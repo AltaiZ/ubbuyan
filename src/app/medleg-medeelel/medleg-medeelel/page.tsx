@@ -14,7 +14,7 @@ export default function page() {
             <div className="tus">
               <hr />
               <div className="tus_img">
-                <img src="/static/sites/ulaanbaatarbuyannew/default/images/icon12.png" />
+                <img src="/static/images/icon12.png" />
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@ export default function page() {
                         href="/%D0%B1%D2%AF%D1%85-%D1%82%D3%A9%D1%80%D0%BB%D0%B8%D0%B9%D0%BD-%D0%B1%D1%83%D1%8F%D0%BD%D1%8B-%D0%B7%D1%8D%D0%B4-%D0%B3-%D0%BE%D0%BD%D0%BB%D0%B0%D0%B9%D0%BD%D0%B0%D0%B0%D1%80/"
                         title="Бүх төрлийн БУЯНЫ ЗЭД-г онлайнаар..."
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.3788526490938856002_400_x_400.jpg" />
+                        <img src="/static/images/3788526490938856002_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -107,7 +107,7 @@ export default function page() {
                         href="/%D0%BC-%D1%8D-%D0%B4-%D1%8D-%D0%B3-%D0%B4-%D1%8D-%D0%BB/"
                         title="М Э Д Э Г Д Э Л"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.2230688512575741057_400_x_199.jpg" />
+                        <img src="/static/images/2230688512575741057_400_x_199.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -147,7 +147,7 @@ export default function page() {
                         href="/%D0%B1%D1%83%D1%80%D1%85%D0%B0%D0%BD-%D0%B1%D0%BE%D0%BB%D0%BE%D0%B3%D1%81%D0%B4%D1%8B%D0%B3-%D0%B4%D1%83%D1%80%D1%81%D0%B0%D1%85-%D0%BE%D0%BB%D0%BE%D0%BD-%D1%83%D0%BB%D1%81%D1%8B%D0%BD-%D3%A9%D0%B4%D1%80%D0%B8%D0%B9%D0%B3-6-%D0%B4%D0%B0%D1%85%D1%8C-%D0%B6%D0%B8%D0%BB%D0%B4%D1%8D%D1%8D-%D0%B7%D0%BE%D1%85%D0%B8%D0%BE%D0%BD-%D0%B1%D0%B0%D0%B9%D0%B3%D1%83%D1%83%D0%BB%D0%BB%D0%B0%D0%B0/"
                         title="Бурхан бологсдыг дурсах олон улсын өдрийг 6 дахь жилдээ зохион байгууллаа"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/2019/.3179122409561071412_400_x_266.jpg" />
+                        <img src="/static/images/3179122409561071412_400_x_266.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -188,7 +188,7 @@ export default function page() {
                         href="/%D0%B4%D0%B0%D0%BB%D0%B0%D0%BD-%D0%B4%D0%B0%D0%B2%D1%85%D0%B0%D1%80-%D1%8B%D0%BD-%D0%BE%D1%80%D1%88%D1%83%D1%83%D0%BB%D0%B3%D1%8B%D0%BD-%D0%B3%D0%B0%D0%B7%D0%B0%D1%80-%D0%B4%D0%B0%D1%85%D1%8C-%D1%85%D2%AF%D0%BD%D0%B4%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D1%86%D1%8D%D1%86%D1%8D%D1%80%D0%BB%D1%8D%D0%B3%D1%82-%D1%85%D2%AF%D1%80%D1%8D%D1%8D%D0%BB%D1%8D%D0%BD%D0%B3%D0%B8%D0%B9%D0%BD-%D0%BD%D0%BE%D0%B3%D0%BE%D0%BE%D0%BD-%D0%B1%D0%B0%D0%B9%D0%B3%D1%83%D1%83%D0%BB%D0%B0%D0%BC%D0%B6%D0%B8%D0%B9%D0%BD-%D0%B0%D0%B6%D0%B8%D0%BB-%D1%8D%D1%85%D1%8D%D0%BB%D0%BB%D1%8D%D1%8D/"
                         title='"Далан давхар"-ын оршуулгын газар дахь Хүндэтгэлийн цэцэрлэгт хүрээлэнгийн ногоон байгууламжийн ажил эхэллээ'
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/.-5790548147340701431_400_x_225.jpg" />
+                        <img src="/static/images/-5790548147340701431_400_x_225.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -230,7 +230,7 @@ export default function page() {
                         href="/%D0%BE%D1%80%D1%88%D1%83%D1%83%D0%BB%D0%B3%D1%8B%D0%BD-%D0%B7%D0%B0%D0%BD-%D2%AF%D0%B9%D0%BB-%D0%B1%D0%BE%D0%BB%D0%BE%D0%BD-%D0%BD%D0%B8%D0%B9%D0%B3%D0%BC%D0%B8%D0%B9%D0%BD-%D1%81%D1%8D%D1%82%D0%B3%D1%8D%D0%BB-%D0%B7%D2%AF%D0%B9%D0%B4-%D1%88%D0%B0%D1%88%D0%BD%D1%8B-%D0%B1%D0%B0%D0%B9%D0%B3%D1%83%D1%83%D0%BB%D0%BB%D0%B0%D0%B3%D1%8B%D0%BD-%D2%AF%D0%B7%D2%AF%D2%AF%D0%BB%D1%8D%D1%85-%D0%BD%D3%A9%D0%BB%D3%A9%D3%A9-%D1%88%D0%B8%D0%B9%D0%B4%D0%B2%D1%8D%D1%80%D0%BB%D1%8D%D1%85-%D0%B0%D1%80%D0%B3%D0%B0-%D1%85%D1%8D%D0%BC%D0%B6%D1%8D%D1%8D%D0%BD%D0%B8%D0%B9-%D1%82%D0%B0%D0%BB%D0%B0%D0%B0%D1%80-%D0%BD%D1%8D%D1%8D%D0%BB%D1%82%D1%82%D1%8D%D0%B9-%D1%85%D1%8D%D0%BB%D1%8D%D0%BB%D1%86%D2%AF%D2%AF%D0%BB%D1%8D%D0%B3-%D0%B1%D0%BE%D0%BB%D0%BB%D0%BE%D0%BE/"
                         title="Оршуулгын зан үйл болон нийгмийн сэтгэл зүйд шашны байгууллагын үзүүлэх нөлөө, шийдвэрлэх арга хэмжээний талаар нээлттэй хэлэлцүүлэг боллоо"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.8020865505496124773_400_x_266.JPG" />
+                        <img src="/static/images/8020865505496124773_400_x_266.JPG" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -272,7 +272,7 @@ export default function page() {
                         href="/%D0%B1%D0%B8%D0%B4-%D0%B4%D1%8D%D0%BB%D1%85%D0%B8%D0%B9%D0%BD-%D1%85%D3%A9%D0%B3%D0%B6%D0%BB%D0%B8%D0%B9%D0%BD-%D1%82%D2%AF%D2%AF%D1%87%D1%8D%D1%8D-ix-%D1%81%D0%B5%D0%BC%D0%B8%D0%BD%D0%B0%D1%80/"
                         title="БИД ДЭЛХИЙН ХӨГЖЛИЙН ТҮҮЧЭЭ IX - семинар"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/.-5843797797342649991_400_x_400.jpg" />
+                        <img src="/static/images/-5843797797342649991_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -312,7 +312,7 @@ export default function page() {
                         href="/%D0%B1%D1%83%D1%80%D1%85%D0%B0%D0%BD-%D0%B1%D0%BE%D0%BB%D0%BE%D0%B3%D1%81%D0%BE%D0%B4%D1%8B%D0%B3-%D0%B4%D1%83%D1%80%D1%81%D0%B0%D1%85-%D0%BE%D0%BB%D0%BE%D0%BD-%D1%83%D0%BB%D1%81%D1%8B%D0%BD-%D3%A9%D0%B4%D3%A9%D1%80-2021-09-19/"
                         title="Бурхан бологсодыг дурсах олон улсын өдөр  2021.09.19"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.717098882587289540_400_x_266.jpg" />
+                        <img src="/static/images/717098882587289540_400_x_266.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -352,7 +352,7 @@ export default function page() {
                         href="/%D0%B1%D1%83%D1%8F%D0%BD%D1%8B-%D0%BB%D0%B0%D0%B2%D0%BB%D0%B0%D1%85-7016-2222/"
                         title="Буяны лавлах 7016-2222"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.5210892212303698228_400_x_400.jpg" />
+                        <img src="/static/images/5210892212303698228_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -392,7 +392,7 @@ export default function page() {
                         href="/%D1%81%D0%B0%D0%BC%D0%B1%D0%B0%D0%BB%D1%85%D2%AF%D0%BD%D0%B4%D1%8D%D0%B2%D0%B8%D0%B9%D0%BD-%D0%BE%D1%80%D1%88%D1%83%D1%83%D0%BB%D0%B3%D1%8B%D0%BD-%D0%B3%D0%B0%D0%B7%D0%B0%D1%80%D1%82-%D0%B4%D1%83%D1%80%D1%81%D0%B3%D0%B0%D0%BB%D1%8B%D0%BD-%D1%86%D1%8D%D1%86%D1%8D%D1%80%D0%BB%D1%8D%D0%B3%D1%82-%D1%85%D2%AF%D1%80%D1%8D%D1%8D%D0%BB%D1%8D%D0%BD-%D0%B1%D0%B0%D0%B9%D0%B3%D1%83%D1%83%D0%BB%D0%B0%D1%85%D1%8B%D0%B3-%D0%B4%D1%8D%D0%BC%D0%B6%D0%B8%D0%B2/"
                         title="Самбалхүндэвийн оршуулгын газарт “Дурсгалын цэцэрлэгт хүрээлэн” байгуулахыг дэмжив"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.-8026743915689401139_400_x_262.jpg" />
+                        <img src="/static/images/-8026743915689401139_400_x_262.jpg" />
                       </a>
                     </div>
                     <div className="garchig">

@@ -48,7 +48,7 @@ export default function page() {
                 className="s_item360 col-md-4 np"
                 style={{
                   background:
-                    "linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('/media/ulaanbaatarbuyannew/content/DJI_0076.jpg') no-repeat center",
+                    "linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('/static/images/DJI_0076.jpg') no-repeat center",
                   backgroundSize: "cover",
                   width: "100%",
                 }}

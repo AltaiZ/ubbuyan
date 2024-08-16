@@ -7,7 +7,7 @@ export default function page() {
         className="row product_bg"
         style={{
           background:
-            "linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6) ), url('/media/ulaanbaatarbuyannew/content/1_Sbdgyaw.jpg') no-repeat center",
+            "linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6) ), url('/static/images/1_Sbdgyaw.jpg') no-repeat center",
           backgroundSize: "cover",
         }}
       >
@@ -21,35 +21,35 @@ export default function page() {
             <ul className="nav nav-tabs" role="tablist">
               <li className="col-md-2 ">
                 <a href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D0%BE%D0%BD%D1%86%D0%BB%D0%BE%D1%85/">
-                  <img src="/static/sites/ulaanbaatarbuyannew/default/images/tab1.png" />
+                  <img src="/static/images/tab1.png" />
                   Онцлох
                 </a>
                 <div className="arrow-down" />
               </li>
               <li className="col-md-2 ">
                 <a href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%85%D0%B0%D0%B9%D1%80%D1%86%D0%B0%D0%B3/">
-                  <img src="/static/sites/ulaanbaatarbuyannew/default/images/tab2.png" />
+                  <img src="/static/images/tab2.png" />
                   Хайрцаг
                 </a>
                 <div className="arrow-down" />
               </li>
               <li className="col-md-2 ">
                 <a href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%85%D3%A9%D1%88%D3%A9%D3%A9/">
-                  <img src="/static/sites/ulaanbaatarbuyannew/default/images/tab3.png" />
+                  <img src="/static/images/tab3.png" />
                   Хөшөө
                 </a>
                 <div className="arrow-down" />
               </li>
               <li className="col-md-2 ">
                 <a href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%81%D0%B0%D1%86-%D1%81%D1%83%D0%B2%D0%B0%D1%80%D0%B3%D0%B0/">
-                  <img src="/static/sites/ulaanbaatarbuyannew/default/images/tab4.png" />
+                  <img src="/static/images/tab4.png" />
                   Сац суварга
                 </a>
                 <div className="arrow-down" />
               </li>
               <li className="col-md-2 ">
                 <a href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%85%D2%AF%D0%BD%D0%B4%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D1%86%D1%8D%D1%86%D1%8D%D0%B3/">
-                  <img src="/static/sites/ulaanbaatarbuyannew/default/images/tab5.png" />
+                  <img src="/static/images/tab5.png" />
                   Хүндэтгэлийн цэцэг
                 </a>
                 <div className="arrow-down" />
@@ -87,7 +87,7 @@ export default function page() {
                           className="product-name"
                           href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D0%BE%D0%BD%D1%86%D0%BB%D0%BE%D1%85/"
                         >
-                          <img src="/static/sites/ulaanbaatarbuyannew/default/images/icons/tab1.png" />
+                          <img src="/static/images/tab1.png" />
                           <span>Онцлох</span>
                         </a>
                       </div>
@@ -100,7 +100,7 @@ export default function page() {
                           className="product-name"
                           href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%85%D0%B0%D0%B9%D1%80%D1%86%D0%B0%D0%B3/"
                         >
-                          <img src="/static/sites/ulaanbaatarbuyannew/default/images/icons/tab2.png" />
+                          <img src="/static/tab2.png" />
                           <span>Хайрцаг</span>
                         </a>
                       </div>
@@ -113,7 +113,7 @@ export default function page() {
                           className="product-name"
                           href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%85%D3%A9%D1%88%D3%A9%D3%A9/"
                         >
-                          <img src="/static/sites/ulaanbaatarbuyannew/default/images/icons/tab3.png" />
+                          <img src="/static/images/tab3.png" />
                           <span>Хөшөө</span>
                         </a>
                       </div>
@@ -126,7 +126,7 @@ export default function page() {
                           className="product-name"
                           href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%81%D0%B0%D1%86-%D1%81%D1%83%D0%B2%D0%B0%D1%80%D0%B3%D0%B0/"
                         >
-                          <img src="/static/sites/ulaanbaatarbuyannew/default/images/icons/tab4.png" />
+                          <img src="/static/images/tab4.png" />
                           <span>Сац суварга</span>
                         </a>
                       </div>
@@ -139,7 +139,7 @@ export default function page() {
                           className="product-name"
                           href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%85%D2%AF%D0%BD%D0%B4%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D1%86%D1%8D%D1%86%D1%8D%D0%B3/"
                         >
-                          <img src="/static/sites/ulaanbaatarbuyannew/default/images/icons/tab5.png" />
+                          <img src="/static/images/tab5.png" />
                           <span>Хүндэтгэлийн цэцэг</span>
                         </a>
                       </div>
@@ -207,7 +207,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Testimonial/.-1780990708727174373_300_x_284.png') no-repeat center",
+                    "url('/static/images/-1780990708727174373_300_x_284.png') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -231,7 +231,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Testimonial/.6223098084883678757_300_x_400.png') no-repeat center",
+                    "url('/static/images/6223098084883678757_300_x_400.png') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -255,7 +255,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хайрцаг/.-4606271830316144378_300_x_200.jpg') no-repeat center",
+                    "url('/static/images/-4606271830316144378_300_x_200.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -279,7 +279,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830311144354_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830311144354_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -303,7 +303,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830311144367_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830311144367_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -327,7 +327,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830311144368_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830311144368_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -351,7 +351,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830311144365_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830311144365_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -375,7 +375,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-624495185098505618_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-624495185098505618_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -399,7 +399,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830311144366_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830311144366_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -423,7 +423,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830311144361_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830311144361_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -447,7 +447,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830311144364_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830311144364_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -471,7 +471,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830314144370_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830314144370_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -495,7 +495,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830314144371_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830314144371_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -519,7 +519,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830314144369_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830314144369_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -543,7 +543,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.-4606271830311144353_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/-4606271830311144353_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >
@@ -567,7 +567,7 @@ export default function page() {
                 className="p_img"
                 style={{
                   background:
-                    "url('/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/Хөшөө/.6248084453872226134_300_x_300.jpg') no-repeat center",
+                    "url('/static/images/6248084453872226134_300_x_300.jpg') no-repeat center",
                   backgroundSize: "cover",
                 }}
               >

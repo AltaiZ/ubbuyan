@@ -25,7 +25,7 @@ export default function hProducts() {
                 href="#hairtsag"
                 role="tab"
               >
-                <img src="/static/sites/ulaanbaatarbuyannew/default/images/tab2.png" />
+                <img src="/static/images/tab2.png" />
                 хайрцаг
               </a>
               <div className="arrow-down" />
@@ -37,14 +37,14 @@ export default function hProducts() {
                 href="#hushuu"
                 role="tab"
               >
-                <img src="/static/sites/ulaanbaatarbuyannew/default/images/tab3.png" />
+                <img src="/static/images/tab3.png" />
                 хөшөө
               </a>
               <div className="arrow-down" />
             </li>
             <li className="col-md-2" role="presentation">
               <a aria-controls="sats" data-toggle="tab" href="#sats" role="tab">
-                <img src="/static/sites/ulaanbaatarbuyannew/default/images/tab4.png" />
+                <img src="/static/images/tab4.png" />
                 сац суварга
               </a>
               <div className="arrow-down" />
@@ -56,7 +56,7 @@ export default function hProducts() {
                 href="#tsetseg"
                 role="tab"
               >
-                <img src="/static/sites/ulaanbaatarbuyannew/default/images/tab5.png" />
+                <img src="/static/images/tab5.png" />
                 хүндэтгэлийн цэцэг
               </a>
               <div className="arrow-down" />
@@ -97,7 +97,7 @@ export default function hProducts() {
                         href="#ontsloh"
                         role="tab"
                       >
-                        <img src="/static/sites/ulaanbaatarbuyannew/default/images/icons/icon15.png" />
+                        <img src="/static/images/icon15.png" />
                         <span>онцлох</span>
                       </a>
                     </div>
@@ -113,7 +113,7 @@ export default function hProducts() {
                         href="#hairtsag"
                         role="tab"
                       >
-                        <img src="/static/sites/ulaanbaatarbuyannew/default/images/icons/icon14.png" />
+                        <img src="/static/images/icon14.png" />
                         <span>хайрцаг</span>
                       </a>
                     </div>
@@ -129,7 +129,7 @@ export default function hProducts() {
                         href="#hushuu"
                         role="tab"
                       >
-                        <img src="/static/sites/ulaanbaatarbuyannew/default/images/icons/icon12.png" />
+                        <img src="/static/icon12.png" />
                         <span>хөшөө</span>
                       </a>
                     </div>
@@ -288,7 +288,7 @@ export default function hProducts() {
                   className="p_img"
                   style={{
                     background:
-                      "url('/media/ulaanbaatarbuyannew/content/100.jpg') no-repeat center",
+                      "url('/static/images/100.jpg') no-repeat center",
                     backgroundSize: "cover",
                   }}
                 >
@@ -770,7 +770,7 @@ export default function hProducts() {
                   className="p_img"
                   style={{
                     background:
-                      "url('/media/ulaanbaatarbuyannew/content/100.jpg') no-repeat center",
+                      "url('/static/images/100.jpg') no-repeat center",
                     backgroundSize: "cover",
                   }}
                 >

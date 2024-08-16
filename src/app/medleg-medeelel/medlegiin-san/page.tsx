@@ -16,7 +16,7 @@ export default function page() {
             <div className="tus">
               <hr />
               <div className="tus_img">
-                <img src="/static/sites/ulaanbaatarbuyannew/default/images/icon12.png" />
+                <img src="/static/images/icon12.png" />
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function page() {
                         href="/%D1%81%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D0%B3%D1%8D%D0%BC%D1%82%D1%8D%D0%BB-%D0%B3%D1%8D%D0%B6-%D1%8E%D1%83/"
                         title="Сэтгэлийн гэмтэл гэж юу?"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.-2372164990151190777_400_x_211.png" />
+                        <img src="/static/images/-2372164990151190777_400_x_211.png" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -109,7 +109,7 @@ export default function page() {
                         href="/%D0%B1%D1%83%D1%8F%D0%BD%D1%8B-%D0%BB%D0%B0%D0%B2%D0%BB%D0%B0%D1%85-7016-2222/"
                         title="Буяны лавлах 7016-2222"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.5210892212303698228_400_x_400.jpg" />
+                        <img src="/static/images/5210892212303698228_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -149,7 +149,7 @@ export default function page() {
                         href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-4/"
                         title="ОЙЛГОЛТЫН ЗӨРҮҮ №4"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.139703866354898186_400_x_400.jpg" />
+                        <img src="/static/images/139703866354898186_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -189,7 +189,7 @@ export default function page() {
                         href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-3/"
                         title="ОЙЛГОЛТЫН ЗӨРҮҮ №3"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.7520967580319363467_400_x_400.jpg" />
+                        <img src="/static/images/7520967580319363467_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -229,7 +229,7 @@ export default function page() {
                         href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-2/"
                         title="ОЙЛГОЛТЫН ЗӨРҮҮ №2"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.-2627697062535744786_400_x_400.jpg" />
+                        <img src="/static/images/-2627697062535744786_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -269,7 +269,7 @@ export default function page() {
                         href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-1/"
                         title="ОЙЛГОЛТЫН ЗӨРҮҮ №1"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.-523343485117177988_400_x_400.jpg" />
+                        <img src="/static/images/-523343485117177988_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -309,7 +309,7 @@ export default function page() {
                         href="/%D1%83%D0%BB%D0%B0%D0%B0%D0%BD%D0%B1%D0%B0%D0%B0%D1%82%D0%B0%D1%80-%D0%B1%D1%83%D1%8F%D0%BD-%D1%85%D1%85%D0%BA-%D0%BD%D0%B8%D0%B9-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D%D0%B3-%D1%81%D0%BE%D0%BD%D0%B3%D0%BE%D1%85-%D1%88%D0%B0%D0%BB%D1%82%D0%B3%D0%B0%D0%B0%D0%BD/"
                         title='"Улаанбаатар буян" ХХК-ний үйлчилгээг сонгох шалтгаан'
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Мэдлэгийн_сан/.-992067526353350923_400_x_400.jpg" />
+                        <img src="/static/images/-992067526353350923_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -349,7 +349,7 @@ export default function page() {
                         href="/%D1%83%D0%BB%D0%B0%D0%B0%D0%BD%D0%B1%D0%B0%D0%B0%D1%82%D0%B0%D1%80-%D0%B1%D1%83%D1%8F%D0%BD-%D1%85%D1%85%D0%BA-%D0%B8%D0%B9%D0%BD-%D0%BC%D1%8D%D1%80%D0%B3%D1%8D%D1%88%D1%81%D1%8D%D0%BD-%D0%B7%D3%A9%D0%B2%D0%BB%D3%A9%D1%85-%D0%B0%D0%B6%D0%B8%D0%BB%D1%87%D0%B8%D0%B4/"
                         title="Улаанбаатар буян ХХК-ийн мэргэшсэн зөвлөх ажилчид"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.4668223339335910114_400_x_565.jpg" />
+                        <img src="/static/images/4668223339335910114_400_x_565.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -389,7 +389,7 @@ export default function page() {
                         href="/%D0%BE%D0%BB%D0%BE%D0%BD-%D1%83%D0%BB%D1%81%D1%8B%D0%BD-%D0%BE%D1%80%D1%88%D1%83%D1%83%D0%BB%D0%B3%D1%8B%D0%BD-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D%D0%BD%D0%B8%D0%B9-%D1%87%D0%B8%D0%B3-%D1%85%D0%B0%D0%BD%D0%B4%D0%BB%D0%B0%D0%B3%D0%B0/"
                         title="ОЛОН УЛСЫН ОРШУУЛГЫН ҮЙЛЧИЛГЭЭНИЙ ЧИГ ХАНДЛАГА "
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.-7165075861294888552_400_x_266.jpg" />
+                        <img src="/static/images/-7165075861294888552_400_x_266.jpg" />
                       </a>
                     </div>
                     <div className="garchig">

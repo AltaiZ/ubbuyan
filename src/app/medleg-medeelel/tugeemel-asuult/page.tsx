@@ -15,7 +15,7 @@ export default function page() {
           <div className="tus">
             <hr />
             <div className="tus_img">
-              <img src="/static/sites/ulaanbaatarbuyannew/default/images/icon.png" />
+              <img src="/static//images/icon.png" />
             </div>
           </div>
           <ul className="article-list">

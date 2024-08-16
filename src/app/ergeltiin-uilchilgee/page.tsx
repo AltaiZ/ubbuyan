@@ -18,7 +18,7 @@ export default function page() {
               <figure>
                 <img
                   data-image="xg63e2rgvi1m"
-                  src="/media/ulaanbaatarbuyannew/content/Үйлчилгээ/12.jpg"
+                  src="/static/images/12.jpg"
                 />
               </figure>
               <p />
@@ -84,7 +84,7 @@ export default function page() {
               <figure>
                 <img
                   data-image="qe071y5ayshg"
-                  src="/media/ulaanbaatarbuyannew/content/90520294_1598728543626328_2315693774405107712_o.jpg"
+                  src="/static/images/90520294_1598728543626328_2315693774405107712_o.jpg"
                 />
               </figure>
               <figure />

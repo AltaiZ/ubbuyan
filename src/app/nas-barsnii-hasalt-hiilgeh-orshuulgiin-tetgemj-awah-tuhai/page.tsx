@@ -12,7 +12,7 @@ export default function page() {
         <div className="tus">
           <hr />
           <div className="tus_img">
-            <img src="/static/sites/ulaanbaatarbuyannew/default/images/icon12.png" />
+            <img src="/static/images/icon12.png" />
           </div>
         </div>
         <div className="emgenel" data-spy="scroll" data-target=".sidebar">

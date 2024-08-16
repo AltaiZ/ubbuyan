@@ -20,14 +20,14 @@ export default function page() {
           <div className="tus">
             <hr />
             <div className="tus_img">
-              <img src="/static/sites/ulaanbaatarbuyannew/default/images/icon12.png" />
+              <img src="/static/images/icon12.png" />
             </div>
           </div>
           <p className="jy"></p>
           <figure>
             <img
               data-image="4kd5a4xe8hp5"
-              src="/media/ulaanbaatarbuyannew/content/2019/buyan_zushuureltei_gazruud_sambar_duussan_curved_1.jpg"
+              src="/static/images/buyan_zushuureltei_gazruud_sambar_duussan_curved_1.jpg"
             />
           </figure>
           <p />

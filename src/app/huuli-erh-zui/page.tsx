@@ -18,27 +18,27 @@ export default function page() {
           <div className="tus">
             <hr />
             <div className="tus_img">
-              <img src="/static/sites/ulaanbaatarbuyannew/default/images/icon12.png" />
+              <img src="/static/images/icon12.png" />
             </div>
           </div>
           <p className="jy"></p>
           <p>
-            <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Хууль_эрх_зүй/Juram-min.jpg" />
+            <img src="/static/images/Juram-min.jpg" />
           </p>
           <p>
-            <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Хууль_эрх_зүй/Juram2-min.jpg" />
+            <img src="/static/images/Juram2-min.jpg" />
           </p>
           <p>
-            <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Хууль_эрх_зүй/Juram3-min.jpg" />
+            <img src="/static/images/Juram3-min.jpg" />
           </p>
           <p>
-            <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Хууль_эрх_зүй/Juram4-min.jpg" />
+            <img src="/static/images/Juram4-min.jpg" />
           </p>
           <p>
-            <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Хууль_эрх_зүй/Juram5-min.jpg" />
+            <img src="/static/images/Juram5-min.jpg" />
           </p>
           <p>
-            <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Хууль_эрх_зүй/Juram6-min.jpg" />
+            <img src="/static/images/Juram6-min.jpg" />
           </p>
           <p />
         </article>

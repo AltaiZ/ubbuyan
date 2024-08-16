@@ -40,7 +40,7 @@ export default function Products() {
                         href="#ontsloh"
                         role="tab"
                       >
-                        <img src="/static/images/icons/icon15.png" />
+                        <img src="/static/images/icon15.png" />
                         <span>онцлох</span>
                       </a>
                     </div>
@@ -62,7 +62,7 @@ export default function Products() {
                         href="#hairtsag"
                         role="tab"
                       >
-                        <img src="/static/images/icons/icon14.png" />
+                        <img src="/static/images/icon14.png" />
                         <span>хайрцаг</span>
                       </a>
                     </div>
@@ -84,7 +84,7 @@ export default function Products() {
                         href="#hushuu"
                         role="tab"
                       >
-                        <img src="/static/images/icons/icon12.png" />
+                        <img src="/static/images/icon12.png" />
                         <span>хөшөө</span>
                       </a>
                     </div>

@@ -254,7 +254,7 @@ export default function Blog() {
                   <div className="overlay">
                     <img
                       className="c_arrow"
-                      src="/static/images/sum-white.png"
+                      src="/static/images/8.png"
                     />
                   </div>
                 </div>

@@ -27,7 +27,7 @@ export default function page() {
               <figure>
                 <img
                   data-image="0nixk2wqz1m0"
-                  src="/media/ulaanbaatarbuyannew/content/IMG_0608.jpg"
+                  src="/static/images/IMG_0608.jpg"
                 />
               </figure>
               <p>
@@ -168,7 +168,7 @@ export default function page() {
               <figure>
                 <img
                   data-image="fam3mfchocl6"
-                  src="/media/ulaanbaatarbuyannew/content/Чандарлах_web.jpg"
+                  src="/static/images/Чандарлах_web.jpg"
                 />
               </figure>
               <p />

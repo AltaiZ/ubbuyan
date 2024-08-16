@@ -61,7 +61,7 @@ export default function page() {
         <div className="col-md-6 col-md-offset-2 sanal">
           <img
             className="full_img"
-            src="/media/ulaanbaatarbuyannew/content/-2468521239344344000_1800_x_1012.jpg"
+            src="/static/images/-2468521239344344000_1800_x_1012.jpg"
           />
         </div>
       </section>

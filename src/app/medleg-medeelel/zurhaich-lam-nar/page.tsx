@@ -16,7 +16,7 @@ export default function page() {
             <div className="tus">
               <hr />
               <div className="tus_img">
-                <img src="/static/sites/ulaanbaatarbuyannew/default/images/icon12.png" />
+                <img src="/static/images/icon12.png" />
               </div>
             </div>
           </div>
@@ -80,7 +80,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/static/images/lam_icon.png"
                         />
                         <h4>Санжаадорж</h4>
                         <p>УТАС: +976-99890614</p>
@@ -94,7 +94,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/static/images/lam_icon.png"
                         />
                         <h4>А.Эрдэнэбат</h4>
                         <p>УТАС: +976-88119032</p>
@@ -108,7 +108,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/static/images/lam_icon.png"
                         />
                         <h4>Ч. Алтангэрэл</h4>
                         <p>УТАС: +976-Дашчойлон хийд</p>
@@ -122,7 +122,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/static/images/lam_icon.png"
                         />
                         <h4>Я.Аюурзана</h4>
                         <p>УТАС: +976-91999535</p>
@@ -137,7 +137,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/static/images/lam_icon.png"
                         />
                         <h4>Энхбат</h4>
                         <p>УТАС: +976-99193681</p>
@@ -151,7 +151,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/static/images/lam_icon.png"
                         />
                         <h4>Д.Цогтбаатар</h4>
                         <p>УТАС: +976-99996668</p>
@@ -165,7 +165,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/stat/images/lam_icon.png"
                         />
                         <h4>Ц.Гүнчин-Иш</h4>
                         <p>УТАС: +976-91917492</p>
@@ -179,7 +179,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/static/images/lam_icon.png"
                         />
                         <h4>Галсан</h4>
                         <p>УТАС: +976-99106565</p>
@@ -194,7 +194,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/static/images/lam_icon.png"
                         />
                         <h4>Ж.Гончигсүрэн</h4>
                         <p>УТАС: +976-99092007</p>
@@ -208,7 +208,7 @@ export default function page() {
                       <div className="col-md-6 info">
                         <img
                           className="lam_icon"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/lam_icon.png"
+                          src="/static/images/lam_icon.png"
                         />
                         <h4>Цолмон</h4>
                         <p>УТАС: +976-99279216</p>

@@ -149,7 +149,7 @@ export default function HeaderNav() {
         <div className="row">
           <img
             className="visible-xs"
-            src="/static/sites/ulaanbaatarbuyannew/default/images/mobilelogo.png"
+            src="/static/images/mobilelogo.png"
             height="80%"
             width="80%"
           />

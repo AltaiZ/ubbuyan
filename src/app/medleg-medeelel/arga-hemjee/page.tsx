@@ -71,7 +71,7 @@ export default function page() {
                         href="/%D0%B4%D0%B0%D0%BB%D0%B0%D0%BD-%D0%B4%D0%B0%D0%B2%D1%85%D0%B0%D1%80-%D1%8B%D0%BD-%D0%BE%D1%80%D1%88%D1%83%D1%83%D0%BB%D0%B3%D1%8B%D0%BD-%D0%B3%D0%B0%D0%B7%D0%B0%D1%80-%D0%B4%D0%B0%D1%85%D1%8C-%D1%85%D2%AF%D0%BD%D0%B4%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D1%86%D1%8D%D1%86%D1%8D%D1%80%D0%BB%D1%8D%D0%B3%D1%82-%D1%85%D2%AF%D1%80%D1%8D%D1%8D%D0%BB%D1%8D%D0%BD%D0%B3%D0%B8%D0%B9%D0%BD-%D0%BD%D0%BE%D0%B3%D0%BE%D0%BE%D0%BD-%D0%B1%D0%B0%D0%B9%D0%B3%D1%83%D1%83%D0%BB%D0%B0%D0%BC%D0%B6%D0%B8%D0%B9%D0%BD-%D0%B0%D0%B6%D0%B8%D0%BB-%D1%8D%D1%85%D1%8D%D0%BB%D0%BB%D1%8D%D1%8D/"
                         title='"Далан давхар"-ын оршуулгын газар дахь Хүндэтгэлийн цэцэрлэгт хүрээлэнгийн ногоон байгууламжийн ажил эхэллээ'
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/.-5790548147340701431_400_x_225.jpg" />
+                        <img src="/static/images/-5790548147340701431_400_x_225.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -113,7 +113,7 @@ export default function page() {
                         href="/%D0%B1%D1%83%D1%80%D1%85%D0%B0%D0%BD-%D0%B1%D0%B0%D0%B3%D1%88%D0%B8%D0%B9%D0%BD-%D0%B8%D1%85-%D0%B4%D2%AF%D0%B9%D1%87%D1%8D%D0%BD-%D3%A9%D0%B4%D3%A9%D1%80/"
                         title="Бурхан багшийн их дүйчэн өдөр"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.5611421020137610330_400_x_400.jpg" />
+                        <img src="/static/images/5611421020137610330_400_x_400.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -153,7 +153,7 @@ export default function page() {
                         href="/%D0%B7%D1%83%D0%BB%D1%8B%D0%BD-25-%D0%BD%D1%8B-%D0%B8%D1%85-%D0%B4%D2%AF%D0%B9%D1%87%D0%B8%D0%BD-%D3%A9%D0%B4%D3%A9%D1%80/"
                         title="Зулын 25-ны ИХ ДҮЙЧИН өдөр"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Арга_хэмжээ/.-3081125630477684051_400_x_266.jpg" />
+                        <img src="/static/images/-3081125630477684051_400_x_266.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -193,7 +193,7 @@ export default function page() {
                         href="/%D0%B1%D1%83%D1%80%D1%85%D0%B0%D0%BD-%D0%B1%D0%BE%D0%BB%D0%BE%D0%B3%D1%81%D0%BE%D0%B4%D1%8B%D0%B3-%D0%B4%D1%83%D1%80%D1%81%D0%B0%D1%85-%D0%BE%D0%BB%D0%BE%D0%BD-%D1%83%D0%BB%D1%81%D1%8B%D0%BD-%D3%A9%D0%B4%D3%A9%D1%80/"
                         title="Бурхан бологсодыг дурсах олон улсын өдөр"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/.8239379731517151843_400_x_266.jpg" />
+                        <img src="/static/images/8239379731517151843_400_x_266.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -233,7 +233,7 @@ export default function page() {
                         href="/%D0%BC%D0%BE%D0%B4-%D1%82%D0%B0%D1%80%D0%B8%D1%85-%D2%AF%D0%BD%D0%B4%D1%8D%D1%81%D0%BD%D0%B8%D0%B9-%D3%A9%D0%B4%D3%A9%D1%80/"
                         title="Мод тарих үндэсний өдөр"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Арга_хэмжээ/.5598591210631684337_400_x_266.jpg" />
+                        <img src="/static/images/5598591210631684337_400_x_266.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
@@ -273,7 +273,7 @@ export default function page() {
                         href="/%D1%85%D0%B0%D0%BD%D1%88-%D0%BD%D1%8D%D1%8D%D1%85-%D3%A9%D0%B4%D3%A9%D1%80/"
                         title="Ханш нээх өдөр"
                       >
-                        <img src="/media/ulaanbaatarbuyannew/content/Мэдээ_мэдээлэл/Арга_хэмжээ/.-3432391960735309929_400_x_300.jpg" />
+                        <img src="/static/images/-3432391960735309929_400_x_300.jpg" />
                       </a>
                     </div>
                     <div className="garchig">
