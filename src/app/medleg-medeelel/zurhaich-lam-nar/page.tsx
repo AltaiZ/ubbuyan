@@ -24,37 +24,27 @@ export default function page() {
             <div className="col-md-3">
               <ul className="sidebar-menu">
                 <li>
-                  <a href="/%D0%BC%D1%8D%D0%B4%D0%BB%D1%8D%D0%B3-%D0%BC%D1%8D%D0%B4%D1%8D%D1%8D%D0%BB%D1%8D%D0%BB/%D1%82%D2%AF%D0%B3%D1%8D%D1%8D%D0%BC%D1%8D%D0%BB-%D0%B0%D1%81%D1%83%D1%83%D0%BB%D1%82/">
-                    Түгээмэл асуулт
-                  </a>
+                  <a href="/medleg-medeelel/tugeemel-asuult">Түгээмэл асуулт</a>
                 </li>
                 <li>
-                  <a href="/%D1%8D%D0%BC%D0%B3%D1%8D%D0%BD%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D2%AF%D0%B3/">
-                    Эмгэнэл
-                  </a>
+                  <a href="/emgeneliin-ug">Эмгэнэл</a>
                 </li>
                 <li>
-                  <a href="/%D1%85%D1%83%D1%83%D0%BB%D1%8C-%D1%8D%D1%80%D1%85-%D0%B7%D2%AF%D0%B9/">
-                    Хууль эрх зүй
-                  </a>
+                  <a href="/huuli-erh-zui">Хууль эрх зүй</a>
                 </li>
                 <li>
-                  <a href="/%D0%BC%D1%8D%D0%B4%D0%BB%D1%8D%D0%B3-%D0%BC%D1%8D%D0%B4%D1%8D%D1%8D%D0%BB%D1%8D%D0%BB/%D0%BC%D0%BE%D0%BD%D0%B3%D0%BE%D0%BB-%D1%91%D1%81-%D0%B7%D0%B0%D0%BD%D1%88%D0%B8%D0%BB/%D0%B0/">
+                  <a href="/medleg-medeelel/mongol-yos-zanshil">
                     Монгол ёс заншил
                   </a>
                 </li>
                 <li>
-                  <a href="/%D0%BC%D1%8D%D0%B4%D0%BB%D1%8D%D0%B3-%D0%BC%D1%8D%D0%B4%D1%8D%D1%8D%D0%BB%D1%8D%D0%BB/%D0%B0%D1%80%D0%B3%D0%B0-%D1%85%D1%8D%D0%BC%D0%B6%D1%8D%D1%8D/">
-                    Арга хэмжээ
-                  </a>
+                  <a href="/medleg-medeelel/arga-hemjee">Арга хэмжээ</a>
                 </li>
                 <li>
-                  <a href="/%D0%BC%D1%8D%D0%B4%D0%BB%D1%8D%D0%B3-%D0%BC%D1%8D%D0%B4%D1%8D%D1%8D%D0%BB%D1%8D%D0%BB/%D0%BC%D1%8D%D0%B4%D0%BB%D1%8D%D0%B3%D0%B8%D0%B9%D0%BD-%D1%81%D0%B0%D0%BD/">
-                    Мэдлэгийн сан
-                  </a>
+                  <a href="/medleg-medeelel/medlegiin-san">Мэдлэгийн сан</a>
                 </li>
                 <li className="active">
-                  <a href="/%D0%BC%D1%8D%D0%B4%D0%BB%D1%8D%D0%B3-%D0%BC%D1%8D%D0%B4%D1%8D%D1%8D%D0%BB%D1%8D%D0%BB/%D0%B7%D1%83%D1%80%D1%85%D0%B0%D0%B9%D1%87-%D0%BB%D0%B0%D0%BC-%D0%BD%D0%B0%D1%80/">
+                  <a href="/medleg-medeelel/zurhaich-lam-nar">
                     Зурхайч лам нар
                   </a>
                 </li>

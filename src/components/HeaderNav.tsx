@@ -56,10 +56,10 @@ export default function HeaderNav() {
                     <a href="/ergeltiin-uilchilgee/">Эргэлтийн үйлчилгээ</a>
                   </li>
                   <li>
-                    <a href="/tuw-bairnii-uilchilgee/">Төв байрны үйлчилгээ</a>
+                    <a href="/tuw-bairnii-uichilgee/">Төв байрны үйлчилгээ</a>
                   </li>
                   <li>
-                    <a href="">Ард түмний алтан сан</a>
+                    <a href="/huuli-erh-zui">Ард түмний алтан сан</a>
                   </li>
                 </ul>
               </li>

@@ -18,7 +18,7 @@ export default function page() {
               <figure>
                 <img
                   data-image="4bpqmqwto60a"
-                  src="/media/ulaanbaatarbuyannew/content/-2468521239344344000_1800_x_1012.jpg"
+                  src="/static/images/-2468521239344344000_1800_x_1012.jpg"
                 />
               </figure>
               <p>

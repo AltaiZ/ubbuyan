@@ -30,7 +30,7 @@ export default function Container() {
                 >
                   <div className="item">
                     <div className="services">
-                      <a href="/%D0%B4%D0%B0%D0%BB%D0%B4-%D0%BE%D1%80%D1%88%D0%BE%D0%BE%D1%85-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+                      <a href="/dald-orshih-uilchilgee/">
                         <div
                           className="s_item col-md-4 np"
                           style={{
@@ -54,7 +54,7 @@ export default function Container() {
                 >
                   <div className="item">
                     <div className="services">
-                      <a href="/%D1%87%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D0%BB%D0%B0%D1%85-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+                      <a href="/chandarlah-uilchilgee/">
                         <div
                           className="s_item col-md-4 np"
                           style={{
@@ -78,7 +78,7 @@ export default function Container() {
                 >
                   <div className="item">
                     <div className="services">
-                      <a href="/m%D0%B0%D1%88%D0%B8%D0%BD%D1%8B-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+                      <a href="/mashinii-uilchilgee/">
                         <div
                           className="s_item col-md-4 np"
                           style={{
@@ -102,7 +102,7 @@ export default function Container() {
                 >
                   <div className="item">
                     <div className="services">
-                      <a href="/%D1%8D%D1%80%D0%B3%D1%8D%D0%BB%D1%82%D0%B8%D0%B9%D0%BD-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+                      <a href="/ergeltiin-uilchilgee/">
                         <div
                           className="s_item col-md-4 np"
                           style={{
@@ -126,7 +126,7 @@ export default function Container() {
                 >
                   <div className="item">
                     <div className="services">
-                      <a href="/%D1%82%D3%A9%D0%B2-%D0%B1%D0%B0%D0%B9%D1%80%D0%BD%D1%8B-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+                      <a href="/tuw-bairnii-uichilgee/">
                         <div
                           className="s_item col-md-4 np"
                           style={{
@@ -207,7 +207,7 @@ export default function Container() {
             <p>Бид та бүхэнд дараах үйлчилгээнүүдийг санал болгож байна.</p>
           </div>
           <div className="services">
-            <a href="/%D0%B4%D0%B0%D0%BB%D0%B4-%D0%BE%D1%80%D1%88%D0%BE%D0%BE%D1%85-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+            <a href="/dald-orshih-uilchilgee/">
               <div
                 className="s_item col-md-4 np"
                 style={{
@@ -226,7 +226,7 @@ export default function Container() {
             </a>
           </div>
           <div className="services">
-            <a href="/%D1%87%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D0%BB%D0%B0%D1%85-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+            <a href="/chandarlah-uilchilgee/">
               <div
                 className="s_item col-md-4 np"
                 style={{
@@ -245,7 +245,7 @@ export default function Container() {
             </a>
           </div>
           <div className="services">
-            <a href="/m%D0%B0%D1%88%D0%B8%D0%BD%D1%8B-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+            <a href="/mashinii-uilchilgee/">
               <div
                 className="s_item col-md-4 np"
                 style={{
@@ -264,7 +264,7 @@ export default function Container() {
             </a>
           </div>
           <div className="services">
-            <a href="/%D1%8D%D1%80%D0%B3%D1%8D%D0%BB%D1%82%D0%B8%D0%B9%D0%BD-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+            <a href="/ergeltiin-uilchilgee/">
               <div
                 className="s_item col-md-4 np"
                 style={{
@@ -283,7 +283,7 @@ export default function Container() {
             </a>
           </div>
           <div className="services">
-            <a href="/%D1%82%D3%A9%D0%B2-%D0%B1%D0%B0%D0%B9%D1%80%D0%BD%D1%8B-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D/">
+            <a href="/tuw-bairnii-uichilgee/">
               <div
                 className="s_item col-md-4 np"
                 style={{

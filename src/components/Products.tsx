@@ -1,287 +1,58 @@
+import { kbTopicDetail } from "@/lib/kb";
+import { getProducts } from "@/lib/products";
+import { IPageProps } from "@/types";
 import React from "react";
+import HomepageTab from "./homepage-tab/homepage-tab";
 
-export default function Products() {
+const PER_PAGE = 4;
+
+export default async function Products({ searchParams }: IPageProps) {
+  const activeTab = searchParams.activeTab;
+
+  const { products } = await getProducts({
+    variables: {
+      categoryId:
+        activeTab === "ontsloh"
+          ? "IyBZvTVk0MEH8zzbXsjJv"
+          : activeTab === "hairtsag"
+          ? "Gcd-Kq0cfnAerSq9udlUk"
+          : activeTab === "hoshoo"
+          ? "b53tve5NEAt2Wqf7A2ec3"
+          : activeTab === "suvarga"
+          ? "fVrZZn1XcQ0rc_OugTyVa"
+          : activeTab === "tsetseg"
+          ? "Gcd-Kq0cfnAerSq9udl"
+          : activeTab === "zed"
+          ? "JYYQypAlxufqG6Qds-CIl"
+          : "",
+    },
+  });
+
+  const tabs = [
+    { name: "Онцлох", id: "ontsloh" },
+    { name: "хайрцаг", id: "hairtsag" },
+    { name: "хөшөө", id: "hoshoo" },
+    { name: "сац суварга", id: "suvarga" },
+    { name: "Онцлох", id: "tsetseg" },
+    { name: "Онцлох", id: "zed" },
+  ];
+
+  console.log(products, "products");
+
   return (
     <div>
-      <section className="mobilehproducts">
-        <ul
-          className="nav nav-tabs blog_buttons mobile-tab visible-xs"
-          role="tablist"
-        >
-          <div
-            className="owl-carousel owl-theme owl-loaded owl-drag owl-hidden"
-            id="product-icon"
-          >
-            <div className="owl-stage-outer">
-              <div
-                className="owl-stage"
-                style={{
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                  transform: "translate3d(0px, 0px, 0px)",
-                  transition: "all 0s ease 0s",
-                  width: "622px",
-                }}
-              >
-                <div
-                  className="owl-item active"
-                  style={{
-                    marginRight: "5px",
-                    width: "95.25px",
-                  }}
-                >
-                  <li className="active" role="presentation">
-                    <div className="item">
-                      <a
-                        aria-controls="ontsloh"
-                        aria-expanded="true"
-                        className="product-name"
-                        data-toggle="tab"
-                        href="#ontsloh"
-                        role="tab"
-                      >
-                        <img src="/static/images/icon15.png" />
-                        <span>онцлох</span>
-                      </a>
-                    </div>
-                  </li>
-                </div>
-                <div
-                  className="owl-item active"
-                  style={{
-                    marginRight: "5px",
-                    width: "95.25px",
-                  }}
-                >
-                  <li role="presentation">
-                    <div className="item">
-                      <a
-                        aria-controls="hairtsag"
-                        className="product-name"
-                        data-toggle="tab"
-                        href="#hairtsag"
-                        role="tab"
-                      >
-                        <img src="/static/images/icon14.png" />
-                        <span>хайрцаг</span>
-                      </a>
-                    </div>
-                  </li>
-                </div>
-                <div
-                  className="owl-item active"
-                  style={{
-                    marginRight: "5px",
-                    width: "95.25px",
-                  }}
-                >
-                  <li role="presentation">
-                    <div className="item">
-                      <a
-                        aria-controls="hushuu"
-                        className="product-name"
-                        data-toggle="tab"
-                        href="#hushuu"
-                        role="tab"
-                      >
-                        <img src="/static/images/icon12.png" />
-                        <span>хөшөө</span>
-                      </a>
-                    </div>
-                  </li>
-                </div>
-                <div
-                  className="owl-item active"
-                  style={{
-                    marginRight: "5px",
-                    width: "95.25px",
-                  }}
-                >
-                  <li className="active" role="presentation">
-                    <div className="item">
-                      <a
-                        aria-controls="sats"
-                        aria-expanded="true"
-                        className="product-name"
-                        data-toggle="tab"
-                        href="#sats"
-                        role="tab"
-                      >
-                        <img src="/static/images/icons/icon13.png" />
-                        <span>сац суварга</span>
-                      </a>
-                    </div>
-                  </li>
-                </div>
-                <div
-                  className="owl-item"
-                  style={{
-                    marginRight: "5px",
-                    width: "95.25px",
-                  }}
-                >
-                  <li role="presentation">
-                    <div className="item">
-                      <a
-                        aria-controls="tsetseg"
-                        className="product-name"
-                        data-toggle="tab"
-                        href="#tsetseg"
-                        role="tab"
-                      >
-                        <img src="/static/images/icons/icon9.png" />
-                        <span>хүндэтгэлийн цэцэг</span>
-                      </a>
-                    </div>
-                  </li>
-                </div>
-                <div
-                  className="owl-item"
-                  style={{
-                    marginRight: "5px",
-                    width: "95.25px",
-                  }}
-                >
-                  <li role="presentation">
-                    <div className="item">
-                      <a
-                        aria-controls="zed"
-                        className="product-name"
-                        data-toggle="tab"
-                        href="#zed"
-                        role="tab"
-                      >
-                        <img src="/static/images/icons/icon9.png" />
-                        <span
-                          style={{
-                            marginLeft: "28px",
-                          }}
-                        >
-                          зэд
-                        </span>
-                      </a>
-                    </div>
-                  </li>
-                </div>
-              </div>
-            </div>
-            <div className="owl-nav disabled">
-              <div className="owl-prev">
-                <svg
-                  aria-hidden="true"
-                  className="svg-inline--fa fa-angle-left fa-w-8 fa-4x"
-                  data-fa-i2svg=""
-                  data-icon="angle-left"
-                  data-prefix="fa"
-                  role="img"
-                  viewBox="0 0 256 512"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-              <div className="owl-next">
-                <svg
-                  aria-hidden="true"
-                  className="svg-inline--fa fa-angle-right fa-w-8 fa-4x"
-                  data-fa-i2svg=""
-                  data-icon="angle-right"
-                  data-prefix="fa"
-                  role="img"
-                  viewBox="0 0 256 512"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className="owl-dots disabled" />
-          </div>
-        </ul>
-      </section>
       <section className="hproducts">
         <div className="container">
           <div className="p_tab hidden-xs">
             <ul className="nav nav-tabs menutab" role="tablist">
-              <li className="col-md-2" role="presentation">
-                <a
-                  aria-controls="ontsloh"
-                  aria-expanded="false"
-                  data-toggle="tab"
-                  href="#ontsloh"
-                  role="tab"
-                >
-                  <img src="/static/images/icon1.png" />
-                  онцлох
-                </a>
-                <div className="arrow-down" />
-              </li>
-              <li className="col-md-2" role="presentation">
-                <a
-                  aria-controls="hairtsag"
-                  data-toggle="tab"
-                  href="#hairtsag"
-                  role="tab"
-                >
-                  <img src="/static/images/icon4.png" />
-                  хайрцаг
-                </a>
-                <div className="arrow-down" />
-              </li>
-              <li className="col-md-2" role="presentation">
-                <a
-                  aria-controls="hushuu"
-                  data-toggle="tab"
-                  href="#hushuu"
-                  role="tab"
-                >
-                  <img src="/static/images/icon5.png" />
-                  хөшөө
-                </a>
-                <div className="arrow-down" />
-              </li>
-              <li className="col-md-2" role="presentation">
-                <a
-                  aria-controls="sats"
-                  data-toggle="tab"
-                  href="#sats"
-                  role="tab"
-                >
-                  <img src="/static/images/icon3.png" />
-                  сац суварга
-                </a>
-                <div className="arrow-down" />
-              </li>
-              <li className="col-md-2" role="presentation">
-                <a
-                  aria-controls="tsetseg"
-                  data-toggle="tab"
-                  href="#tsetseg"
-                  role="tab"
-                >
-                  <img src="/static/images/tab5.png" />
-                  хүндэтгэлийн цэцэг
-                </a>
-                <div className="arrow-down" />
-              </li>
-              <li className="col-md-2 active" role="presentation">
-                <a
-                  aria-controls="zed"
-                  aria-expanded="true"
-                  data-toggle="tab"
-                  href="#zed"
-                  role="tab"
-                >
-                  зэд
-                </a>
-                <div className="arrow-down" />
-              </li>
+              {tabs.map((tab) => (
+                <HomepageTab
+                  key={tab.id}
+                  name={tab.name}
+                  id={tab.id}
+                  searchParams={searchParams}
+                />
+              ))}
             </ul>
           </div>
         </div>
@@ -292,86 +63,30 @@ export default function Products() {
               id="ontsloh"
               role="tabpanel"
             >
-              <div className="pc_tab col-md-3 col-sm-6 col-xs-6">
-                <a href="/%D0%B7%D1%83%D1%80%D0%BC%D0%B0%D0%BB-%D1%85%D1%8D%D1%8D%D1%82%D1%8D%D0%B9-%D0%BB%D0%B0%D0%BA%D0%B0%D0%BD-%D1%85%D0%B0%D0%B9%D1%80%D1%86%D0%B0%D0%B3/">
-                  <div
-                    className="p_img"
-                    style={{
-                      background:
-                        "url('/static/images/8.jpg') no-repeat center",
-                      backgroundSize: "cover",
-                    }}
-                  >
-                    <div className="overlay">
-                      <img
-                        className="c_arrow"
-                        src="/static/images/sum-white.png"
-                      />
+              {products?.map((item: any) => (
+                <div
+                  className="pc_tab col-md-3 col-sm-6 col-xs-6"
+                  key={item._id}
+                >
+                  <a href={`/${item?._id}`}>
+                    <div
+                      className="p_img"
+                      style={{
+                        background: `url(https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.attachment?.url}) no-repeat center`,
+                        backgroundSize: "cover",
+                      }}
+                    >
+                      <div className="overlay">
+                        <img
+                          className="c_arrow"
+                          src="/static/images/sum-white.png"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <h3>Зурмал хээтэй лакан хайрцаг</h3>
-                </a>
-              </div>
-              <div className="pc_tab col-md-3 col-sm-6 col-xs-6">
-                <a href="/%D1%88%D0%B8%D0%BD%D1%8D-%D0%B7%D0%B0%D0%B3%D0%B2%D0%B0%D1%80%D1%8B%D0%BD-%D1%85%D0%B0%D0%BC%D0%B1%D0%B0%D0%BD-%D1%85%D0%B0%D0%B9%D1%80%D1%86%D0%B0%D0%B3/">
-                  <div
-                    className="p_img"
-                    style={{
-                      background:
-                        "url('/static/images/3_TivfSbz.png') no-repeat center",
-                      backgroundSize: "cover",
-                    }}
-                  >
-                    <div className="overlay">
-                      <img
-                        className="c_arrow"
-                        src="/static/images/sum-white.png"
-                      />
-                    </div>
-                  </div>
-                  <h3>Шинэ загварын хамбан хайрцаг</h3>
-                </a>
-              </div>
-              <div className="pc_tab col-md-3 col-sm-6 col-xs-6">
-                <a href="/%D1%82%D0%BE%D0%BD%D0%BE%D0%B3%D1%82%D0%BE%D0%B9-%D1%8D%D1%81%D0%B3%D0%B8%D0%B9-%D1%85%D0%B0%D0%B9%D1%80%D1%86%D0%B0%D0%B3/">
-                  <div
-                    className="p_img"
-                    style={{
-                      background:
-                        "url('/static/images/100.jpg') no-repeat center",
-                      backgroundSize: "cover",
-                    }}
-                  >
-                    <div className="overlay">
-                      <img
-                        className="c_arrow"
-                        src="/static/images/sum-white.png"
-                      />
-                    </div>
-                  </div>
-                  <h3>Тоногтой эсгий хайрцаг</h3>
-                </a>
-              </div>
-              <div className="pc_tab col-md-3 col-sm-6 col-xs-6">
-                <a href="/9-%D1%8D%D1%80%D0%B4%D1%8D%D0%BD%D0%B8%D0%B9%D0%BD-%D1%87%D0%B8%D0%BC%D1%8D%D0%B3%D0%BB%D1%8D%D0%BB%D1%82%D1%8D%D0%B9-%D0%BB%D0%B0%D0%BA%D0%B0%D0%BD-%D1%85%D0%B0%D0%B9%D1%80%D1%86%D0%B0%D0%B3/">
-                  <div
-                    className="p_img"
-                    style={{
-                      background:
-                        "url('/static/images/6_oAmLEe6.png') no-repeat center",
-                      backgroundSize: "cover",
-                    }}
-                  >
-                    <div className="overlay">
-                      <img
-                        className="c_arrow"
-                        src="/static/images/sum-white.png"
-                      />
-                    </div>
-                  </div>
-                  <h3>9 эрдэнийн чимэглэлтэй лакан хайрцаг</h3>
-                </a>
-              </div>
+                    <h3>{item.name}</h3>
+                  </a>
+                </div>
+              ))}
             </div>
             <div className="fade tab-pane row" id="hairtsag" role="tabpanel">
               <div className=" pc_tab col-md-3 col-sm-6 col-xs-6">
