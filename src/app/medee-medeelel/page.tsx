@@ -10,7 +10,6 @@ export default async function page({
   searchParams: { page: string };
 }) {
   const { articles } = await getKbArticlesByCode("medleg-medeelel");
-  // console.log(articles);
   const reversedArticles = [...articles].reverse();
   const currentPage = parseInt(searchParams.page as string) || 1;
   const totalPages = Math.ceil(reversedArticles.length / ITEMS_PER_PAGE);

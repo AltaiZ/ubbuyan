@@ -6,7 +6,7 @@ import { CommonParams } from "./kb";
 const token = process.env.NEXT_PUBLIC_ERXES_APP_TOKEN;
 
 type GetProducts = (params?: CommonParams) => Promise<{
-  products: IProduct[];
+  products: IProducts[];
   error_msg: string | undefined;
 }>;
 
@@ -16,7 +16,7 @@ type GetProductCategories = (params?: CommonParams) => Promise<{
 }>;
 
 type GetProductDetail = (params?: CommonParams) => Promise<{
-  product: any;
+  product: IProduct;
   error_msg: string | undefined;
 }>;
 
@@ -79,6 +79,13 @@ export const getProductDetail: GetProductDetail = cache(async (params: any) => {
   };
 });
 
+export interface IProductsBase {
+  _id: string;
+  name: string;
+  unitPrice: number;
+  isPackage?: boolean;
+}
+
 export interface IProductBase {
   _id: string;
   name: string;
@@ -98,6 +105,19 @@ export interface Group {
 }
 
 export interface IProduct extends IProductBase {
+  categoryId?: string | null;
+  type?: string | null;
+  description?: string | null;
+  attachment?: { url?: string } | null;
+  remainder?: number;
+  code?: string;
+  manufacturedDate?: string;
+  hasSimilarity?: boolean;
+  customFieldsData?: CustomField[];
+  shortName?: string;
+}
+
+export interface IProducts extends IProductsBase {
   categoryId?: string | null;
   type?: string | null;
   description?: string | null;

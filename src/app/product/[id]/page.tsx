@@ -5,11 +5,9 @@ import { getProductDetail } from "@/lib/products";
 
 export default async function page({ params }: { params: { id: string } }) {
   const { product } = await getProductDetail({
-    variables: {
-      id: params.id,
-    },
+    variables: { _id: params.id },
   });
-  console.log(product);
+  console.log(product, "product");
 
   return (
     <div id="content" style={{ display: "block" }}>
@@ -36,7 +34,7 @@ export default async function page({ params }: { params: { id: string } }) {
               <p> </p>
               <hr />
               <p>Үнэ:</p>
-              <h1>{product?.unitPric }</h1>
+              <h1>{product?.unitPrice}</h1>
               <hr />
             </div>
           </div>

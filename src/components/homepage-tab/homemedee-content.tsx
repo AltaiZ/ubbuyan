@@ -10,13 +10,11 @@ export default function HomeMedeeContent({
   tabs: any[];
   articles: any[];
 }) {
-  console.log(articles.map((article) => article.categoryId));
   const [activeNewTab, setActiveNewsTab] = useState(tabs[0].id);
 
   const filteredArticles = articles?.filter(
     (article: any) => article.categoryId === activeNewTab
   );
-  console.log(tabs);
 
   return (
     <div>

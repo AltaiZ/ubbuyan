@@ -22,17 +22,12 @@ export default async function Page({
     },
   });
 
-  
-
   const category = topic?.categories?.map((item) => item);
 
   const items = category?.map((item) => item);
 
-  const data = items?.map((item) => item);
+  const data = items?.map((item) => item?.articles);
 
-  const item = data?.map((item) => item);
-
-  // console.log(item, "i");
 
   const { articles } = await getKbArticlesByCode(
     activeTab === "dangaar"
@@ -51,7 +46,6 @@ export default async function Page({
     { name: "Хорго", id: "horgo" },
   ];
 
-  // console.log(articles);
   const reversedArticles = [...articles].reverse();
   const currentPage = parseInt(searchParams.page as string) || 1;
   const totalPages = Math.ceil(reversedArticles.length / ITEMS_PER_PAGE);
@@ -281,31 +275,37 @@ export default async function Page({
               />
             ))}
           </ul>
-          {data.map((item) => (
-            <div className="pc_tab col-md-3 col-sm-6 col-xs-6" key={item?._id}>
-              <a href={`/buteegdehuun/hoshoo/${item?._id}`}>
-                <div
-                  className="p_img"
-                  style={{
-                    background: `url(https://khankhujirt.app.erxes.io/api/read-file?key=${item?.image?.url})`,
-                    backgroundSize: "cover",
-                  }}
-                >
-                  <div className="overlay">
-                    <img
-                      className="c_arrow"
-                      src="/static/sites/ulaanbaatarbuyannew/default/images/sum-white.png"
-                    />
+
+          {data?.map((innerArray) =>
+            innerArray.map((item) => (
+              <div
+                className="pc_tab col-md-3 col-sm-6 col-xs-6"
+                key={item?._id}
+              >
+                <a href={`/buteegdehuun/hoshoo/${item?._id}`}>
+                  <div
+                    className="p_img"
+                    style={{
+                      background: `url(https://khankhujirt.app.erxes.io/api/read-file?key=${item?.image?.url})`,
+                      backgroundSize: "cover",
+                    }}
+                  >
+                    <div className="overlay">
+                      <img
+                        className="c_arrow"
+                        src="/static/sites/ulaanbaatarbuyannew/default/images/sum-white.png"
+                      />
+                    </div>
                   </div>
-                </div>
-                <h3>{item.title}</h3>
-                <div className="price_field">
-                  <h5 className="price-name">Үнэ: </h5>
-                  <h3 className="price">{item.summary}</h3>
-                </div>
-              </a>
-            </div>
-          ))}
+                  <h3>{item.title}</h3>
+                  <div className="price_field">
+                    <h5 className="price-name">Үнэ: </h5>
+                    <h3 className="price">{item.summary}</h3>
+                  </div>
+                </a>
+              </div>
+            ))
+          )}
           {paginatedArticles?.map((item) => (
             <div className="pc_tab col-md-3 col-sm-6 col-xs-6" key={item?._id}>
               <a href={`/buteegdehuun/hoshoo/${item?._id}`}>

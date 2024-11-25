@@ -11,7 +11,6 @@ export default async function Page({
   searchParams: { page: string };
 }) {
   const { articles } = await getKbArticlesByCode("sats-suvarga");
-  // console.log(articles);
   const reversedArticles = [...articles].reverse();
   const currentPage = parseInt(searchParams.page as string) || 1;
   const totalPages = Math.ceil(reversedArticles.length / ITEMS_PER_PAGE);
@@ -21,7 +20,6 @@ export default async function Page({
   const paginatedArticles = reversedArticles.slice(startIndex, endIndex);
 
   const newArticles = [...articles].reverse();
-  console.log(articles[0].title?.split(".").slice(0, 1).join("."), "articles");
   return (
     <div id="content">
       <section

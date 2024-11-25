@@ -9,7 +9,6 @@ export default async function page({ params }: { params: { id: string } }) {
       id: params.id,
     },
   });
-  console.log(article);
 
   return (
     <div id="content" style={{ display: "block" }}>

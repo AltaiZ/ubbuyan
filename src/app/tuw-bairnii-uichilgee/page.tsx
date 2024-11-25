@@ -1,7 +1,8 @@
 import HProducts from "@/components/hProducts";
+import { IPageProps } from "@/types";
 import React from "react";
 
-export default function page() {
+export default function page({searchParams}: IPageProps) {
   return (
     <div id="content">
       <div className="row eee">
@@ -247,7 +248,7 @@ export default function page() {
           </div>
         </section>
       </div>
-      <HProducts />
+      <HProducts searchParams={searchParams} params={{}} />
     </div>
   );
 }

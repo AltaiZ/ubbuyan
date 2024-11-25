@@ -3,23 +3,25 @@
 import { IPageProps } from "@/types";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { usePathname } from "next/navigation";
 
 export default function HomepageTab({
   name,
   id,
-  searchParams,
+  activeTab,
   url,
 }: {
   url: any;
   name: string;
   id: string;
-  searchParams: IPageProps["searchParams"];
+  activeTab: any;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <li
-      className={`col-md-2 ${id === searchParams.activeTab && "active"}`}
+      className={`col-md-2 ${id === activeTab && "active"}`}
       role="presentation "
     >
       <a
@@ -27,7 +29,9 @@ export default function HomepageTab({
         aria-expanded="false"
         data-toggle="tab"
         role="tab"
-        onClick={() => router.push(`/?activeTab=${id}`, { scroll: false })}
+        onClick={() =>
+          router.push(`${pathname}?activeTab=${id}`, { scroll: false })
+        }
       >
         <img src={url} />
         {name}

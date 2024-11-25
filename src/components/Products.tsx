@@ -3,8 +3,9 @@ import { getProducts } from "@/lib/products";
 import { IPageProps } from "@/types";
 import React from "react";
 import HomepageTab from "./homepage-tab/homepage-tab";
+import { url } from "inspector";
 
-const PER_PAGE = 4;
+const ITEMS_PER_PAGE = 4;
 
 export default async function Products({ searchParams }: IPageProps) {
   const activeTab = searchParams.activeTab;
@@ -28,16 +29,19 @@ export default async function Products({ searchParams }: IPageProps) {
     },
   });
 
+
+  const paginatedArticles = products.slice(0, ITEMS_PER_PAGE);
+
   const tabs = [
-    { name: "Онцлох", id: "ontsloh" },
-    { name: "хайрцаг", id: "hairtsag" },
-    { name: "хөшөө", id: "hoshoo" },
-    { name: "сац суварга", id: "suvarga" },
-    { name: "Онцлох", id: "tsetseg" },
+    { name: "Онцлох", id: "ontsloh", url: "/static/images/icon1.png" },
+    { name: "хайрцаг", id: "hairtsag", url: "/static/images/icon2.png" },
+    { name: "хөшөө", id: "hoshoo", url: "/static/images/icon3.png" },
+    { name: "сац суварга", id: "suvarga", url: "/static/images/icon4.png" },
+    { name: "Онцлох", id: "tsetseg", url: "/static/images/icon5.png" },
     { name: "Онцлох", id: "zed" },
   ];
 
-  console.log(products, "products");
+  // console.log(products, "products");
 
   return (
     <div>
@@ -50,6 +54,7 @@ export default async function Products({ searchParams }: IPageProps) {
                   key={tab.id}
                   name={tab.name}
                   id={tab.id}
+                  url={tab.url}
                   searchParams={searchParams}
                 />
               ))}
@@ -63,12 +68,12 @@ export default async function Products({ searchParams }: IPageProps) {
               id="ontsloh"
               role="tabpanel"
             >
-              {products?.map((item: any) => (
+              {paginatedArticles?.map((item: any) => (
                 <div
                   className="pc_tab col-md-3 col-sm-6 col-xs-6"
                   key={item._id}
                 >
-                  <a href={`/${item?._id}`}>
+                  <a href={`/product/${item?._id}`}>
                     <div
                       className="p_img"
                       style={{
