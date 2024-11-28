@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import HomeMedeeTab from "./homemedee-tab";
 import { IArticle } from "@/lib/kb";
+import LamNar from "../lam-nar";
 
 export default function HomeMedeeContent({
   tabs,
@@ -252,6 +253,7 @@ export default function HomeMedeeContent({
                 </a>
               </div>
             ))}
+          {activeNewTab === "lam-nar" && <LamNar />}
         </div>
       </div>
     </div>

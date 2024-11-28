@@ -66,7 +66,7 @@ export default async function HProducts({ searchParams }: IPageProps) {
                   className="pc_tab col-md-3 col-sm-6 col-xs-6"
                   key={item._id}
                 >
-                  <a href={`/${item?._id}`}>
+                  <a href={`/product/${item?._id}`}>
                     <div
                       className="p_img"
                       style={{

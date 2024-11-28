@@ -44,7 +44,13 @@ export default function FullScreenImage() {
                       <div className="owlcaption container no_img">
                         <div className="row d-flex">
                           <div className="col-sm-12 col-md-6">
-                            <div style={{ textAlign: "center" }}>
+                            <div
+                              style={{
+                                textAlign: "center",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
                               <img
                                 className="re-image-logo"
                                 src="/static/images/blue_logo.png"
@@ -132,7 +138,13 @@ export default function FullScreenImage() {
                       <div className="owlcaption container no_img">
                         <div className="row d-flex">
                           <div className="col-sm-12 col-md-6">
-                            <div style={{ textAlign: "center" }}>
+                            <div
+                              style={{
+                                textAlign: "center",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
                               <img
                                 className="re-image-logo"
                                 src="/static/images/blue_logo.png"
@@ -220,7 +232,13 @@ export default function FullScreenImage() {
                       <div className="owlcaption container no_img">
                         <div className="row d-flex">
                           <div className="col-sm-12 col-md-6">
-                            <div style={{ textAlign: "center" }}>
+                            <div
+                              style={{
+                                textAlign: "center",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
                               <img
                                 className="re-image-logo"
                                 src="/static/images/blue_logo.png"
@@ -308,7 +326,13 @@ export default function FullScreenImage() {
                       <div className="owlcaption container no_img">
                         <div className="row d-flex">
                           <div className="col-sm-12 col-md-6">
-                            <div style={{ textAlign: "center" }}>
+                            <div
+                              style={{
+                                textAlign: "center",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
                               <img
                                 className="re-image-logo"
                                 src="/static/images/blue_logo.png"
@@ -396,7 +420,13 @@ export default function FullScreenImage() {
                       <div className="owlcaption container no_img">
                         <div className="row d-flex">
                           <div className="col-sm-12 col-md-6">
-                            <div style={{ textAlign: "center" }}>
+                            <div
+                              style={{
+                                textAlign: "center",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
                               <img
                                 className="re-image-logo"
                                 src="/static/images/blue_logo.png"

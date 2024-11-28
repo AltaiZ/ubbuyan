@@ -1084,6 +1084,33 @@ section .single_article .post {
   }
 }
 
+.panel-heading a {
+  color: black;
+}
+
+.pb-4 {
+  margin-left: 35px;
+}
+.accordion-content {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 13px;
+  margin-left: 10px !important;
+}
+
+.lucide {
+  display: none;
+  visibility: hidden;
+}
+
+.panel-group .panel {
+  border-top: 2px solid #fff;
+}
+
+.border-b {
+  border-bottom-width: 0px;
+}
+
 .c_arrow {
   margin: 0 15px;
   width: 40px;
