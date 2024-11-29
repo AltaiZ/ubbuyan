@@ -1,6 +1,7 @@
 "use client";
 
 import React, { use, useState } from "react";
+import Map from "./component/map";
 
 export default function page() {
   const [activeTab, setActiveTab] = useState("list");
@@ -579,18 +580,7 @@ export default function page() {
                 <div className="map mapclass" id="tab2-2"></div>
               </div>
             )}
-            {activeTab === "map" && (
-              <div style={{ width: "100%", height: "500px" }}>
-                <iframe
-                  src="https://www.google.com/maps/search/+%D0%A5%D0%B8%D0%B9%D0%B4/@47.8933202,106.9086396,18216m/data=!3m1!1e3?authuser=0&entry=ttu&g_ep=EgoyMDI0MTEyNC4xIKXMDSoASAFQAw%3D%3D"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
-              </div>
-            )}
+            {activeTab === "map" && <Map />}
           </div>
         </div>
       </div>

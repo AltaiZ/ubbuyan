@@ -17,26 +17,10 @@ export default async function page({ params }: { params: { id: string } }) {
             <div className="col-md-6">
               <Slider product={product} />
             </div>
-            <div className="col-md-6 rightside no_img">
-              <h2>{product?.name}</h2>
-              <hr />
-              <p className="jy" />
-              <figure>
-                <img
-                  src="/media/ulaanbaatarbuyannew/content/Бүтээгдэхүүн/3_TivfSbz.png"
-                  data-image="j592kywxmcpo"
-                />
-              </figure>
-              <p />
-              <hr />
-              <p> </p>
-              <p> </p>
-              <p> </p>
-              <hr />
-              <p>Үнэ:</p>
-              <h1>{product?.unitPrice}</h1>
-              <hr />
-            </div>
+
+            <div
+              dangerouslySetInnerHTML={{ __html: product?.description || "" }}
+            />
           </div>
         </article>
         <section className="hproducts product_tab">

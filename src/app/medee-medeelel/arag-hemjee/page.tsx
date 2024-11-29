@@ -11,7 +11,7 @@ export default async function page({
   searchParams: { page: string };
 }) {
   const { articles } = await getKbArticlesByCode("arag-hemjee");
-  // console.log(articles);
+  console.log(articles, "arag-hemjee");
   const reversedArticles = [...articles].reverse();
   const currentPage = parseInt(searchParams.page as string) || 1;
   const totalPages = Math.ceil(reversedArticles.length / ITEMS_PER_PAGE);
@@ -34,7 +34,7 @@ export default async function page({
         >
           <li role="presentation" className="">
             <a
-              href="#medee_medeelel"
+              href="/medee-medeelel"
               aria-controls="medee_medeelel"
               role="tab"
               data-toggle="tab"
@@ -225,7 +225,7 @@ export default async function page({
                   <div
                     className="p_img"
                     style={{
-                      background: `url(https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.image?.url}) no-repeat center`,
+                      background: `url(https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.image?.url}) `,
                       backgroundSize: "cover",
                     }}
                   >

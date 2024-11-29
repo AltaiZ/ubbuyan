@@ -1,27 +1,7 @@
 import React from "react";
+import ErxesForm from "./component/erxesForm";
 
 export default function page() {
-  (window as any).erxesSettings = {
-    forms: [
-      {
-        brand_id: "qgYkrI",
-        form_id: "cC26Mb",
-      },
-    ],
-  };
-
-  (function () {
-    var script = document.createElement("script");
-    script.src =
-      "https://ulaanbaatarbuyan.app.erxes.io/widgets/build/formWidget.bundle.js";
-    script.async = true;
-
-    var entry = document.getElementsByTagName("script")[0];
-    if (entry && entry.parentNode) {
-      entry.parentNode.insertBefore(script, entry);
-    }
-  })();
-
   return (
     <div
       id="content"
@@ -93,15 +73,15 @@ export default function page() {
               }}
             />
           </figure>
-          <div
-            data-erxes-embed="cC26Mb"
-            style={{ width: "900px", height: "300px" }}
-          ></div>
           <p />
         </div>
+
         <div className="col-md-6 col-md-offset-2 holboo">
           <img className="full_img" src="" />
         </div>
+      </section>
+      <section className="container">
+        <ErxesForm />
       </section>
     </div>
   );

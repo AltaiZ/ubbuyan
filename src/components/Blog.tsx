@@ -7,6 +7,9 @@ import { log } from "console";
 import HomeMedeeTabs from "./homepage-tab/homemedee-content";
 import HomeMedeeContent from "./homepage-tab/homemedee-content";
 
+export const revalidate = 1;
+const ITEMS_PER_PAGE = 4;
+
 export default async function Blog() {
   const { topic } = await kbTopicDetail({
     variables: {
@@ -15,6 +18,9 @@ export default async function Blog() {
   });
 
   const articles = topic?.categories?.flatMap((item) => item.articles);
+
+  const PageArticles = articles.slice(ITEMS_PER_PAGE);
+
   const tabs = [
     { name: "Мэдээ мэдээлэл", id: "nrC0GCqQm0KS6F2xawdmL" },
     { name: "Арга хэмжээ", id: "OBw0dhHO90I_2O2S26PIh" },
@@ -30,7 +36,7 @@ export default async function Blog() {
           Сүүлийн үеийн мэдээлэл, мэдлэг, арга хэмжээ зэргийг та эндээс авах
           боломжтой.
         </p>
-        <HomeMedeeContent tabs={tabs} articles={articles} />
+        <HomeMedeeContent tabs={tabs} articles={PageArticles} />
       </div>
       <div className="read_more">
         <a href="/medee-medeelel">

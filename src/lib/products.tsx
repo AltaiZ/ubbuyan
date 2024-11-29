@@ -107,7 +107,7 @@ export interface Group {
 export interface IProduct extends IProductBase {
   categoryId?: string | null;
   type?: string | null;
-  description?: string | null;
+  description?: any | null;
   attachment?: { url?: string } | null;
   remainder?: number;
   code?: string;
@@ -120,7 +120,7 @@ export interface IProduct extends IProductBase {
 export interface IProducts extends IProductsBase {
   categoryId?: string | null;
   type?: string | null;
-  description?: string | null;
+  description?: any | null;
   attachment?: { url?: string } | null;
   remainder?: number;
   code?: string;

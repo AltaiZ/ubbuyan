@@ -29,7 +29,6 @@ export default async function Products({ searchParams }: IPageProps) {
     },
   });
 
-
   const paginatedArticles = products.slice(0, ITEMS_PER_PAGE);
 
   const tabs = [
@@ -37,8 +36,12 @@ export default async function Products({ searchParams }: IPageProps) {
     { name: "хайрцаг", id: "hairtsag", url: "/static/images/icon2.png" },
     { name: "хөшөө", id: "hoshoo", url: "/static/images/icon3.png" },
     { name: "сац суварга", id: "suvarga", url: "/static/images/icon4.png" },
-    { name: "Онцлох", id: "tsetseg", url: "/static/images/icon5.png" },
-    { name: "Онцлох", id: "zed" },
+    {
+      name: "хүндэтгэлийн цэцэг",
+      id: "tsetseg",
+      url: "/static/images/icon5.png",
+    },
+    { name: "зэд", id: "zed" },
   ];
 
   // console.log(products, "products");
