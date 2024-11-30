@@ -17,6 +17,8 @@ export default function HomeMedeeContent({
     (article: any) => article.categoryId === activeNewTab
   );
 
+  console.log(filteredArticles, "filteredArticles");
+
   return (
     <div>
       <ul
