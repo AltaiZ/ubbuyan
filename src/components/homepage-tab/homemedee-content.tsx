@@ -4,6 +4,8 @@ import HomeMedeeTab from "./homemedee-tab";
 import { IArticle } from "@/lib/kb";
 import LamNar from "../lam-nar";
 
+const ITEMS_PER_PAGE = 4;
+
 export default function HomeMedeeContent({
   tabs,
   articles,
@@ -17,7 +19,7 @@ export default function HomeMedeeContent({
     (article: any) => article.categoryId === activeNewTab
   );
 
-  console.log(filteredArticles, "filteredArticles");
+  const PerArticles = filteredArticles.slice(0, ITEMS_PER_PAGE);
 
   return (
     <div>
@@ -164,7 +166,7 @@ export default function HomeMedeeContent({
               >
                 <li role="presentation">
                   <div className="item">
-                    <a href="http://ulaanbaatarbuyan.mn/medleg-medeelel/tugeemel-asuult">
+                    <a href="/medee-medeelel/tugemel-asuult">
                       Түгээмээл асуулт
                     </a>
                   </div>
@@ -234,7 +236,7 @@ export default function HomeMedeeContent({
           role="tabpanel"
         >
           {activeNewTab !== "lam-nar" &&
-            filteredArticles?.reverse().map((item: any) => (
+            PerArticles?.reverse().map((item: any) => (
               <div className=" pc_tab col-md-3 col-sm-6">
                 <a href={`/medee-medeelel/${item._id}`}>
                   <div

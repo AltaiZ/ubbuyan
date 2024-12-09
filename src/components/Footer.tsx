@@ -1,12 +1,18 @@
+"use client";
+
 import React from "react";
 
 export default function Footer() {
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className="footer">
       <div className="container">
         <div className="row">
           <div className="footer_menus ">
-            <div className="up_button hidden-xs">
+            <div className="up_button hidden-xs" onClick={handleScrollToTop}>
               <i className="up" />
             </div>
             <div className="col-md-3 col-sm-6 footer_menu">
@@ -98,7 +104,7 @@ export default function Footer() {
                   <a href="/huuli-erh-zui">Хууль эрх зүй</a>
                 </li>
                 <li className=" hidden-xs" role="presentation">
-                  <a href="/medleg-medeelel/tugeemel-asuult">Түгээмэл асуулт</a>
+                  <a href="/medee-medeelel/tugemel-asuult">Түгээмэл асуулт</a>
                 </li>
                 <li className=" hidden-xs" role="presentation">
                   <a href="/medee-medeelel/arag-hemjee">Арга хэмжээ</a>
@@ -175,14 +181,10 @@ export default function Footer() {
           <a href="/aboutUs">Компани танилцуулга</a>
         </li>
         <li className="" role="presentation">
-          <a href="/%D0%B0%D0%B6%D0%BB%D1%8B%D0%BD-%D0%B1%D0%B0%D0%B9%D1%80/">
-            Ажлын байр
-          </a>
+          <a href="/aljiin-bair/">Ажлын байр</a>
         </li>
         <li className="" role="presentation">
-          <a href="/%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D%D0%BD%D0%B8%D0%B9-%D0%BD%D3%A9%D1%85%D1%86%D3%A9%D0%BB/">
-            Үйлчилгээний нөхцөл
-          </a>
+          <a href="/uilchelgenii-nohtsol">Үйлчилгээний нөхцөл</a>
         </li>
         <li className="" role="presentation">
           <a href="/holboo-barih/">Холбоо барих</a>

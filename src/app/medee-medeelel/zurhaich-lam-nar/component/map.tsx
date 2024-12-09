@@ -7,40 +7,29 @@ interface MarkerData {
   lat: number;
   lng: number;
   name: string;
-  address1: string;
+  address1?: string;
 }
 
 const markersData: MarkerData[] = [
   {
-    lat: 47.910643,
-    lng: 106.929639,
-    name: "Улаанбаатар буян төв байр",
+    lat: 47.9278265,
+    lng: 106.9415559,
+    name: "Мамба дацан",
     address1: "Улаанбаатар хот, СБД 1-р хороо, Авто замчдын гудамж 54",
   },
   {
-    lat: 47.91694,
-    lng: 106.624242,
-    name: "Баруун буяны төв цогцолбор",
-    address1: "Сонгино хйрхан дүүрэг, 32-р хороо, Баруун турууны ам",
+    lat: 47.9390453,
+    lng: 106.9349934,
+    name: "Дамбадаржаалин Хийд",
+    address1: "Улаанбаатар хот , БЗД 2-р хороо",
   },
   {
-    lat: 47.918318,
-    lng: 107.107501,
-    name: "Зүүн буяны төв цогцолбор",
-    address1: "Баянзүр дүүрэг, 20-р хороо",
+    lat: 47.9198087,
+    lng: 106.9582959,
+    name: "Тарвалин хийд",
+    address1: "Улаанбаатар хот, БЗД 15-р хороо",
   },
-  {
-    lat: 48.041027,
-    lng: 106.496952,
-    name: "Дурсгалын цэцэрлэгт хүрээлэн",
-    address1: "Сонгинохайрхан дүүрэг, 21-р хороо, Шүлэг уулын энгэрт",
-  },
-  {
-    lat: 47.710694,
-    lng: 107.216096,
-    name: "Диваажингийн цэцэрлэгт хүрээлэн",
-    address1: "Төв аймгийн сэргэлэн сум, Баян уулын энгэрт",
-  },
+  // Бусад маркеруудыг энд нэмж оруулна уу
 ];
 
 const MapComponent: React.FC = () => {
@@ -52,7 +41,7 @@ const MapComponent: React.FC = () => {
 
       const map = new google.maps.Map(mapRef.current, {
         center: { lat: 47.910643, lng: 106.929639 },
-        zoom: 12,
+        zoom: 13,
         mapTypeId: "roadmap",
       });
 
@@ -68,9 +57,13 @@ const MapComponent: React.FC = () => {
         });
 
         marker.addListener("click", () => {
-          infoWindow.setContent(
-            `<div><strong>${name}</strong><br>${address1}</div>`
-          );
+          const content = `
+            <div>
+              <strong>${name}</strong>
+              <br />
+              ${address1 || ""}
+            </div>`;
+          infoWindow.setContent(content);
           infoWindow.open(map, marker);
         });
 
@@ -93,7 +86,6 @@ const MapComponent: React.FC = () => {
         src={`https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap`}
         strategy="lazyOnload"
       />
-
       <div ref={mapRef} style={{ width: "100%", height: "500px" }} />
     </>
   );

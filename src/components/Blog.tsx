@@ -1,10 +1,6 @@
 import { getKbArticlesByCode, kbTopicDetail } from "@/lib/kb";
 import React, { useState } from "react";
-import HomepageTab from "./homepage-tab/homemedee-tab";
-import { useQuery } from "@apollo/client";
-import queries from "@/graphql/queries";
-import { log } from "console";
-import HomeMedeeTabs from "./homepage-tab/homemedee-content";
+
 import HomeMedeeContent from "./homepage-tab/homemedee-content";
 
 export const revalidate = 1;

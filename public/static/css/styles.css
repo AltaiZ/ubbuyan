@@ -2510,6 +2510,8 @@ img {
   color: #333;
 }
 
+
+
 .emgenel p {
   font-family: Roboto, Verdana, Geneva, sans-serif;
   font-weight: 300;
@@ -2517,6 +2519,11 @@ img {
   line-height: 1.5;
   font-size: 18px;
   color: #747474;
+}
+
+.font-medium {
+  font-size: 15px;
+  padding: 4px;
 }
 
 .nav-tabs > li > a {

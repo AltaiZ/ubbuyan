@@ -1,29 +1,13 @@
-import { PaginationPart } from "@/components/pagination";
 import { getKbArticlesByCode } from "@/lib/kb";
 import React from "react";
-
 export const revalidate = 1;
-const ITEMS_PER_PAGE = 16;
-
-export default async function page({
-  searchParams,
-}: {
-  searchParams: { page: string };
-}) {
+export default async function page() {
   const { articles } = await getKbArticlesByCode("arag-hemjee");
-  console.log(articles, "arag-hemjee");
-  const reversedArticles = [...articles].reverse();
-  const currentPage = parseInt(searchParams.page as string) || 1;
-  const totalPages = Math.ceil(reversedArticles.length / ITEMS_PER_PAGE);
-  const safeCurrentPage = Math.min(Math.max(currentPage, 1), totalPages);
-  const startIndex = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const paginatedArticles = reversedArticles.slice(startIndex, endIndex);
-
+  console.log("articles", articles);
   return (
     <div id="content" style={{ display: "block" }}>
       <div className="blog_cat container wrapper h_blog">
-        <h1>Мэдлэг, мэдээлэл</h1>
+        <h1>{articles?.[0]?.title}</h1>
         <p>
           Сүүлийн үеийн мэдээлэл, мэдлэг, арга хэмжээ зэргийг та эндээс авах
           боломжтой.
@@ -214,12 +198,9 @@ export default async function page({
         </ul>
         <br />
         <div className="tab-content">
-          <div
-            role="tabpanel"
-            className="sub_tab fade tab-pane"
-            id="medee_medeelel"
-          >
-            {paginatedArticles.map((item) => (
+          <div role="tabpanel" id="medee_medeelel">
+            <h1>HDD</h1>
+            {articles.map((item) => (
               <div className=" pc_tab col-md-3 col-sm-6" key={item._id}>
                 <a href={`/medee-medeelel/${item._id}`}>
                   <div
@@ -246,10 +227,6 @@ export default async function page({
 
             <div className="clearfix" />
           </div>
-          <PaginationPart
-            currentPage={safeCurrentPage}
-            totalPages={totalPages}
-          />
         </div>
       </div>
       <div className="map_new" style={{ display: "none" }}>

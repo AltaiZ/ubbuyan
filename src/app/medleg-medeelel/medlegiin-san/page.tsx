@@ -1,6 +1,19 @@
+import { getKbArticlesByCode } from "@/lib/kb";
 import React from "react";
 
-export default function page() {
+export const revalidate = 1;
+const ITEMS_PER_PAGE = 9;
+
+export default async function page({ searchParams }: any) {
+  const { articles } = await getKbArticlesByCode("medlegiin-san");
+  // console.log(articles);
+  const reversedArticles = [...articles].reverse();
+  const currentPage = parseInt(searchParams.page as string) || 1;
+  const totalPages = Math.ceil(reversedArticles.length / ITEMS_PER_PAGE);
+  const safeCurrentPage = Math.min(Math.max(currentPage, 1), totalPages);
+  const startIndex = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedArticles = reversedArticles.slice(startIndex, endIndex);
   return (
     <div
       id="content"
@@ -24,19 +37,13 @@ export default function page() {
             <div className="col-md-3">
               <ul className="sidebar-menu">
                 <li>
-                  <a href="/medleg-medeelel/tugeemel-asuult">
-                    Түгээмэл асуулт
-                  </a>
+                  <a href="/medee-medeelel/tugemel-asuult">Түгээмэл асуулт</a>
                 </li>
                 <li>
-                  <a href="/emgeneliin-ug">
-                    Эмгэнэл
-                  </a>
+                  <a href="/emgeneliin-ug">Эмгэнэл</a>
                 </li>
                 <li>
-                  <a href="/huuli-erh-zui">
-                    Хууль эрх зүй
-                  </a>
+                  <a href="/huuli-erh-zui">Хууль эрх зүй</a>
                 </li>
                 <li>
                   <a href="/medleg-medeelel/mongol-yos-zanshil">
@@ -44,14 +51,10 @@ export default function page() {
                   </a>
                 </li>
                 <li>
-                  <a href="/medleg-medeelel/arga-hemjee">
-                    Арга хэмжээ
-                  </a>
+                  <a href="/medleg-medeelel/arga-hemjee">Арга хэмжээ</a>
                 </li>
                 <li className="active">
-                  <a href="/medleg-medeelel/medlegiin-san">
-                    Мэдлэгийн сан
-                  </a>
+                  <a href="/medleg-medeelel/medlegiin-san">Мэдлэгийн сан</a>
                 </li>
                 <li>
                   <a href="/medleg-medeelel/zurhaich-lam-nar">
@@ -62,366 +65,56 @@ export default function page() {
             </div>
             <div className="col-md-9">
               <div className="blog-list">
-                <div className="col-md-4 col-sm-6">
-                  <div className="blog-item">
-                    <div className="blog_img">
-                      <a
-                        href="/%D1%81%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D0%B3%D1%8D%D0%BC%D1%82%D1%8D%D0%BB-%D0%B3%D1%8D%D0%B6-%D1%8E%D1%83/"
-                        title="Сэтгэлийн гэмтэл гэж юу?"
-                      >
-                        <img src="/static/images/-2372164990151190777_400_x_211.png" />
-                      </a>
-                    </div>
-                    <div className="garchig">
-                      <span className="date">
-                        <svg
-                          aria-hidden="true"
-                          className="svg-inline--fa fa-calendar fa-w-14"
-                          data-fa-i2svg=""
-                          data-icon="calendar"
-                          data-prefix="fa"
-                          role="img"
-                          viewBox="0 0 448 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        2022-11-21
-                      </span>
-                      <h4>
+                {paginatedArticles.map((item) => (
+                  <div className="col-md-4 col-sm-6" key={item._id}>
+                    <div className="blog-item">
+                      <div className="blog_img">
                         <a
-                          href="/%D1%81%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D0%B3%D1%8D%D0%BC%D1%82%D1%8D%D0%BB-%D0%B3%D1%8D%D0%B6-%D1%8E%D1%83/"
-                          title="Сэтгэлийн гэмтэл гэж юу?"
+                          href={`/medee-medeelel/${item._id}`}
+                          title="Бүх төрлийн БУЯНЫ ЗЭД-г онлайнаар..."
                         >
-                          Сэтгэлийн гэмтэл гэж юу?
+                          <img
+                            className="img-responsive"
+                            width={240}
+                            height={180}
+                            alt={item.title}
+                            src={`https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.image?.url}`}
+                          />
                         </a>
-                      </h4>
+                      </div>
+                      <div className="garchig">
+                        <span className="date d-flex align-center">
+                          <svg
+                            width="12"
+                            height="12"
+                            aria-hidden="true"
+                            className="svg-inline--fa fa-calendar fa-w-14"
+                            data-fa-i2svg=""
+                            data-icon="calendar"
+                            data-prefix="fa"
+                            role="img"
+                            viewBox="0 0 448 512"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                          {item.summary}
+                        </span>
+                        <h4>
+                          <a
+                            href={`/medleg-medeelel/${item._id}`}
+                            className="medleg_title"
+                          >
+                            {item.title}
+                          </a>
+                        </h4>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-md-4 col-sm-6">
-                  <div className="blog-item">
-                    <div className="blog_img">
-                      <a
-                        href="/%D0%B1%D1%83%D1%8F%D0%BD%D1%8B-%D0%BB%D0%B0%D0%B2%D0%BB%D0%B0%D1%85-7016-2222/"
-                        title="Буяны лавлах 7016-2222"
-                      >
-                        <img src="/static/images/5210892212303698228_400_x_400.jpg" />
-                      </a>
-                    </div>
-                    <div className="garchig">
-                      <span className="date">
-                        <svg
-                          aria-hidden="true"
-                          className="svg-inline--fa fa-calendar fa-w-14"
-                          data-fa-i2svg=""
-                          data-icon="calendar"
-                          data-prefix="fa"
-                          role="img"
-                          viewBox="0 0 448 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        2021-08-31
-                      </span>
-                      <h4>
-                        <a
-                          href="/%D0%B1%D1%83%D1%8F%D0%BD%D1%8B-%D0%BB%D0%B0%D0%B2%D0%BB%D0%B0%D1%85-7016-2222/"
-                          title="Буяны лавлах 7016-2222"
-                        >
-                          Буяны лавлах 7016-2222
-                        </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-6">
-                  <div className="blog-item">
-                    <div className="blog_img">
-                      <a
-                        href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-4/"
-                        title="ОЙЛГОЛТЫН ЗӨРҮҮ №4"
-                      >
-                        <img src="/static/images/139703866354898186_400_x_400.jpg" />
-                      </a>
-                    </div>
-                    <div className="garchig">
-                      <span className="date">
-                        <svg
-                          aria-hidden="true"
-                          className="svg-inline--fa fa-calendar fa-w-14"
-                          data-fa-i2svg=""
-                          data-icon="calendar"
-                          data-prefix="fa"
-                          role="img"
-                          viewBox="0 0 448 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        2021-08-16
-                      </span>
-                      <h4>
-                        <a
-                          href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-4/"
-                          title="ОЙЛГОЛТЫН ЗӨРҮҮ №4"
-                        >
-                          ОЙЛГОЛТЫН ЗӨРҮҮ №4
-                        </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-6">
-                  <div className="blog-item">
-                    <div className="blog_img">
-                      <a
-                        href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-3/"
-                        title="ОЙЛГОЛТЫН ЗӨРҮҮ №3"
-                      >
-                        <img src="/static/images/7520967580319363467_400_x_400.jpg" />
-                      </a>
-                    </div>
-                    <div className="garchig">
-                      <span className="date">
-                        <svg
-                          aria-hidden="true"
-                          className="svg-inline--fa fa-calendar fa-w-14"
-                          data-fa-i2svg=""
-                          data-icon="calendar"
-                          data-prefix="fa"
-                          role="img"
-                          viewBox="0 0 448 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        2021-08-10
-                      </span>
-                      <h4>
-                        <a
-                          href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-3/"
-                          title="ОЙЛГОЛТЫН ЗӨРҮҮ №3"
-                        >
-                          ОЙЛГОЛТЫН ЗӨРҮҮ №3
-                        </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-6">
-                  <div className="blog-item">
-                    <div className="blog_img">
-                      <a
-                        href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-2/"
-                        title="ОЙЛГОЛТЫН ЗӨРҮҮ №2"
-                      >
-                        <img src="/static/images/-2627697062535744786_400_x_400.jpg" />
-                      </a>
-                    </div>
-                    <div className="garchig">
-                      <span className="date">
-                        <svg
-                          aria-hidden="true"
-                          className="svg-inline--fa fa-calendar fa-w-14"
-                          data-fa-i2svg=""
-                          data-icon="calendar"
-                          data-prefix="fa"
-                          role="img"
-                          viewBox="0 0 448 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        2021-08-04
-                      </span>
-                      <h4>
-                        <a
-                          href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-2/"
-                          title="ОЙЛГОЛТЫН ЗӨРҮҮ №2"
-                        >
-                          ОЙЛГОЛТЫН ЗӨРҮҮ №2
-                        </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-6">
-                  <div className="blog-item">
-                    <div className="blog_img">
-                      <a
-                        href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-1/"
-                        title="ОЙЛГОЛТЫН ЗӨРҮҮ №1"
-                      >
-                        <img src="/static/images/-523343485117177988_400_x_400.jpg" />
-                      </a>
-                    </div>
-                    <div className="garchig">
-                      <span className="date">
-                        <svg
-                          aria-hidden="true"
-                          className="svg-inline--fa fa-calendar fa-w-14"
-                          data-fa-i2svg=""
-                          data-icon="calendar"
-                          data-prefix="fa"
-                          role="img"
-                          viewBox="0 0 448 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        2021-08-04
-                      </span>
-                      <h4>
-                        <a
-                          href="/%D0%BE%D0%B9%D0%BB%D0%B3%D0%BE%D0%BB%D1%82%D1%8B%D0%BD-%D0%B7%D3%A9%D1%80%D2%AF%D2%AF-1/"
-                          title="ОЙЛГОЛТЫН ЗӨРҮҮ №1"
-                        >
-                          ОЙЛГОЛТЫН ЗӨРҮҮ №1
-                        </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-6">
-                  <div className="blog-item">
-                    <div className="blog_img">
-                      <a
-                        href="/%D1%83%D0%BB%D0%B0%D0%B0%D0%BD%D0%B1%D0%B0%D0%B0%D1%82%D0%B0%D1%80-%D0%B1%D1%83%D1%8F%D0%BD-%D1%85%D1%85%D0%BA-%D0%BD%D0%B8%D0%B9-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D%D0%B3-%D1%81%D0%BE%D0%BD%D0%B3%D0%BE%D1%85-%D1%88%D0%B0%D0%BB%D1%82%D0%B3%D0%B0%D0%B0%D0%BD/"
-                        title='"Улаанбаатар буян" ХХК-ний үйлчилгээг сонгох шалтгаан'
-                      >
-                        <img src="/static/images/-992067526353350923_400_x_400.jpg" />
-                      </a>
-                    </div>
-                    <div className="garchig">
-                      <span className="date">
-                        <svg
-                          aria-hidden="true"
-                          className="svg-inline--fa fa-calendar fa-w-14"
-                          data-fa-i2svg=""
-                          data-icon="calendar"
-                          data-prefix="fa"
-                          role="img"
-                          viewBox="0 0 448 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        2020-10-28
-                      </span>
-                      <h4>
-                        <a
-                          href="/%D1%83%D0%BB%D0%B0%D0%B0%D0%BD%D0%B1%D0%B0%D0%B0%D1%82%D0%B0%D1%80-%D0%B1%D1%83%D1%8F%D0%BD-%D1%85%D1%85%D0%BA-%D0%BD%D0%B8%D0%B9-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D%D0%B3-%D1%81%D0%BE%D0%BD%D0%B3%D0%BE%D1%85-%D1%88%D0%B0%D0%BB%D1%82%D0%B3%D0%B0%D0%B0%D0%BD/"
-                          title='"Улаанбаатар буян" ХХК-ний үйлчилгээг сонгох шалтгаан'
-                        >
-                          "Улаанбаатар буян" ХХК-ний үйлчилгээг сонгох шалтгаан
-                        </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-6">
-                  <div className="blog-item">
-                    <div className="blog_img">
-                      <a
-                        href="/%D1%83%D0%BB%D0%B0%D0%B0%D0%BD%D0%B1%D0%B0%D0%B0%D1%82%D0%B0%D1%80-%D0%B1%D1%83%D1%8F%D0%BD-%D1%85%D1%85%D0%BA-%D0%B8%D0%B9%D0%BD-%D0%BC%D1%8D%D1%80%D0%B3%D1%8D%D1%88%D1%81%D1%8D%D0%BD-%D0%B7%D3%A9%D0%B2%D0%BB%D3%A9%D1%85-%D0%B0%D0%B6%D0%B8%D0%BB%D1%87%D0%B8%D0%B4/"
-                        title="Улаанбаатар буян ХХК-ийн мэргэшсэн зөвлөх ажилчид"
-                      >
-                        <img src="/static/images/4668223339335910114_400_x_565.jpg" />
-                      </a>
-                    </div>
-                    <div className="garchig">
-                      <span className="date">
-                        <svg
-                          aria-hidden="true"
-                          className="svg-inline--fa fa-calendar fa-w-14"
-                          data-fa-i2svg=""
-                          data-icon="calendar"
-                          data-prefix="fa"
-                          role="img"
-                          viewBox="0 0 448 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        2020-10-11
-                      </span>
-                      <h4>
-                        <a
-                          href="/%D1%83%D0%BB%D0%B0%D0%B0%D0%BD%D0%B1%D0%B0%D0%B0%D1%82%D0%B0%D1%80-%D0%B1%D1%83%D1%8F%D0%BD-%D1%85%D1%85%D0%BA-%D0%B8%D0%B9%D0%BD-%D0%BC%D1%8D%D1%80%D0%B3%D1%8D%D1%88%D1%81%D1%8D%D0%BD-%D0%B7%D3%A9%D0%B2%D0%BB%D3%A9%D1%85-%D0%B0%D0%B6%D0%B8%D0%BB%D1%87%D0%B8%D0%B4/"
-                          title="Улаанбаатар буян ХХК-ийн мэргэшсэн зөвлөх ажилчид"
-                        >
-                          Улаанбаатар буян ХХК-ийн мэргэшсэн зөвлөх ажилчид
-                        </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-6">
-                  <div className="blog-item">
-                    <div className="blog_img">
-                      <a
-                        href="/%D0%BE%D0%BB%D0%BE%D0%BD-%D1%83%D0%BB%D1%81%D1%8B%D0%BD-%D0%BE%D1%80%D1%88%D1%83%D1%83%D0%BB%D0%B3%D1%8B%D0%BD-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D%D0%BD%D0%B8%D0%B9-%D1%87%D0%B8%D0%B3-%D1%85%D0%B0%D0%BD%D0%B4%D0%BB%D0%B0%D0%B3%D0%B0/"
-                        title="ОЛОН УЛСЫН ОРШУУЛГЫН ҮЙЛЧИЛГЭЭНИЙ ЧИГ ХАНДЛАГА "
-                      >
-                        <img src="/static/images/-7165075861294888552_400_x_266.jpg" />
-                      </a>
-                    </div>
-                    <div className="garchig">
-                      <span className="date">
-                        <svg
-                          aria-hidden="true"
-                          className="svg-inline--fa fa-calendar fa-w-14"
-                          data-fa-i2svg=""
-                          data-icon="calendar"
-                          data-prefix="fa"
-                          role="img"
-                          viewBox="0 0 448 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12 192h424c6.6 0 12 5.4 12 12v260c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V204c0-6.6 5.4-12 12-12zm436-44v-36c0-26.5-21.5-48-48-48h-48V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H160V12c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v52H48C21.5 64 0 85.5 0 112v36c0 6.6 5.4 12 12 12h424c6.6 0 12-5.4 12-12z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                        2019-09-18
-                      </span>
-                      <h4>
-                        <a
-                          href="/%D0%BE%D0%BB%D0%BE%D0%BD-%D1%83%D0%BB%D1%81%D1%8B%D0%BD-%D0%BE%D1%80%D1%88%D1%83%D1%83%D0%BB%D0%B3%D1%8B%D0%BD-%D2%AF%D0%B9%D0%BB%D1%87%D0%B8%D0%BB%D0%B3%D1%8D%D1%8D%D0%BD%D0%B8%D0%B9-%D1%87%D0%B8%D0%B3-%D1%85%D0%B0%D0%BD%D0%B4%D0%BB%D0%B0%D0%B3%D0%B0/"
-                          title="ОЛОН УЛСЫН ОРШУУЛГЫН ҮЙЛЧИЛГЭЭНИЙ ЧИГ ХАНДЛАГА "
-                        >
-                          ОЛОН УЛСЫН ОРШУУЛГЫН ҮЙЛЧИЛГЭЭНИЙ ЧИГ ХАНДЛАГА{" "}
-                        </a>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
               <nav>
                 <ul className="pagination">

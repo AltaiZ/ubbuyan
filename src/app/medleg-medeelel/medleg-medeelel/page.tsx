@@ -37,7 +37,7 @@ export default async function page({ searchParams }: any) {
             <div className="col-md-3">
               <ul className="sidebar-menu">
                 <li>
-                  <a href="/medleg-medeelel/tugeemel-asuult">Түгээмэл асуулт</a>
+                  <a href="/medee-medeelel/tugemel-asuult">Түгээмэл асуулт</a>
                 </li>
                 <li>
                   <a href="/emgeneliin-ug">Эмгэнэл</a>
