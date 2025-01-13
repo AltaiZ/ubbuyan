@@ -26,7 +26,7 @@ export default async function Blog() {
 
   return (
     <div>
-      {/* <div className="container wrapper h_blog">
+      <div className="container wrapper h_blog">
         <h1>Мэдлэг, мэдээлэл</h1>
         <p className="hidden-xs">
           Сүүлийн үеийн мэдээлэл, мэдлэг, арга хэмжээ зэргийг та эндээс авах
@@ -39,7 +39,7 @@ export default async function Blog() {
           <img src="/static/images/sum-red.png" />
         </a>
         <p>бүгдийг харах</p>
-      </div> */}
+      </div>
     </div>
   );
 }

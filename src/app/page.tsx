@@ -1,5 +1,5 @@
 import Image from "next/image";
-import FullScreenImage from "../components/FullScreenImage";
+// import FullScreenImage from "../components/FullScreenImage";
 import Container from "../components/Container";
 import Products from "../components/Products";
 import CommentContainer from "../components/CommentContainer";
@@ -10,7 +10,7 @@ import { IPageProps } from "@/types";
 export default function Home({ searchParams }: IPageProps) {
   return (
     <div>
-      <FullScreenImage />
+      {/* <FullScreenImage /> */}
       <Container />
       <Products searchParams={searchParams} params={{}} />
       <CommentContainer />
