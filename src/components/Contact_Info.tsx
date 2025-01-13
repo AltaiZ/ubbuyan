@@ -3,7 +3,7 @@ import React from "react";
 export default function Contact_Info() {
   return (
     <div>
-      {/* <section className="visible-xs contact_info">
+      <section className="visible-xs contact_info">
         <div className="contact_infos">
           <div
             className="owl-carousel testi-carousel owl-theme owl-loaded owl-drag owl-hidden"
@@ -164,7 +164,7 @@ export default function Contact_Info() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 }
