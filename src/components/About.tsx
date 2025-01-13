@@ -3,7 +3,7 @@ import React from "react";
 export default function About() {
   return (
     <section className="h_about ">
-      <div className="container">
+      {/* <div className="container">
         <div className="row">
           <div className="col-md-6">
             <div className="abouttext1">
@@ -115,7 +115,8 @@ export default function About() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
+
