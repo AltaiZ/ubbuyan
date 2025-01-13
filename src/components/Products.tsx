@@ -48,7 +48,7 @@ export default async function Products({ searchParams }: IPageProps) {
 
   return (
     <div>
-      {/* <section className="hproducts">
+      <section className="hproducts">
         <div className="container">
           <div className="p_tab hidden-xs">
             <ul className="nav nav-tabs menutab" role="tablist">
@@ -371,7 +371,7 @@ export default async function Products({ searchParams }: IPageProps) {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
     </div>
   );
 }

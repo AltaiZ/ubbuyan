@@ -17,7 +17,7 @@ export default function CommentContainer() {
   const isSmall = useMediaQuery("(min-width:600px)");
   return (
     <section className="testi container">
-      <div
+      {/* <div
         className="bg_testi"
         style={{
           background:
@@ -572,7 +572,7 @@ export default function CommentContainer() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
