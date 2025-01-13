@@ -9,7 +9,7 @@ import "swiper/css";
 export default function FullScreenImage() {
   return (
     <div id="content">
-      {/* <div className="main-body">
+      <div className="main-body">
         <div
           className="home-carousel owl-carousel owl-theme owl-loaded owl-drag"
           id="owl-demo"
@@ -539,7 +539,7 @@ export default function FullScreenImage() {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

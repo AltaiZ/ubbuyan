@@ -3,7 +3,7 @@ import React from "react";
 export default function Container() {
   return (
     <div>
-      <section className="container-fluid mobilehservice visible-xs">
+      {/* <section className="container-fluid mobilehservice visible-xs">
         <div className="row">
           <h4>Үйлчилгээ</h4>
           <div
@@ -319,7 +319,7 @@ export default function Container() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
