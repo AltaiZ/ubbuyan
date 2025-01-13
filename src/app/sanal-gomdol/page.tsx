@@ -1,4 +1,5 @@
 import React from "react";
+import Erxesform from "./component/erxesForm";
 
 export default function page() {
   return (
@@ -11,45 +12,7 @@ export default function page() {
       <section className="container">
         <div className="col-md-4">
           <div id="form_container_3">
-            <form
-              action="/admin/forms/submission/3/"
-              encType="multipart/form-data"
-              id="form_id_3"
-              method="post"
-            >
-              <input
-                defaultValue="JnglRsjm7SSlukZgoX658BYHHosjurNX"
-                name="csrfmiddlewaretoken"
-                type="hidden"
-              />
-              <input
-                defaultValue=""
-                name="gerege"
-                style={{
-                  display: "none",
-                }}
-                type="text"
-              />
-              <h3>Санал Гомдол</h3>
-              <div className="errors"></div>
-              <p>
-                <label>Нэр</label>
-                <input name="form_field_8" type="text" />
-              </p>
-              <p></p>
-              <p>
-                <label>Утасны дугаар</label>
-                <input name="form_field_9" type="text" />
-              </p>
-              <p></p>
-              <p>
-                <label>Текст</label>
-                <textarea name="form_field_10" />
-              </p>
-              <p>
-                <button type="submit">Илгээх</button>
-              </p>
-            </form>
+            <Erxesform /> 
             <script
               dangerouslySetInnerHTML={{
                 __html:
