@@ -11,7 +11,7 @@ export default function page() {
       <div>
         <img
           alt="background_about"
-          src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Бидний_тухай/.-2468521239344344000_1800_x_1012.jpg"
+          src="/static/images/.-2468521239344344000_1800_x_1012.jpg"
         />
       </div>
       <section className="hidden-xs about">
@@ -187,7 +187,7 @@ export default function page() {
                   <figure>
                     <img
                       data-image="tw5d07p711v1"
-                      src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Бидний_тухай/Collect.jpg"
+                      src="/static/images/Collect.jpg"
                     />
                   </figure>
                   <p />
