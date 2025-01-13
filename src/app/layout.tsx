@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from "next/script";
 import HeaderTop from "../components/HeaderTop";
 import Footer from "../components/Footer";
+import Apollo from "./apolloClient";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -46,13 +47,15 @@ export default function RootLayout({
         /> */}
       </head>
       <body className={inter.className}>
-        <HeaderTop />
-        {children}
-        <Footer />
-        <Script src="/static/js/scripts.js" />
-        <Script src="/static/js/custom.js" />
-        {/* <Script src="/static/js/owl.carousel.min.js" /> */}
-        {/* <Script src="/static/bootstrap/js/bootstrap.min.js" /> */}
+        <Apollo>
+          <HeaderTop />
+          {children}
+          <Footer />
+          <Script src="/static/js/scripts.js" />
+          <Script src="/static/js/custom.js" />
+          {/* <Script src="/static/js/owl.carousel.min.js" /> */}
+          {/* <Script src="/static/bootstrap/js/bootstrap.min.js" /> */}
+        </Apollo>
       </body>
     </html>
   );
