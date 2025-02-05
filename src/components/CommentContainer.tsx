@@ -21,7 +21,7 @@ export default function CommentContainer() {
         className="bg_testi"
         style={{
           background:
-            "linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Blue_sky_wallpaper_14366.jpg') no-repeat center",
+            "linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('/static/images/Blue_sky_wallpaper_14366.jpg') no-repeat center",
           backgroundSize: "cover",
         }}
       >
@@ -62,7 +62,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/18195145_1508287412576597_3255052871209800463_n.jpg" />
+                            <img src="/static/images/18195145_1508287412576597_3255052871209800463_n.jpg" />
                             <h4>Н. Түвшинбаяр</h4>
                             <i />
                           </div>
@@ -74,7 +74,7 @@ export default function CommentContainer() {
                             </p>
                             <p>Сайн үйлс дэлгэрэх болтугай!</p>
                             <p>
-                              <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/18195145_1508287412576597_3255052871209800463_n.jpg" />
+                              <img src="/static/images/18195145_1508287412576597_3255052871209800463_n.jpg" />
                               <br />
                             </p>
                           </div>
@@ -97,7 +97,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Testimonial/20622129_1428348160605529_7837121744385571155_n.jpg" />
+                            <img src="/static/images/20622129_1428348160605529_7837121744385571155_n.jpg" />
                             <h4>Зоригтбаатар Баярцэцэг</h4>
                             <i />
                           </div>
@@ -114,7 +114,7 @@ export default function CommentContainer() {
                               <br />
                             </p>
                             <p>
-                              <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Testimonial/20622129_1428348160605529_7837121744385571155_n.jpg" />
+                              <img src="/static/images/20622129_1428348160605529_7837121744385571155_n.jpg" />
                             </p>
                           </div>
                         </div>
@@ -136,7 +136,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Testimonial/17203181_1441115199254183_4508586150976407966_n.jpg" />
+                            <img src="/static/images/17203181_1441115199254183_4508586150976407966_n.jpg" />
                             <h4>Болормаа Цэвэлжав</h4>
                             <i />
                           </div>
@@ -160,7 +160,7 @@ export default function CommentContainer() {
                             </p>
                             <p>
                               <span className="redactor-invisible-space" />
-                              <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Testimonial/17203181_1441115199254183_4508586150976407966_n.jpg" />
+                              <img src="/static/images/17203181_1441115199254183_4508586150976407966_n.jpg" />
                               <span className="redactor-invisible-space" />
                             </p>
                           </div>
@@ -183,7 +183,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/55861004_271556510390099_5831999438263943168_n.jpg" />
+                            <img src="/static/images/55861004_271556510390099_5831999438263943168_n.jpg" />
                             <h4>Маргад-Эрдэнэ миний эрдэнэ</h4>
                             <i />
                           </div>
@@ -209,7 +209,7 @@ export default function CommentContainer() {
                             <figure>
                               <img
                                 data-image="1nljk8qis8e9"
-                                src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/55861004_271556510390099_5831999438263943168_n.jpg"
+                                src="/static/images/55861004_271556510390099_5831999438263943168_n.jpg"
                               />
                             </figure>
                           </div>
@@ -232,7 +232,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/70935824_1318683751642229_3589780090298302464_n.jpg" />
+                            <img src="/static/images/70935824_1318683751642229_3589780090298302464_n.jpg" />
                             <h4>Бага Хуяг</h4>
                             <i />
                           </div>
@@ -246,7 +246,7 @@ export default function CommentContainer() {
                             <figure>
                               <img
                                 data-image="3sjy79pow3bv"
-                                src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/70935824_1318683751642229_3589780090298302464_n.jpg"
+                                src="/static/images/70935824_1318683751642229_3589780090298302464_n.jpg"
                               />
                             </figure>
                           </div>
@@ -269,7 +269,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/29432870_1757986270927928_6351355918238448301_n.jpg" />
+                            <img src="/static/images/29432870_1757986270927928_6351355918238448301_n.jpg" />
                             <h4>Tumee Tumku</h4>
                             <i />
                           </div>
@@ -281,7 +281,7 @@ export default function CommentContainer() {
                             <figure>
                               <img
                                 data-image="gv7c18uzwtth"
-                                src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/29432870_1757986270927928_6351355918238448301_n.jpg"
+                                src="/static/images/29432870_1757986270927928_6351355918238448301_n.jpg"
                               />
                             </figure>
                           </div>
@@ -304,7 +304,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/18195145_1508287412576597_3255052871209800463_n.jpg" />
+                            <img src="/static/images/18195145_1508287412576597_3255052871209800463_n.jpg" />
                             <h4>Н. Түвшинбаяр</h4>
                             <i />
                           </div>
@@ -316,7 +316,7 @@ export default function CommentContainer() {
                             </p>
                             <p>Сайн үйлс дэлгэрэх болтугай!</p>
                             <p>
-                              <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/18195145_1508287412576597_3255052871209800463_n.jpg" />
+                              <img src="/static/images/18195145_1508287412576597_3255052871209800463_n.jpg" />
                               <br />
                             </p>
                           </div>
@@ -339,7 +339,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Testimonial/20622129_1428348160605529_7837121744385571155_n.jpg" />
+                            <img src="/static/images/20622129_1428348160605529_7837121744385571155_n.jpg" />
                             <h4>Зоригтбаатар Баярцэцэг</h4>
                             <i />
                           </div>
@@ -356,7 +356,7 @@ export default function CommentContainer() {
                               <br />
                             </p>
                             <p>
-                              <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Testimonial/20622129_1428348160605529_7837121744385571155_n.jpg" />
+                              <img src="/static/images/20622129_1428348160605529_7837121744385571155_n.jpg" />
                             </p>
                           </div>
                         </div>
@@ -378,7 +378,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Testimonial/17203181_1441115199254183_4508586150976407966_n.jpg" />
+                            <img src="/static/images/17203181_1441115199254183_4508586150976407966_n.jpg" />
                             <h4>Болормаа Цэвэлжав</h4>
                             <i />
                           </div>
@@ -402,7 +402,7 @@ export default function CommentContainer() {
                             </p>
                             <p>
                               <span className="redactor-invisible-space" />
-                              <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/Testimonial/17203181_1441115199254183_4508586150976407966_n.jpg" />
+                              <img src="/static/images/17203181_1441115199254183_4508586150976407966_n.jpg" />
                               <span className="redactor-invisible-space" />
                             </p>
                           </div>
@@ -425,7 +425,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/55861004_271556510390099_5831999438263943168_n.jpg" />
+                            <img src="/static/images/55861004_271556510390099_5831999438263943168_n.jpg" />
                             <h4>Маргад-Эрдэнэ миний эрдэнэ</h4>
                             <i />
                           </div>
@@ -451,7 +451,7 @@ export default function CommentContainer() {
                             <figure>
                               <img
                                 data-image="1nljk8qis8e9"
-                                src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/55861004_271556510390099_5831999438263943168_n.jpg"
+                                src="/static/images/55861004_271556510390099_5831999438263943168_n.jpg"
                               />
                             </figure>
                           </div>
@@ -474,7 +474,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/70935824_1318683751642229_3589780090298302464_n.jpg" />
+                            <img src="/static/images/70935824_1318683751642229_3589780090298302464_n.jpg" />
                             <h4>Бага Хуяг</h4>
                             <i />
                           </div>
@@ -488,7 +488,7 @@ export default function CommentContainer() {
                             <figure>
                               <img
                                 data-image="3sjy79pow3bv"
-                                src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/70935824_1318683751642229_3589780090298302464_n.jpg"
+                                src="/static/images/70935824_1318683751642229_3589780090298302464_n.jpg"
                               />
                             </figure>
                           </div>
@@ -511,7 +511,7 @@ export default function CommentContainer() {
                         />
                         <div className="owlcaption custom-style">
                           <div className="col-md-3 yes_img">
-                            <img src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/29432870_1757986270927928_6351355918238448301_n.jpg" />
+                            <img src="/static/images/29432870_1757986270927928_6351355918238448301_n.jpg" />
                             <h4>Tumee Tumku</h4>
                             <i />
                           </div>
@@ -523,7 +523,7 @@ export default function CommentContainer() {
                             <figure>
                               <img
                                 data-image="gv7c18uzwtth"
-                                src="https://ulaanbaatarbuyan.mn/media/ulaanbaatarbuyannew/content/29432870_1757986270927928_6351355918238448301_n.jpg"
+                                src="/static/images/29432870_1757986270927928_6351355918238448301_n.jpg"
                               />
                             </figure>
                           </div>
