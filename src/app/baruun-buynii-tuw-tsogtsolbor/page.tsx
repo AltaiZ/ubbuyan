@@ -56,7 +56,7 @@ export default function page() {
           </div>
         </div>
       </section>
-      <div className="map_box container">
+      {/* <div className="map_box container">
         <div className="map_news col-md-4 col-xs-12 c_map">
           <li>
             <svg
@@ -113,7 +113,7 @@ export default function page() {
             Авто замчдын гудамж-54, Сүхбаатар дүүрэг, Улаанбаатар, Монгол улс
           </li>
         </div>
-      </div>
+      </div> */}
       <div
         id="map-canvas"
         style={{

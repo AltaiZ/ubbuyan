@@ -174,9 +174,9 @@ export default function Footer() {
         </a>
       </div>
       <div className="bottom_menu container">
-        <li>
+        {/* <li>
           <a href="/plugins/ub_buyan/list/">Бурхан болоочийн хайлтын систем</a>
-        </li>
+        </li> */}
         <li className="active" role="presentation">
           <a href="/aboutUs">Компани танилцуулга</a>
         </li>

@@ -17,11 +17,11 @@ export default function HeaderTop() {
                 <img src="/static/images/01.png" /> info@ubbuyan.mn
               </a>
             </li>
-            <li className="email">
+            {/* <li className="email">
               <a href="/plugins/ub_buyan/online/book/select/">
                 <img src="/static/images/01.png" /> Цахим айлтгал
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

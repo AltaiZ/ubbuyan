@@ -23,14 +23,15 @@ export default function Header() {
               </div>
             </div>
           </div>
-          <div className="sign-up">
+          {/* <div className="sign-up">
             <div className="register">
               <a href="/login/">
                 <img alt="profile" src="/static/images/profile.png" />
                 <span>Нэвтрэх</span>
               </a>
             </div>
-          </div>
+          </div> */}
+         
         </header>
       </div>
     </div>
