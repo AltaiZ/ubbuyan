@@ -264,12 +264,12 @@ export default function HeaderNav() {
           <li className="" role="presentation">
             <a href="/contactus/">Холбоо барих</a>
           </li>
-          <li role="presentation">
+          {/* <li role="presentation">
             <span>
               {" "}
               <a href="/login/"> Нэвтрэх</a>
             </span>
-          </li>
+          </li> */}
         </ul>
       </div>
       <span
