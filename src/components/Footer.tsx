@@ -109,6 +109,9 @@ export default function Footer() {
                 <li className=" hidden-xs" role="presentation">
                   <a href="/medee-medeelel/arag-hemjee">Арга хэмжээ</a>
                 </li>
+                <li className=" hidden-xs" role="presentation">
+                  <a href="/search">serch</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -174,9 +177,9 @@ export default function Footer() {
         </a>
       </div>
       <div className="bottom_menu container">
-        {/* <li>
-          <a href="/plugins/ub_buyan/list/">Бурхан болоочийн хайлтын систем</a>
-        </li> */}
+        <li>
+          <a href="/search">Бурхан болоочийн хайлтын систем</a>
+        </li>
         <li className="active" role="presentation">
           <a href="/aboutUs">Компани танилцуулга</a>
         </li>
