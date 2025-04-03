@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {jsonData}  from "../../data/data"
-
-
+import { jsonData } from "../../data/data";
 
 const DeathNoteSearch: React.FC = () => {
   const [lname, setLname] = useState("");
@@ -15,17 +13,25 @@ const DeathNoteSearch: React.FC = () => {
   const [searchPerformed, setSearchPerformed] = useState(false);
 
   const handleSearch = () => {
+    const lnameLower = lname.toLowerCase();
+    const fnameLower = fname.toLowerCase();
+    const locationLower = location.toLowerCase();
+
     const result = jsonData.filter((entry) => {
+      const entryLastName = entry.last_name?.toLowerCase() || "";
+      const entryFirstName = entry.first_name?.toLowerCase() || "";
+      const entryLocation = entry.location?.toLowerCase() || "";
+
       return (
-        (!lname || entry.full_name.includes(lname)) &&
-        (!fname || entry.full_name.includes(fname)) &&
+        (!lname || entryLastName.includes(lnameLower)) &&
+        (!fname || entryFirstName.includes(fnameLower)) &&
         (!bornYear || entry.born_year.toString().startsWith(bornYear)) &&
         (!deadYear || entry.dead_year.toString().startsWith(deadYear)) &&
-        (!location || entry.location.includes(location))
+        (!location || entryLocation.includes(locationLower))
       );
     });
 
-    setFilteredData(result.slice(0, 20)); 
+    setFilteredData(result.slice(0, 20));
     setSearchPerformed(true);
   };
 
@@ -35,9 +41,6 @@ const DeathNoteSearch: React.FC = () => {
         <div className="col-md-12">
           <div className="ub_header">
             <h2 className="sub_title">Бурхан болоочийн хайлтын систем</h2>
-            <a className="btn" href="/death-note/create">
-              <i className="fa fa-plus"></i> Нэмэх
-            </a>
           </div>
 
           <form className="form-vertical filter-wrapper" method="GET">
@@ -101,7 +104,11 @@ const DeathNoteSearch: React.FC = () => {
               />
             </div>
 
-            <button className="btn btn-default" type="button" onClick={handleSearch}>
+            <button
+              className="btn btn-default"
+              type="button"
+              onClick={handleSearch}
+            >
               Хайх
             </button>
           </form>
@@ -113,26 +120,27 @@ const DeathNoteSearch: React.FC = () => {
                   <thead>
                     <tr>
                       <th>Овог</th>
+                      <th>Нэр</th>
                       <th>Төрсөн он</th>
                       <th>Нас барсан он</th>
                       <th>Хаана оршоосон</th>
-                      <th>Буяны төв цогцолбор</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredData.map((entry) => (
-                      <tr key={entry.id}>
-                        <td>{entry.full_name}</td>
-                        <td>{entry.born_year}</td>
-                        <td>{entry.dead_year}</td>
-                        <td>{entry.location}</td>
-                        <td>
-                          {entry.monastery === 1
-                            ? "Баруун буяны төв"
-                            : "Зүүн буяны төв"}
-                        </td>
-                      </tr>
-                    ))}
+                    {filteredData.map((entry) => {
+                      // last_name болон first_name-ийг нийлүүлж full_name-ийг гаргаж авах
+                      const fullName = `${entry.last_name} ${entry.first_name}`;
+
+                      return (
+                        <tr key={entry.dead_id}>
+                          <td>{entry.last_name}</td>
+                          <td>{entry.first_name}</td>
+                          <td>{entry.born_year}</td>
+                          <td>{entry.dead_year}</td>
+                          <td>{entry.location}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               ) : (
