@@ -1,7 +1,6 @@
 import React from "react";
-import HProducts from "@/components/hProducts";
-import { IPageProps } from "@/types";
-export default function page({searchParams} : IPageProps) {
+
+export default function page() {
   return (
     <div
       id="content"
@@ -21,10 +20,7 @@ export default function page({searchParams} : IPageProps) {
                 }}
               />
               <figure>
-                <img
-                  data-image="xdps6yhtocwu"
-                  src="/static/images/dald3.jpg"
-                />
+                <img data-image="xdps6yhtocwu" src="/static/images/dald3.jpg" />
               </figure>
               <p />
               <p
@@ -336,7 +332,6 @@ export default function page({searchParams} : IPageProps) {
           </div>
         </section>
       </div>
-      <HProducts searchParams={searchParams} params={{}} />
     </div>
   );
 }

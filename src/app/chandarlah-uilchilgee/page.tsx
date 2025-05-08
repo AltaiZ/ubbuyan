@@ -1,7 +1,6 @@
 import React from "react";
-import HProducts from "@/components/hProducts";
-import { IPageProps } from "@/types";
-export default function page({ searchParams }: IPageProps) {
+
+export default function page() {
   return (
     <div
       id="content"
@@ -550,7 +549,7 @@ export default function page({ searchParams }: IPageProps) {
               </div>
             </div>
           </div>
-          <div className="col-md-12">
+          {/* <div className="col-md-12">
             <div className="table">
               <table className="table table-striped table-bordered">
                 <thead>
@@ -567,10 +566,9 @@ export default function page({ searchParams }: IPageProps) {
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> */}
         </section>
       </div>
-      <HProducts searchParams={searchParams} params={{}} />
     </div>
   );
 }

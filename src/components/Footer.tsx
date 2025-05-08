@@ -17,7 +17,7 @@ export default function Footer() {
             </div>
             <div className="col-md-3 col-sm-6 footer_menu">
               <h4>
-                <a href="/далд-оршоох-үйлчилгээ/">Үйлчилгээ</a>
+                <a href="/dald-orshih-uilchilgee/">Үйлчилгээ</a>
               </h4>
               <ul>
                 <li className="active hidden-xs" role="presentation">
@@ -44,7 +44,7 @@ export default function Footer() {
             </div>
             <div className="col-md-3 col-sm-6 footer_menu">
               <h4>
-                <a href="/баруун-буяны-төв-цогцолбор/">Буяны төв цогцолбор</a>
+                <a href="/virtual-aylal">Буяны төв цогцолбор</a>
               </h4>
               <ul>
                 <li className="active hidden-xs" role="presentation">

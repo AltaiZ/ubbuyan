@@ -39,7 +39,7 @@ export default function HeaderNav() {
                 </ul>
               </li>
               <li className="dropdown " role="presentation">
-                <a href="" target="_blank">
+                <a href="/dald-orshih-uilchilgee" target="_blank">
                   Үйлчилгээ
                 </a>
                 <ul className="dropdown-menu">
@@ -106,9 +106,7 @@ export default function HeaderNav() {
                 <a href="/medleg-medeelel/medleg-medeelel/">Мэдлэг мэдээлэл</a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a href="/medee-medeelel/tugemel-asuult">
-                      Түгээмэл асуулт
-                    </a>
+                    <a href="/medee-medeelel/tugemel-asuult">Түгээмэл асуулт</a>
                   </li>
                   <li>
                     <a href="/emgeneliin-ug/">Эмгэнэл</a>
