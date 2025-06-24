@@ -114,14 +114,14 @@ const DeathNoteSearch: React.FC = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="apartment">Байр</label>
+              <label htmlFor="apartment">Цогцолбор</label>
               <select
                 id="apartment"
                 className="form-control"
                 value={apartment}
                 onChange={(e) => setApartment(e.target.value)}
               >
-                <option value="">-- Байр сонгох --</option>
+                <option value="">-- Цоцолбор сонгох --</option>
                 {apartmentOptions.map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
@@ -150,7 +150,7 @@ const DeathNoteSearch: React.FC = () => {
                       <th>Төрсөн он</th>
                       <th>Нас барсан он</th>
                       <th>Хаана оршоосон</th>
-                      <th>Байр</th>
+                      <th>Цогцолбор</th>
                     </tr>
                   </thead>
                   <tbody>
