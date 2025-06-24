@@ -1,15 +1,16 @@
 import React from "react";
+import CurrentUser from "@/containers/auth/current-user";
 
 export default function Header() {
   return (
     <div className="mobilecontain">
       <div className="container">
-        <header className="header">
-          <div className="header-left">
+        <header className="header flex justify-between items-center">
+          <div className="header-left flex items-center gap-4">
             <div className="logo np hitem">
               <a href="/">
-                <img className="hidden-xs" src="/static/images/logoo3.png" />
-                <img className="visible-xs" src="/static/images/logoo3.png" />
+                <img className="hidden-xs" src="/static/images/logoo3.png" alt="Logo" />
+                <img className="visible-xs" src="/static/images/logoo3.png" alt="Logo Mobile" />
               </a>
             </div>
             <div className="mark-top">
@@ -18,20 +19,13 @@ export default function Header() {
                   href="https://www.iafcertsearch.org/r/b/b433889a-2115-59ae-bc47-34f8edadb6f1"
                   target="_blank"
                 >
-                  <img src="/static/images/iaf.png" />
+                  <img src="/static/images/iaf.png" alt="IAF Mark" />
                 </a>
               </div>
             </div>
           </div>
-          {/* <div className="sign-up">
-            <div className="register">
-              <a href="/login/">
-                <img alt="profile" src="/static/images/profile.png" />
-                <span>Нэвтрэх</span>
-              </a>
-            </div>
-          </div> */}
-         
+
+            <CurrentUser />
         </header>
       </div>
     </div>

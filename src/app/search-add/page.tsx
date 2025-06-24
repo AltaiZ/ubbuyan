@@ -1,7 +1,8 @@
 import React from 'react';
-import Search from "@/components/search/Search"
+import SearchAdd from "@/components/search/Add"
+
 
 const Searchs = () => {
-    return(<Search/>)
+    return(<SearchAdd/>)
 }
 export default Searchs

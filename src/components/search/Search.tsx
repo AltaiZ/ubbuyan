@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { jsonData } from "../../data/data";
+import React, { useState, useMemo } from "react";
+import { jsonData } from "../../../data/data";
 
 const DeathNoteSearch: React.FC = () => {
   const [lname, setLname] = useState("");
@@ -9,8 +9,15 @@ const DeathNoteSearch: React.FC = () => {
   const [bornYear, setBornYear] = useState("");
   const [deadYear, setDeadYear] = useState("");
   const [location, setLocation] = useState("");
+  const [apartment, setApartment] = useState("");
   const [filteredData, setFilteredData] = useState<typeof jsonData>([]);
   const [searchPerformed, setSearchPerformed] = useState(false);
+
+  // apartment-ийн давхардсангүй утгуудыг гаргаж авах
+  const apartmentOptions = useMemo(() => {
+    const unique = Array.from(new Set(jsonData.map((entry) => entry.apartment)));
+    return unique.filter((a) => a); // null эсвэл хоосон бол хаяна
+  }, []);
 
   const handleSearch = () => {
     const lnameLower = lname.toLowerCase();
@@ -21,13 +28,15 @@ const DeathNoteSearch: React.FC = () => {
       const entryLastName = entry.last_name?.toLowerCase() || "";
       const entryFirstName = entry.first_name?.toLowerCase() || "";
       const entryLocation = entry.location?.toLowerCase() || "";
+      const entryApartment = entry.apartment || "";
 
       return (
         (!lname || entryLastName.includes(lnameLower)) &&
         (!fname || entryFirstName.includes(fnameLower)) &&
         (!bornYear || entry.born_year.toString().startsWith(bornYear)) &&
         (!deadYear || entry.dead_year.toString().startsWith(deadYear)) &&
-        (!location || entryLocation.includes(locationLower))
+        (!location || entryLocation.includes(locationLower)) &&
+        (!apartment || entryApartment === apartment)
       );
     });
 
@@ -104,6 +113,23 @@ const DeathNoteSearch: React.FC = () => {
               />
             </div>
 
+            <div className="form-group">
+              <label htmlFor="apartment">Байр</label>
+              <select
+                id="apartment"
+                className="form-control"
+                value={apartment}
+                onChange={(e) => setApartment(e.target.value)}
+              >
+                <option value="">-- Байр сонгох --</option>
+                {apartmentOptions.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <button
               className="btn btn-default"
               type="button"
@@ -124,23 +150,20 @@ const DeathNoteSearch: React.FC = () => {
                       <th>Төрсөн он</th>
                       <th>Нас барсан он</th>
                       <th>Хаана оршоосон</th>
+                      <th>Байр</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredData.map((entry) => {
-                      // last_name болон first_name-ийг нийлүүлж full_name-ийг гаргаж авах
-                      const fullName = `${entry.last_name} ${entry.first_name}`;
-
-                      return (
-                        <tr key={entry.dead_id}>
-                          <td>{entry.last_name}</td>
-                          <td>{entry.first_name}</td>
-                          <td>{entry.born_year}</td>
-                          <td>{entry.dead_year}</td>
-                          <td>{entry.location}</td>
-                        </tr>
-                      );
-                    })}
+                    {filteredData.map((entry) => (
+                      <tr key={entry.dead_id + entry.apartment}>
+                        <td>{entry.last_name}</td>
+                        <td>{entry.first_name}</td>
+                        <td>{entry.born_year}</td>
+                        <td>{entry.dead_year}</td>
+                        <td>{entry.location}</td>
+                        <td>{entry.apartment}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               ) : (
