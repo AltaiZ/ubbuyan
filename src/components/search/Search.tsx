@@ -155,13 +155,13 @@ const DeathNoteSearch: React.FC = () => {
                   </thead>
                   <tbody>
                     {filteredData.map((entry) => (
-                      <tr key={entry.dead_id + entry.apartment}>
+                      <tr key={entry.dead_id + (entry.apartment || '')}>
                         <td>{entry.last_name}</td>
                         <td>{entry.first_name}</td>
                         <td>{entry.born_year}</td>
                         <td>{entry.dead_year}</td>
                         <td>{entry.location}</td>
-                        <td>{entry.apartment}</td>
+                        <td>{entry.apartment || 'Хоосон'}</td>
                       </tr>
                     ))}
                   </tbody>
