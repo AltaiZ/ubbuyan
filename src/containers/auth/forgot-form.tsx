@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useForgotPassword } from "@/hooks/auth";
+import { useForgotPassword } from "@/sdk/hooks/auth";
 import { LoadingIcon } from "@/components/ui/loading";
 import { CheckCircle2Icon } from "lucide-react";
 
@@ -47,11 +46,9 @@ const ForgotForm = () => {
           strokeWidth={1.5}
         />
         <p className="text-base font-medium my-1 text-center">
-          We have sent you an email with a link to reset your password.
+          Танд нууц үг солих холбоос бүхий имэйл илгээлээ.
         </p>
-        <p className="text-sm text-neutral-500">
-          Please check your email address.
-        </p>
+        <p className="text-sm text-neutral-500">Та имэйл хаяг aa шалгана уу.</p>
       </div>
     );
   }
@@ -81,7 +78,7 @@ const ForgotForm = () => {
         />
         <Button className="w-full col-span-2" size="lg" disabled={loading}>
           {loading && <LoadingIcon />}
-          Recover password
+          Enter
         </Button>
       </form>
     </Form>

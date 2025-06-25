@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,17 +15,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Password } from "@/components/ui/password";
 import Link from "next/link";
-import { useLogin } from "@/hooks/auth";
+import { useLogin } from "@/sdk/hooks/auth";
 
 const formSchema = z.object({
   login: z
     .string()
-    .min(1, { message: "Fill input" })
-    .regex(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+|[0-9]{6,}$/,
-      "Wrong email or phone number"
-    ),
-  password: z.string().min(1, { message: "Fill input" }),
+    .min(1, { message: "Enter your email" })
+    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+|[0-9]{6,}$/, "Invalid email address"),
+  password: z
+    .string()
+    .min(1, { message: "Enter your password or Invalid password" }),
 });
 
 const LoginForm = () => {
@@ -54,9 +52,13 @@ const LoginForm = () => {
           name="login"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{("email")}</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Email" {...field} autoComplete="username" />
+                <Input
+                  placeholder="Enter your email"
+                  {...field}
+                  autoComplete="username"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -68,14 +70,14 @@ const LoginForm = () => {
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center justify-between mb-1">
-                <FormLabel>{("password")}</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <Button
                   asChild
                   variant="link"
                   className="py-1 h-auto font-normal px-0"
                   tabIndex={-1}
                 >
-                  <Link href="/forgot">{("forgot")}</Link>
+                  <Link href="/forgot">Forget?</Link>
                 </Button>
               </div>
 
@@ -86,8 +88,14 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full pt-10" size="lg" disabled={loading}>
-          {("login")}
+
+        <Button
+          type="submit"
+          className="w-full text-white"
+          size="lg"
+          disabled={loading}
+        >
+          Log In
         </Button>
       </form>
     </Form>

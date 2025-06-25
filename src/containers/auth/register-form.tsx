@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Password } from "@/components/ui/password";
 import Link from "next/link";
-import { useRegister } from "@/hooks/auth";
+import { useRegister } from "@/sdk/hooks/auth";
 import { toast } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { InfoIcon } from "lucide-react";
@@ -25,7 +24,7 @@ import { passwordZod, phoneZod } from "@/lib/zod";
 import { LoadingIcon } from "@/components/ui/loading";
 
 const formSchema = z.object({
-  firstName: z.string().min(1, { message: "Fill input" }),
+  firstName: z.string().min(1, { message: "Enter your First Name" }),
   lastName: z.string().optional(),
   email: z.string().email(),
   phone: phoneZod,
@@ -45,12 +44,13 @@ const RegisterForm = () => {
     },
   });
   const { register, loading, clientPortalId } = useRegister();
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     register({
       variables: { ...values, clientPortalId },
       onCompleted() {
         toast.success("Congratulations, You registered successfully", {
-          description: "Таны имэйл рүү баталгаажуулах холбоос илгээлээ.",
+          description: "",
         });
         router.push("/login");
       },
@@ -59,7 +59,7 @@ const RegisterForm = () => {
   return (
     <Form {...form}>
       <form
-        className="lg:grid grid-cols-2 space-y-4 lg:space-y-0 gap-y-6 gap-x-3 relative"
+        className="md:grid grid-cols-2 space-y-4 md:space-y-0 gap-y-6 gap-x-3 relative"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -67,10 +67,10 @@ const RegisterForm = () => {
           name="firstName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{("firstname")}</FormLabel>
+              <FormLabel>First Name</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="John"
+                  placeholder="First Name"
                   {...field}
                   autoComplete="given-name"
                 />
@@ -84,10 +84,10 @@ const RegisterForm = () => {
           name="lastName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{("lastname")}</FormLabel>
+              <FormLabel>Last Name</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Doe"
+                  placeholder="Last Name"
                   {...field}
                   autoComplete="family-name"
                 />
@@ -101,7 +101,7 @@ const RegisterForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{("email")}</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
                   placeholder="john@doe.com"
@@ -118,7 +118,7 @@ const RegisterForm = () => {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{("phone")}</FormLabel>
+              <FormLabel>Phone</FormLabel>
               <FormControl>
                 <Input
                   placeholder="0000 0000"
@@ -135,7 +135,7 @@ const RegisterForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem className="col-span-2">
-              <FormLabel>{("password")}</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Password {...field} autoComplete="new-password" />
               </FormControl>
@@ -143,16 +143,37 @@ const RegisterForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full col-span-2" size="lg" disabled={loading}>
+        <Button
+          className="w-full col-span-2 text-white"
+          size="lg"
+          disabled={loading}
+        >
           {loading && <LoadingIcon />}
-          {("signup")}
+          Register
         </Button>
         <Alert className="col-span-2">
           <InfoIcon className="h-4 w-4" />
-          <AlertTitle className="text-sm">Caution!</AlertTitle>
+          <AlertTitle className="text-sm">Note!</AlertTitle>
           <AlertDescription className="text-xs">
-            By clicking the register button, you are considered to have accepted
-            the {`website's`} Terms of Service and Privacy Policy.
+            By clicking the register button, you agree to the website's
+            <Button
+              variant="link"
+              asChild
+              className="h-auto px-0 py-0 mx-1 text-foreground"
+              size="sm"
+            >
+              <Link href="/terms-of-service">terms of service</Link>
+            </Button>
+            and
+            <Button
+              variant="link"
+              asChild
+              className="h-auto px-0 py-0 mx-1 text-foreground"
+              size="sm"
+            >
+              <Link href="/terms-of-service">privacy policy</Link>
+            </Button>
+            .
           </AlertDescription>
         </Alert>
       </form>

@@ -1,32 +1,24 @@
-"use client";
+'use client';
 
-import { currentUserAtom, loadingUserAtom } from "@/store/auth.store";
-import { useAtomValue } from "jotai";
-import { Loader2Icon } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
-import storefront from "@/../storefront.json";
+import { currentUserAtom, loadingUserAtom } from '@/store/auth.store';
+import { useAtomValue } from 'jotai';
+import { Loader2Icon } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-const PrivateRoute = ({
-  children,
-  inCheckout,
-}: React.PropsWithChildren<{ inCheckout?: boolean }>) => {
+const PrivateRoute = ({ children }: React.PropsWithChildren) => {
   const currentUser = useAtomValue(currentUserAtom);
   const loading = useAtomValue(loadingUserAtom);
   const pathname = usePathname();
   const router = useRouter();
-  const guest = storefront.allowGuestAccount && inCheckout;
 
   useEffect(() => {
-    if (guest) {
-      return;
-    }
     if (!loading && !currentUser) {
       router.push(`/login?from=${pathname}`);
     }
   }, [loading, currentUser]);
 
-  if (currentUser || guest) return children;
+  if (currentUser) return children;
 
   return (
     <div className="flex-auto flex justify-center items-center py-32">

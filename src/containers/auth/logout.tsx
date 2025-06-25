@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { LoadingIcon } from "@/components/ui/loading";
-import { useLogout } from "@/hooks/auth";
+import { useLogout } from "@/sdk/hooks/auth";
 
 const Logout = () => {
   const { logout, loading } = useLogout();
@@ -13,7 +13,7 @@ const Logout = () => {
       disabled={loading}
       onClick={logout}
     >
-      {loading && <LoadingIcon />} {("logout")}
+      {loading && <LoadingIcon />} Log Out
     </Button>
   );
 };

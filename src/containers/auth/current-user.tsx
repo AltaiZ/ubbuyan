@@ -1,7 +1,7 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useCurrentUser } from "@/queries/auth.client";
+import { useCurrentUser } from "@/sdk/queries/auth.client";
 import { UserIcon, Loader2Icon } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -32,10 +32,6 @@ const CurrentUser = () => {
             {(firstName || "P")[0]}
             {(lastName || "")[0]}
           </AvatarFallback>
-          <div className="border border-3">
-            
-
-          </div>
         </Link>
       </Avatar>
     );

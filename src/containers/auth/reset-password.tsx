@@ -13,7 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useResetPassword } from "@/hooks/auth";
+import { useResetPassword } from "@/sdk/hooks/auth";
 import { LoadingIcon } from "@/components/ui/loading";
 import { CheckCircle2Icon, XCircleIcon } from "lucide-react";
 import { passwordZod } from "@/lib/zod";
@@ -63,9 +63,11 @@ const ResetPasswordForm = () => {
           strokeWidth={1.5}
         />
         <p className="text-base font-medium my-1 text-center">
-          Your password has been successfully updated.
+          Таны нууц үг амжилттай шинэчлэгдлээ
         </p>
-        <p className="text-sm text-neutral-500">Please log in to continue.</p>
+        <p className="text-sm text-neutral-500">
+          Та нэвтэрч ороод үргэлжлүүлнэ үү.
+        </p>
       </div>
     );
   }
@@ -91,7 +93,7 @@ const ResetPasswordForm = () => {
         />
         <Button className="w-full col-span-2" size="lg" disabled={loading}>
           {loading && <LoadingIcon />}
-          Update password
+          Reset password
         </Button>
       </form>
     </Form>

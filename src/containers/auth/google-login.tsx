@@ -3,6 +3,16 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+// import {
+//   Googlelogin,
+//   getFacebookLoginStatus,
+//   initFacebookSdk,
+// } from '@/lib/facebook';
+// import { FacebookIcon } from 'lucide-react';
+// import { useFacebookLogin } from '@/sdk/hooks/auth';
+// import { LoadingIcon } from '@/components/ui/loading';
+
+
 const GoogleLogin = () => {
   const [domain, setDomain] = useState('');
 
