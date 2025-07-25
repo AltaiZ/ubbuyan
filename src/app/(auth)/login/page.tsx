@@ -1,6 +1,11 @@
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+// import FacebookLogin from '@/containers/auth/facebook-login';
+import GoogleLogin from '@/containers/auth/google-login';
+import LoginForm from '@/containers/auth/login-form';
 import { Metadata } from 'next/types';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { getConfig } from '@/sdk/queries/auth';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,6 +30,10 @@ const Login = () => {
             <h2 className="font-bold text-lg text-center pb-6 hidden lg:block">
               Нэвтрэх
             </h2>
+          <Suspense>
+            <LoginForm />
+          </Suspense>
+          <Separator />
         </div>
       </div>
       <div className="mt-8 text-center text-sm relative md:mb-20">
