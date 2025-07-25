@@ -1,20 +1,21 @@
-import { Button } from "@/components/ui/button";
-// import { Separator } from "@/components/ui/separator";
-import GoogleLogin from "@/containers/auth/google-login";
-import LoginForm from "@/containers/auth/login-form";
-import { Metadata } from "next/types";
-import Link from "next/link";
-import { Suspense } from "react";
-import { getConfig } from "@/sdk/queries/auth";
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+// import FacebookLogin from '@/containers/auth/facebook-login';
+import GoogleLogin from '@/containers/auth/google-login';
+import LoginForm from '@/containers/auth/login-form';
+import { Metadata } from 'next/types';
+import Link from 'next/link';
+import { Suspense } from 'react';
+import { getConfig } from '@/sdk/queries/auth';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { config } = await getConfig();
 
   return {
-    title: config.name + " - Тавтай морил",
+    title: config.name + ' - Тавтай морил',
     openGraph: {
-      title: config.name + " - Тавтай морил",
-    },
+      title: config.name + ' - Тавтай морил'
+    }
   };
 }
 
@@ -22,20 +23,22 @@ const Login = () => {
   return (
     <>
       <div className="text-lg md:text-2xl font-semibold mx-auto relative md:mt-20">
-        Welcome
+        Тавтай морил
       </div>
       <div className="mb-auto mx-auto mt-4 md:mt-8 w-full sm:max-w-md">
         <div className="md:border md:rounded-xl w-full sm:py-10 px-3 sm:px-10 space-y-5 bg-background relative">
-          <h2 className="font-bold text-lg text-center pb-6 hidden lg:block">
-            Log In
-          </h2>
+            <h2 className="font-bold text-lg text-center pb-6 hidden lg:block">
+              Нэвтрэх
+            </h2>
           <Suspense>
             <LoginForm />
           </Suspense>
-          {/* <Separator /> */}
+          <Separator />
           <div className="space-y-3">
             {process.env.NEXT_PUBLIC_FACEBOOK_ID && (
-              <Suspense>{/* <FacebookLogin /> */}</Suspense>
+              <Suspense>
+                {/* <FacebookLogin /> */}
+              </Suspense>
             )}
             {process.env.NEXT_PUBLIC_GOOGLE_ID && (
               <Suspense>
@@ -47,7 +50,7 @@ const Login = () => {
       </div>
       <div className="mt-8 text-center text-sm relative md:mb-20">
         <Button variant="link" className="text-sm" asChild>
-          <Link href="/signup">Create an account?</Link>
+          <Link href="/signup">Бүртгэл үүсгэх?</Link>
         </Button>
       </div>
     </>

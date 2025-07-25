@@ -10,6 +10,7 @@ const currentUser = gql`
       erxesCustomerId
       phone
       email
+      customFieldsData
     }
   }
 `;
@@ -19,6 +20,16 @@ const userDetail = gql`
     clientPortalCurrentUser {
       isEmailVerified
       isPhoneVerified
+    }
+  }
+`;
+
+const erxesCustomerDetail = gql`
+  query CustomerDetail($id: String!) {
+    customerDetail(_id: $id) {
+      _id
+      company
+      position
     }
   }
 `;
@@ -64,6 +75,6 @@ const branchDetail = gql`
   }
 `;
 
-const queries = { currentUser, currentConfig, userDetail, branchDetail };
+const queries = { currentUser, currentConfig, userDetail, branchDetail, erxesCustomerDetail };
 
 export default queries;

@@ -1,46 +1,47 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Password } from "@/components/ui/password";
-import Link from "next/link";
-import { useLogin } from "@/sdk/hooks/auth";
+  FormMessage
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Password } from '@/components/ui/password';
+import Link from 'next/link';
+import { useLogin } from '@/sdk/hooks/auth';
 
 const formSchema = z.object({
   login: z
     .string()
-    .min(1, { message: "Enter your email" })
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+|[0-9]{6,}$/, "Invalid email address"),
-  password: z
-    .string()
-    .min(1, { message: "Enter your password or Invalid password" }),
+    .min(1, { message: 'Нэвтрэх нэрээ оруулна уу' })
+    .regex(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+|[0-9]{6,}$/,
+      'Буруу утас эсвэл цахим хаяг'
+    ),
+  password: z.string().min(1, { message: 'Нууц үгээ оруулна уу' })
 });
 
 const LoginForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      login: "",
-      password: "",
-    },
+      login: '',
+      password: ''
+    }
   });
 
   const { login, loading, clientPortalId } = useLogin();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     login({
-      variables: { ...values, clientPortalId },
+      variables: { ...values, clientPortalId }
     });
   }
 
@@ -52,10 +53,10 @@ const LoginForm = () => {
           name="login"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Нэвтрэх нэр</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter your email"
+                  placeholder="цахим хаяг эсвэл утас"
                   {...field}
                   autoComplete="username"
                 />
@@ -70,14 +71,14 @@ const LoginForm = () => {
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center justify-between mb-1">
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Нууц үг</FormLabel>
                 <Button
                   asChild
                   variant="link"
                   className="py-1 h-auto font-normal px-0"
                   tabIndex={-1}
                 >
-                  <Link href="/forgot">Forget?</Link>
+                  <Link href="/forgot">Mартсан?</Link>
                 </Button>
               </div>
 
@@ -89,14 +90,10 @@ const LoginForm = () => {
           )}
         />
 
-        <Button
-          type="submit"
-          className="w-full text-white"
-          size="lg"
-          disabled={loading}
-        >
-          Log In
+        <Button variant="non" type="submit" className="w-full text-white" size="lg" disabled={loading}>
+          Нэвтрэх
         </Button>
+        
       </form>
     </Form>
   );

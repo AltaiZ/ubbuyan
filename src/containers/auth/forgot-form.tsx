@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useForgotPassword } from "@/sdk/hooks/auth";
-import { LoadingIcon } from "@/components/ui/loading";
-import { CheckCircle2Icon } from "lucide-react";
+  FormMessage
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useForgotPassword } from '@/sdk/hooks/auth';
+import { LoadingIcon } from '@/components/ui/loading';
+import { CheckCircle2Icon } from 'lucide-react';
 
 const formSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email()
 });
 
 const ForgotForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-    },
+      email: ''
+    }
   });
 
   const { loading, forgotPassword, clientPortalId, success } =
@@ -34,7 +34,7 @@ const ForgotForm = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     forgotPassword({
-      variables: { email: values.email, clientPortalId },
+      variables: { email: values.email, clientPortalId }
     });
   }
 
@@ -64,7 +64,7 @@ const ForgotForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Цахим хаяг</FormLabel>
               <FormControl>
                 <Input
                   placeholder="john@doe.com"
@@ -78,7 +78,7 @@ const ForgotForm = () => {
         />
         <Button className="w-full col-span-2" size="lg" disabled={loading}>
           {loading && <LoadingIcon />}
-          Enter
+          Нууц үг сэргээх
         </Button>
       </form>
     </Form>

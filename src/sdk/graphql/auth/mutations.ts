@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const login = gql`
   mutation ClientPortalLogin(
@@ -20,6 +20,7 @@ const createUser = gql`
     $email: String
     $firstName: String
     $lastName: String
+    $customFieldsData: JSON
     $password: String
     $phone: String
     $companyName: String
@@ -34,6 +35,7 @@ const createUser = gql`
       firstName: $firstName
       lastName: $lastName
       password: $password
+      customFieldsData: $customFieldsData
       phone: $phone
       companyName: $companyName
       companyRegistrationNumber: $companyRegistrationNumber
@@ -70,8 +72,20 @@ const forgotPassword = gql`
   }
 `;
 
+const erxesCustomerEdit = gql`
+  mutation CustomersEdit($id: String!, $company: String, $position: String) {
+    customersEdit(_id: $id, company: $company, position: $position) {
+      _id
+    }
+  }
+`;
+
+
+
+
 const userEdit = gql`
   mutation clientPortalUsersEdit(
+    $clientPortalId: String
     $_id: String!
     $email: String
     $firstName: String
@@ -84,6 +98,7 @@ const userEdit = gql`
     $avatar: String
   ) {
     clientPortalUsersEdit(
+      clientPortalId: $clientPortalId
       _id: $_id
       email: $email
       firstName: $firstName
@@ -93,7 +108,6 @@ const userEdit = gql`
       companyName: $companyName
       companyRegistrationNumber: $companyRegistrationNumber
       password: $password
-
       avatar: $avatar
     ) {
       _id
@@ -185,6 +199,7 @@ const mutations = {
   googleLogin,
   changePhone,
   socialPayLogin,
+  erxesCustomerEdit
 };
 
 export default mutations;

@@ -1,0 +1,60 @@
+import { Button } from "@/components/ui/button";
+// import { Separator } from "@/components/ui/separator";
+import GoogleLogin from "@/containers/auth/google-login";
+import LoginForm from "@/containers/auth/login-form";
+import { Metadata } from "next/types";
+import Link from "next/link";
+import { Suspense } from "react";
+import { getConfig } from "@/sdk/queries/auth";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { config } = await getConfig();
+
+  return {
+    title: config.name + " - Тавтай морил",
+    openGraph: {
+      title: config.name + " - Тавтай морил",
+    },
+  };
+}
+
+const Login = () => {
+  return (
+    <>
+      <div className="text-lg md:text-2xl font-semibold mx-auto relative md:mt-20">
+        Welcome
+      </div>
+      <div className="mb-auto mx-auto mt-4 md:mt-8 w-full sm:max-w-md">
+        <div className="md:border md:rounded-xl w-full sm:py-10 px-3 sm:px-10 space-y-5 bg-background relative">
+          <h2 className="font-bold text-lg text-center pb-6 hidden lg:block">
+            Log In
+          </h2>
+          <Suspense>
+            <LoginForm />
+          </Suspense>
+          {/* <Separator /> */}
+          <div className="space-y-3">
+            {process.env.NEXT_PUBLIC_FACEBOOK_ID && (
+              <Suspense>{/* <FacebookLogin /> */}</Suspense>
+            )}
+            {process.env.NEXT_PUBLIC_GOOGLE_ID && (
+              <Suspense>
+                <GoogleLogin />
+              </Suspense>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="mt-8 text-center text-sm relative md:mb-20">
+        <Button variant="link" className="text-sm" asChild>
+          <Link href="/signup">Create an account?</Link>
+        </Button>
+      </div>
+    </>
+  );
+};
+
+export default Login;
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsibmFtZSI6ImJ1ZCIsImNyZWF0ZWRBdCI6IjIwMjQtMTEtMjBUMDA6MDg6MzcuODg4WiIsInVzZXJHcm91cElkIjoiX3dPZGtDTTZwWHh4X0xNLUY0c3p4IiwiZXhwaXJlRGF0ZSI6IjIwMjQtMTItMjBUMDk6MjU6NTUuMDc4WiIsIm5vRXhwaXJlIjp0cnVlLCJhbGxvd0FsbFBlcm1pc3Npb24iOmZhbHNlLCJfaWQiOiJHaE9hY2pGQ3MwTjRlTVdzalJIUGEiLCJfX3YiOjB9LCJpYXQiOjE3MzIwOTQ3NjF9.KSN830uGCYiAPyYKOUhppirZSST9TOrQiiZKbkngDoo
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsibmFtZSI6ImJ1ZCIsImNyZWF0ZWRBdCI6IjIwMjQtMTEtMjBUMDA6MDg6MzcuODg4WiIsInVzZXJHcm91cElkIjoiX3dPZGtDTTZwWHh4X0xNLUY0c3p4IiwiZXhwaXJlRGF0ZSI6IjIwMjQtMTItMjBUMDk6MjU6NTUuMDc4WiIsIm5vRXhwaXJlIjp0cnVlLCJhbGxvd0FsbFBlcm1pc3Npb24iOmZhbHNlLCJfaWQiOiJHaE9hY2pGQ3MwTjRlTVdzalJIUGEiLCJfX3YiOjB9LCJpYXQiOjE3MzIwOTQ3NjF9.KSN830uGCYiAPyYKOUhppirZSST9TOrQiiZKbkngDoo

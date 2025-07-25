@@ -1,11 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { cn } from "@/lib/utils";
-import { Input, InputProps } from "./input";
-import { Separator } from "./Separator";
-import { Button } from "./button";
-import { EyeIcon } from "lucide-react";
-import { useState } from "react";
+import { cn } from '@/lib/utils';
+import { Input, InputProps } from './input';
+import { Separator } from './separator';
+import { Button } from './button';
+import { EyeIcon } from 'lucide-react';
+import { useState } from 'react';
 
 const Password = React.forwardRef<
   HTMLInputElement,
@@ -15,14 +15,14 @@ const Password = React.forwardRef<
   return (
     <div
       className={cn(
-        "flex border rounded-md overflow-hidden focus-within:ring-1 focus-within:ring-ring",
+        'flex border rounded-md overflow-hidden focus-within:ring-1 focus-within:ring-ring',
         containerClassName
       )}
     >
       <Input
-        type={show ? "text" : "password"}
+        type={show ? 'text' : 'password'}
         className={cn(
-          "rounded-l-md rounded-r-none border-none focus-visible:ring-none",
+          'rounded-l-md rounded-r-none border-none focus-visible:ring-none',
           className
         )}
         ref={ref}
@@ -33,7 +33,7 @@ const Password = React.forwardRef<
       <Button
         tabIndex={-1}
         size="sm"
-        variant={"ghost"}
+        variant={'ghost'}
         className="h-10 rounded-none"
         type="button"
         onClick={() => setShow((prev) => !prev)}
@@ -43,6 +43,6 @@ const Password = React.forwardRef<
     </div>
   );
 });
-Password.displayName = "Password";
+Password.displayName = 'Password';
 
 export { Password };

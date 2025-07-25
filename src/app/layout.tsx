@@ -1,3 +1,113 @@
+// import { Inter as FontSans } from 'next/font/google';
+// import './globals.css';
+// // import { SpeedInsights } from '@vercel/speed-insights/next';
+// import { cn, getSimilarColorWithOpacity, hexToHsl } from '@/lib/utils';
+// import DefaultLayout from '@/components/layouts';
+// import Providers from '@/store';
+// import CurrentOrder from '@/containers/currentOrder';
+// import { Toaster } from '@/components/ui/sonner';
+// import OrderCRUD from '@/containers/order-cud';
+// import { getConfig } from '@/sdk/queries/auth';
+// import ConfigProvider from '@/components/layouts/config';
+// import { Metadata } from 'next/types';
+
+// export const fontSans = FontSans({
+//   subsets: ['latin'],
+//   variable: '--font-sans'
+// });
+
+// interface RootLayoutProps {
+//   children: React.ReactNode;
+// }
+
+// export const revalidate = 300;
+
+// export async function generateMetadata(): Promise<Metadata> {
+//   const { config } = await getConfig();
+//   console.log("s",{config})
+//   const { pdomain, name, description, uiOptions } = config || {};
+
+//   return {
+//     metadataBase: new URL(`https://${pdomain}` || 'https://www.erxes.io'),
+//     title: name,
+//     description,
+//     openGraph: {
+//       title: name,
+//       description,
+//       images: [
+//         {
+//           url: uiOptions?.logo,
+//           width: 800,
+//           height: 600,
+//           alt: name
+//         }
+//       ],
+//       url: pdomain,
+//       type: 'website'
+//     }
+//   };
+// }
+
+// export default async function RootLayout({ children }: RootLayoutProps) {
+//   const { config } = await getConfig();
+
+//   const { uiOptions } = config || {};
+//   const { colors } = uiOptions || {};
+
+//   return (
+//     <html lang="en" suppressHydrationWarning>
+//       <head>
+//         <link rel="icon" href={uiOptions?.favIcon} />
+//         {!!colors && (
+//           <style>{`
+//          :root {
+//            ${
+//              colors?.primary
+//                ? `--primary: ${hexToHsl(colors?.primary)};
+//               --accent: ${hexToHsl(
+//                 getSimilarColorWithOpacity(colors?.primary, 0.2)
+//               )}; 
+//               --secondary: ${hexToHsl(
+//                 getSimilarColorWithOpacity(colors?.primary, 0.1)
+//               )};`
+//                : ''
+//            }
+//            ${
+//              colors?.secondary
+//                ? `--active: ${hexToHsl(colors?.secondary)};`
+//                : ''
+//            }
+//            ${
+//              colors?.third
+//                ? `--background: ${hexToHsl(colors?.third)}; --card: ${hexToHsl(
+//                    colors?.third
+//                  )};`
+//                : ''
+//            }
+//           }
+//         `}</style>
+//         )}
+//       </head>
+//       <body
+//         className={cn(
+//           'min-h-screen bg-background font-sans antialiased flex flex-col',
+//           fontSans.variable
+//         )}
+//       >
+//         <Providers>
+//           <ConfigProvider config={config}>
+//             <DefaultLayout>{children}</DefaultLayout>
+//           </ConfigProvider>
+//           <CurrentOrder />
+//           <OrderCRUD />
+//         </Providers>
+//         <Toaster richColors closeButton />
+//       </body>
+//     </html>
+//   );
+// }
+
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -33,18 +143,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/static/css/styles.css" />
         <link rel="stylesheet" href="/static/css/font-awesome.css" />
         <link rel="stylesheet" href="/static/css/mobile.css" />
-        {/* <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-          crossOrigin="anonymous"
-        /> */}
+ 
       </head>
       <body className={inter.className}>
         <Apollo>
@@ -53,8 +152,6 @@ export default function RootLayout({
           <Footer />
           <Script src="/static/js/scripts.js" />
           <Script src="/static/js/custom.js" />
-          {/* <Script src="/static/js/owl.carousel.min.js" /> */}
-          {/* <Script src="/static/bootstrap/js/bootstrap.min.js" /> */}
         </Apollo>
       </body>
     </html>

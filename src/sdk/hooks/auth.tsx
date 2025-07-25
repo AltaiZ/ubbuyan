@@ -1,7 +1,7 @@
 import { BaseMutationOptions, useMutation } from '@apollo/client';
 import { mutations } from '../graphql/auth';
-import { useSetAtom } from 'jotai';
-import { loadingUserAtom, refetchCurrentUserAtom } from '@/store/auth.store';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { configAtom, loadingUserAtom, refetchCurrentUserAtom } from '@/store/auth.store';
 import { toast } from 'sonner';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { onError } from '@/lib/utils';
@@ -101,6 +101,22 @@ export const useUserEdit = () => {
   });
 
   return { loading, editUser };
+};
+
+export const useErxesCustomerEdit = () => {
+  const { erxesAppToken } = useAtomValue(configAtom) || {};
+  const [erxesCustomerEdit, { loading }] = useMutation(
+    mutations.erxesCustomerEdit,
+    {
+      context: {
+        headers: {
+          'erxes-app-token': erxesAppToken,
+        },
+      },
+      onError() {},
+    }
+  );
+  return { loading, erxesCustomerEdit };
 };
 
 export const useForgotPassword = () => {

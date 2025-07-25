@@ -1,13 +1,12 @@
-// import { SidebarNav } from "@/components/sidebar-nav/sidebar-nav";
-// import { Separator } from "@/components/ui/separator";
-import { Separator } from "@radix-ui/react-separator";
-import PrivateRoute from "@/containers/auth/private-route";
-import { Suspense } from "react";
+import { SidebarNav } from '@/components/sidebar-nav/sidebar-nav';
+import { Separator } from '@/components/ui/separator';
+import PrivateRoute from '@/containers/auth/private-route';
+import { Suspense } from 'react';
 
 const ProfileLayout = ({
   children,
   title,
-  description,
+  description
 }: React.PropsWithChildren & { title: string; description: string }) => {
   return (
     <PrivateRoute>
@@ -20,7 +19,7 @@ const ProfileLayout = ({
         <div className="flex flex-col space-y-4 md:space-y-8 lg:flex-row lg:space-x-10 lg:space-y-0">
           <aside className="lg:w-1/5 overflow-auto -mx-2 md:mx-0">
             <Suspense>
-              {/* <SidebarNav items={sidebarNavItems} /> */}
+              <SidebarNav items={sidebarNavItems} />
             </Suspense>
           </aside>
           <div className="flex-1">{children}</div>
@@ -32,12 +31,12 @@ const ProfileLayout = ({
 
 const sidebarNavItems = [
   {
-    title: "Personal information",
-    href: "/profile",
+    title: 'Хувийн мэдээлэл',
+    href: '/profile'
   },
   {
-    title: "Orders",
-    href: "/profile/orders",
+    title: 'Захиалгууд',
+    href: '/profile/orders'
   },
   // {
   //   title: 'Хүслийн жагсаалт',
@@ -48,9 +47,9 @@ const sidebarNavItems = [
   //   href: '/profile/viewed'
   // },
   {
-    title: "Log Out",
-    href: "/logout",
-  },
+    title: 'Гарах',
+    href: '/logout'
+  }
 ];
 
 export default ProfileLayout;

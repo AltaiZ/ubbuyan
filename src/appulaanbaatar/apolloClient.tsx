@@ -1,0 +1,60 @@
+"use client";
+
+import {
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  split,
+  ApolloProvider,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
+import { createClient } from "graphql-ws";
+import { getMainDefinition } from "@apollo/client/utilities";
+
+const httpLink: any = new HttpLink({
+  uri: `${process.env.NEXT_PUBLIC_MAIN_API_DOMAIN}/graphql`,
+  credentials: "include",
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      "Access-Control-Allow-Origin": `${process.env.NEXT_PUBLIC_MAIN_API_DOMAIN}/graphql`,
+      "erxes-app-token": process.env.NEXT_PUBLIC_ERXES_APP_TOKEN,
+    },
+  };
+});
+
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: `${process.env.NEXT_PUBLIC_WS_DOMAIN}`,
+  })
+);
+
+const httpLinkWithMiddleware = authLink.concat(httpLink);
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
+    );
+  },
+  wsLink,
+  httpLinkWithMiddleware
+);
+
+const client = new ApolloClient({
+  ssrMode: typeof window !== "undefined",
+  cache: new InMemoryCache(),
+  link: splitLink,
+});
+
+const Apollo = ({ children }: React.PropsWithChildren) => {
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+};
+
+export default Apollo;
