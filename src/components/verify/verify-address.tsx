@@ -1,7 +1,6 @@
 'use client';
 import { useAtomValue } from 'jotai';
 import { Badge } from '../ui/badge';
-// import { Separator } from '../ui/separator';
 import {
   billTypeAtom,
   deliveryInfoAtom,
