@@ -11,7 +11,7 @@ import {
 } from 'react-hook-form';
 
 import { cn } from '@/lib/utils';
-import { Label } from '@/components/ui/label';
+// import { Label } from '@/components/ui/label';
 
 const Form = FormProvider;
 
@@ -91,12 +91,13 @@ const FormLabel = React.forwardRef<
   const { error, formItemId } = useFormField();
 
   return (
-    <Label
-      ref={ref}
-      className={cn('text-sm', error && 'text-destructive', className)}
-      htmlFor={formItemId}
-      {...props}
-    />
+    // <Label
+    //   ref={ref}
+    //   className={cn('text-sm', error && 'text-destructive', className)}
+    //   htmlFor={formItemId}
+    //   {...props}
+    // />
+    <h1></h1>
   );
 });
 FormLabel.displayName = 'FormLabel';

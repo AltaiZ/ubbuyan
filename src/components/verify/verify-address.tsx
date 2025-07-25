@@ -1,7 +1,7 @@
 'use client';
 import { useAtomValue } from 'jotai';
 import { Badge } from '../ui/badge';
-import { Separator } from '../ui/separator';
+// import { Separator } from '../ui/separator';
 import {
   billTypeAtom,
   deliveryInfoAtom,
@@ -37,7 +37,7 @@ const VerifyAddress = () => {
           {email} {phone}
         </div>
       </div>
-      <Separator />
+      {/* <Separator /> */}
       <div className="py-6">
         <div className="text-black/60 mb-3">Хүргэлтийн хаяг</div>
         <div>

@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 import { Input, InputProps } from './input';
-import { Separator } from './separator';
 import { Button } from './button';
 import { EyeIcon } from 'lucide-react';
 import { useState } from 'react';
@@ -29,7 +28,6 @@ const Password = React.forwardRef<
         {...props}
         placeholder="•••••••••••••"
       />
-      <Separator orientation="vertical" className="border-l h-10" />
       <Button
         tabIndex={-1}
         size="sm"

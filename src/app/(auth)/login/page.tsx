@@ -1,11 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-// import FacebookLogin from '@/containers/auth/facebook-login';
-import GoogleLogin from '@/containers/auth/google-login';
-import LoginForm from '@/containers/auth/login-form';
 import { Metadata } from 'next/types';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { getConfig } from '@/sdk/queries/auth';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -30,22 +25,6 @@ const Login = () => {
             <h2 className="font-bold text-lg text-center pb-6 hidden lg:block">
               Нэвтрэх
             </h2>
-          <Suspense>
-            <LoginForm />
-          </Suspense>
-          <Separator />
-          <div className="space-y-3">
-            {process.env.NEXT_PUBLIC_FACEBOOK_ID && (
-              <Suspense>
-                {/* <FacebookLogin /> */}
-              </Suspense>
-            )}
-            {process.env.NEXT_PUBLIC_GOOGLE_ID && (
-              <Suspense>
-                <GoogleLogin />
-              </Suspense>
-            )}
-          </div>
         </div>
       </div>
       <div className="mt-8 text-center text-sm relative md:mb-20">
@@ -58,6 +37,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsibmFtZSI6ImJ1ZCIsImNyZWF0ZWRBdCI6IjIwMjQtMTEtMjBUMDA6MDg6MzcuODg4WiIsInVzZXJHcm91cElkIjoiX3dPZGtDTTZwWHh4X0xNLUY0c3p4IiwiZXhwaXJlRGF0ZSI6IjIwMjQtMTItMjBUMDk6MjU6NTUuMDc4WiIsIm5vRXhwaXJlIjp0cnVlLCJhbGxvd0FsbFBlcm1pc3Npb24iOmZhbHNlLCJfaWQiOiJHaE9hY2pGQ3MwTjRlTVdzalJIUGEiLCJfX3YiOjB9LCJpYXQiOjE3MzIwOTQ3NjF9.KSN830uGCYiAPyYKOUhppirZSST9TOrQiiZKbkngDoo
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsibmFtZSI6ImJ1ZCIsImNyZWF0ZWRBdCI6IjIwMjQtMTEtMjBUMDA6MDg6MzcuODg4WiIsInVzZXJHcm91cElkIjoiX3dPZGtDTTZwWHh4X0xNLUY0c3p4IiwiZXhwaXJlRGF0ZSI6IjIwMjQtMTItMjBUMDk6MjU6NTUuMDc4WiIsIm5vRXhwaXJlIjp0cnVlLCJhbGxvd0FsbFBlcm1pc3Npb24iOmZhbHNlLCJfaWQiOiJHaE9hY2pGQ3MwTjRlTVdzalJIUGEiLCJfX3YiOjB9LCJpYXQiOjE3MzIwOTQ3NjF9.KSN830uGCYiAPyYKOUhppirZSST9TOrQiiZKbkngDoo
