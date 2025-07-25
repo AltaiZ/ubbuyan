@@ -35,18 +35,6 @@ const sidebarNavItems = [
     href: '/profile'
   },
   {
-    title: 'Захиалгууд',
-    href: '/profile/orders'
-  },
-  // {
-  //   title: 'Хүслийн жагсаалт',
-  //   href: '/profile/wishlist'
-  // },
-  // {
-  //   title: 'Үзсэн',
-  //   href: '/profile/viewed'
-  // },
-  {
     title: 'Гарах',
     href: '/logout'
   }

@@ -1,20 +1,19 @@
-import { PropsWithChildren } from 'react';
-import { Breadcrumb, Breadcrumbs } from '@/components/breadcrumb/breadcrumb';
+// import { PropsWithChildren } from 'react';
 
-type BreadcrumbsLayoutProps = PropsWithChildren & {
-  breadcrumbs?: Breadcrumb[];
-};
+// type BreadcrumbsLayoutProps = PropsWithChildren & {
+//   breadcrumbs?: Breadcrumb[];
+// };
 
-export function BreadcrumbsLayout({
-  breadcrumbs = [],
-  children
-}: BreadcrumbsLayoutProps) {
-  return (
-    <>
-      <div className="container">
-        {/* {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />} */}
-        {children}
-      </div>
-    </>
-  );
-}
+// export function BreadcrumbsLayout({
+//   breadcrumbs = [],
+//   children
+// }: BreadcrumbsLayoutProps) {
+//   return (
+//     <>
+//       <div className="container">
+//         {/* {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />} */}
+//         {children}
+//       </div>
+//     </>
+//   );
+// }

@@ -45,7 +45,8 @@ const CurrentUser = () => {
       className="text-inherit hover:text-inherit"
     >
       <Link href="/login">
-        <UserIcon className="h-5 w-5" />
+        {/* <UserIcon className="h-5 w-5" /> */}
+        <span>Nevtreh</span>
       </Link>
     </Button>
   );

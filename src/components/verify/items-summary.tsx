@@ -3,7 +3,6 @@
 import { cartAtom } from '@/store/cart.store';
 import { useAtomValue } from 'jotai';
 import { Badge } from '../ui/badge';
-import Price from '../price/price';
 
 const ItemsSummary = () => {
   const items = useAtomValue(cartAtom);
@@ -15,7 +14,7 @@ const ItemsSummary = () => {
           {item.productName}
           <div className="flex justify-between w-1/3">
             <Badge variant="secondary">x{item.count}</Badge>
-            <Price amount={item.unitPrice} />
+      
           </div>
         </div>
       ))}
