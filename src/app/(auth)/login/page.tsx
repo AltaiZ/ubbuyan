@@ -1,7 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-// import FacebookLogin from '@/containers/auth/facebook-login';
-import GoogleLogin from '@/containers/auth/google-login';
 import LoginForm from '@/containers/auth/login-form';
 import { Metadata } from 'next/types';
 import Link from 'next/link';
@@ -33,7 +30,6 @@ const Login = () => {
           <Suspense>
             <LoginForm />
           </Suspense>
-          <Separator />
         </div>
       </div>
       <div className="mt-8 text-center text-sm relative md:mb-20">
