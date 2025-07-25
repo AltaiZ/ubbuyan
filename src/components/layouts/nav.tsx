@@ -1,6 +1,5 @@
 import TransparentNavbar from "./navbar-top.transparent";
 import Logo from "./logo";
-import { SearchPopupTrigger } from "../searchtest/search-popup";
 import CartTrigger from "../cart/cart-trigger";
 import CurrentUser from "@/containers/auth/current-user";
 import Links from "./Links";
@@ -18,7 +17,6 @@ const NavTop = async () => {
         </div>
       </nav>
       <div className="hidden md:flex gap-3">
-        <SearchPopupTrigger />
         <CartTrigger />
         <CurrentUser />
       </div>

@@ -1,4 +1,3 @@
-import OrderSummary from '@/components/order-summary/order-summary';
 import CheckoutLayout from '../checkout-layout';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -22,12 +21,6 @@ const Verify = () => {
             <Separator />
             <VerifyAddress />
           </div>
-          <OrderSummary
-            className="col-span-5 md:sticky md:top-20 h-fit"
-            content={<ItemsSummary />}
-          >
-            <VerifyButton />
-          </OrderSummary>
         </div>
       </VerifyLayout>
     </CheckoutLayout>
