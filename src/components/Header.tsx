@@ -24,9 +24,10 @@ export default function Header() {
               </div>
             </div>
           </div>
-
+          <span className="ml-10 md:ml-0">
             <CurrentUser />
-        </header>
+          </span>
+      </header>
       </div>
     </div>
   );

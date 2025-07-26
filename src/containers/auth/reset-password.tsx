@@ -83,7 +83,7 @@ const ResetPasswordForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>New Password</FormLabel>
+              <FormLabel>Нууц үг шинэчлэх</FormLabel>
               <FormControl>
                 <Password {...field} autoComplete="password" />
               </FormControl>
@@ -91,7 +91,7 @@ const ResetPasswordForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full col-span-2" size="lg" disabled={loading}>
+        <Button className="w-full col-span-2" variant='non' size="lg" disabled={loading}>
           {loading && <LoadingIcon />}
           Нууц үг шинэчлэх
         </Button>

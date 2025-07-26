@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-
+import CurrentUser from "@/containers/auth/current-user";
 export default function Footer() {
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -112,6 +112,8 @@ export default function Footer() {
                 <li className=" hidden-xs" role="presentation">
                   <a href="/search">serch</a>
                 </li>
+            
+
               </ul>
             </div>
           </div>

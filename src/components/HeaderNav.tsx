@@ -12,7 +12,7 @@ export default function HeaderNav() {
       <nav className="navbar navbar-default nav-justified hidden-xs">
         <div className="container">
           <div
-            className="np  navbar-collapse"
+            className="np navbar-collapse"
             id="bs-example-navbar-collapse-1"
           >
             <ul className="nav navbar-nav">
@@ -146,7 +146,7 @@ export default function HeaderNav() {
       >
         <div className="row">
           <img
-            className="visible-xs"
+            className="visible-xs ml-24"
             src="/static/images/mobilelogo.png"
             height="80%"
             width="80%"
@@ -155,7 +155,11 @@ export default function HeaderNav() {
             ×
           </button>
         </div>
-        <ul className="">
+      
+      
+      
+      
+        <ul className="ml-20">
           <li className="active" role="presentation">
             <a href="/">Нүүр</a>
           </li>
@@ -186,7 +190,7 @@ export default function HeaderNav() {
               </li>
             </ul>
           </li>
-          <li className="" role="presentation">
+          <li className="mr-10" role="presentation">
             <a href="" target="_blank">
               Үйлчилгээ
             </a>
@@ -262,12 +266,7 @@ export default function HeaderNav() {
           <li className="" role="presentation">
             <a href="/contactus/">Холбоо барих</a>
           </li>
-          {/* <li role="presentation">
-            <span>
-              {" "}
-              <a href="/login/"> Нэвтрэх</a>
-            </span>
-          </li> */}
+   
         </ul>
       </div>
       <span
@@ -277,6 +276,8 @@ export default function HeaderNav() {
       >
         ☰
       </span>
+
+
     </div>
   );
 }
