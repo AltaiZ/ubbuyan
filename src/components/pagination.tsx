@@ -1,12 +1,11 @@
-import {
-  Pagination,
+import {   Pagination,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious,
-} from "../../components/[ui]/pagination";
+  PaginationPrevious, } from "./ui/pagination";
+
 
 interface PaginationPartProps {
   currentPage: number;
@@ -17,9 +16,8 @@ export function PaginationPart({
   currentPage,
   totalPages,
 }: PaginationPartProps) {
-  const visiblePages = 5; // Display 5 pagination links at a time
+  const visiblePages = 5; 
 
-  // Clamp currentPage to ensure it's within valid bounds
   const currentPageClamped = Math.max(1, Math.min(currentPage, totalPages));
 
   let startPage = Math.max(

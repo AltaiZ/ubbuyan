@@ -25,7 +25,7 @@ const ProductionSidebar = ({ articles }: SidebarProps) => {
           <Button
             key={article._id}
             onClick={() => handleScroll(index)}
-            variant='custom'
+
             className="w-full"
           >
             {article.title}

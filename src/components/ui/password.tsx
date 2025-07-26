@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { cn } from '@/lib/utils';
 import { Input, InputProps } from './input';
 import { Button } from './button';
@@ -14,14 +13,14 @@ const Password = React.forwardRef<
   return (
     <div
       className={cn(
-        'flex border rounded-md overflow-hidden focus-within:ring-1 focus-within:ring-ring',
+        'flex border overflow-hidden',
         containerClassName
       )}
     >
       <Input
         type={show ? 'text' : 'password'}
         className={cn(
-          'rounded-l-md rounded-r-none border-none focus-visible:ring-none',
+          'h-14 text-base px-4 py-2 text-xl border-none focus-visible:ring-0',
           className
         )}
         ref={ref}
@@ -31,12 +30,12 @@ const Password = React.forwardRef<
       <Button
         tabIndex={-1}
         size="sm"
-        variant={'ghost'}
-        className="h-10 rounded-none"
+        variant="ghost"
+        className="h-12 px-3 rounded-none"
         type="button"
         onClick={() => setShow((prev) => !prev)}
       >
-        <EyeIcon className="h-4 w-4" />
+        <EyeIcon className="h-5 w-5" />
       </Button>
     </div>
   );

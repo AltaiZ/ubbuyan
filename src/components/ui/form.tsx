@@ -10,7 +10,6 @@ import {
   useFormContext
 } from 'react-hook-form';
 import { cn } from '@/lib/utils';
-// import { Label } from '@/components/ui/label';
 import { Label } from '@radix-ui/react-label';
 
 const Form = FormProvider;
@@ -78,7 +77,11 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn('space-y-1', className)} {...props} />
+      <div
+        ref={ref}
+        className={cn('space-y-2', className)} // том зайтай болгосон
+        {...props}
+      />
     </FormItemContext.Provider>
   );
 });
@@ -93,7 +96,8 @@ const FormLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn('text-sm', error && 'text-destructive', className)}
+      className={cn('text-2xl font-semibold text-[#dda372]', error && 'text-destructive', className)}
+
       htmlFor={formItemId}
       {...props}
     />
@@ -134,7 +138,7 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn('text-[0.8rem] text-muted-foreground', className)}
+      className={cn('text-sm text-muted-foreground', className)} // description томруулсан
       {...props}
     />
   );
@@ -156,7 +160,10 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn('text-[0.8rem] font-medium text-destructive', className)}
+      className={cn(
+        'text-sm font-medium text-destructive', // message томруулсан
+        className
+      )}
       {...props}
     >
       {body}

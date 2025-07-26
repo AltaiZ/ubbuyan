@@ -76,7 +76,7 @@ const ForgotForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full col-span-2" size="lg" disabled={loading}>
+        <Button className="w-full col-span-2" variant='non' size="lg" disabled={loading}>
           {loading && <LoadingIcon />}
           Нууц үг сэргээх
         </Button>

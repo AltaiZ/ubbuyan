@@ -47,7 +47,7 @@ const LoginForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="login"
@@ -56,7 +56,7 @@ const LoginForm = () => {
               <FormLabel>Нэвтрэх нэр</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="цахим хаяг эсвэл утас"
+                  placeholder="Цахим хаяг"
                   {...field}
                   autoComplete="username"
                 />
@@ -75,7 +75,7 @@ const LoginForm = () => {
                 <Button
                   asChild
                   variant="link"
-                  className="py-1 h-auto font-normal px-0"
+                  className="py-1 h-auto font-normal px-0 text-lg"
                   tabIndex={-1}
                 >
                   <Link href="/forgot">Mартсан?</Link>
@@ -89,11 +89,9 @@ const LoginForm = () => {
             </FormItem>
           )}
         />
-
         <Button variant="non" type="submit" className="w-full text-white" size="lg" disabled={loading}>
           Нэвтрэх
-        </Button>
-        
+        </Button>        
       </form>
     </Form>
   );

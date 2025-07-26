@@ -17,27 +17,20 @@ const buttonVariants = cva(
           "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "",
-        link: "text-primary underline-offset-4 hover:underline",
-        header: "text-primary hover:text-[rgb(16,91,171)]",
-        footer: "text-primary underline-offset-4 hover:text-black",
-        custom:
-          " bg-[rgb(16,91,171)] text-white hover:bg-white border border-[rgb(16,91,171)] hover:text-[rgb(16,91,171)]",
-        non: " bg-[rgb(16,91,171)] text-white",
-        none_color: "text-white",
-        phone: "bg-[rgb(16,91,171)] text-white",
-        social: "",
+        ghost: "text-[#dda372]",
+        link: "text-[#dda372]",
+        non: " bg-[#dda372] text-white",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 px-3 text-xs",
-        lg: "h-10  px-8",
+        lg: "h-14  px-8",
         icon: "h-9 w-9",
         login: "h-9 px-1 py-2",
       },
     },
     defaultVariants: {
-      variant: "phone",
+      variant: "default",
       size: "default",
     },
   }

@@ -42,10 +42,8 @@ const CurrentUser = () => {
       size="icon"
       variant={"ghost"}
       asChild
-      className="text-inherit"
     >
       <Link href="/login">
-        {/* <UserIcon className="h-5 w-5" /> */}
         <span>Нэвтрэх</span>
       </Link>
     </Button>

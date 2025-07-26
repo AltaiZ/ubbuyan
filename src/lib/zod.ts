@@ -2,20 +2,20 @@ import { z } from "zod";
 
 export const phoneZod = z
   .string()
-  .regex(/^\d{8}$/, "Invalid Phone number")
-  .min(1, { message: "Phone is required" });
+  .regex(/^\d{8}$/, "Буруу утасны дугаар")
+  .min(1, { message: "Утасны дугаар шаардлагатай" });
 
 export const passwordZod = z
   .string()
-  .min(1, { message: "Please enter your password." })
+  .min(1, { message: "Та нууц үгээ оруулна уу." })
   .regex(
     /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-    "The password must be at least 8 characters long and include at least one lowercase letter and one uppercase letter."
+    "Нууц үг хамгийн багадаа 8 тэмдэгт байх ба түүнд тухайн жижиг үсэг болон том үсэг, тэмдэгт байх шаардлагатай."
   );
 export const mailZod = z
   .string()
-  .min(1, { message: "Please enter your email." })
+  .min(1, { message: "Та өөрийн имэйлээ оруулна уу." })
   .regex(
     /^([A-Z0-9_+-]+\.?)*[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\-]*\.)+[A-Z]{2,}$/,
-    "Invalid email"
+    "Буруу имэйл"
   );
