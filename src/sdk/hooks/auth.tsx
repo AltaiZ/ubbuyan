@@ -1,11 +1,14 @@
 import { BaseMutationOptions, useMutation } from '@apollo/client';
 import { mutations } from '../graphql/auth';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { configAtom, loadingUserAtom, refetchCurrentUserAtom } from '@/store/auth.store';
+import { useSetAtom } from 'jotai';
+import {
+  loadingUserAtom,
+  refetchCurrentUserAtom,
+} from '@/store/auth.store';
 import { toast } from 'sonner';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { onError } from '@/lib/utils';
-import { fbLogout } from '@/lib/facebook';
+import { onErrorLogin } from '@/lib/utils';
 
 const clientPortalId = process.env.NEXT_PUBLIC_CP_ID;
 
@@ -16,6 +19,7 @@ interface ILoginData {
 
 const useLoginCallback = () => {
   const router = useRouter();
+  const from = useSearchParams().get('from');
   const triggerRefetchUser = useSetAtom(refetchCurrentUserAtom);
   const setLoadingUser = useSetAtom(loadingUserAtom);
 
@@ -30,17 +34,15 @@ const useLoginCallback = () => {
         triggerRefetchUser(true);
         setLoadingUser(true);
         toast.success('Сайн байна уу?', {
-          description: 'Та амжилттай нэвтэрлээ'
+          description: 'Та амжилттай нэвтэрлээ',
         });
 
-        // Always navigate to home page upon login
-        router.push('/');
+        router.push(from ? from : '/');
         !!callback && callback();
       }
-    }
+    },
   };
 };
-
 
 export const useLogin = (onCompleted?: () => void) => {
   const { loginCallback } = useLoginCallback();
@@ -49,7 +51,7 @@ export const useLogin = (onCompleted?: () => void) => {
     onCompleted: ({ clientPortalLogin }) => {
       loginCallback(clientPortalLogin, onCompleted);
     },
-    onError
+    onError: onErrorLogin,
   });
 
   return { login, loading, clientPortalId };
@@ -61,7 +63,7 @@ export const useGoogleLogin = () => {
     onCompleted({ clientPortalGoogleAuthentication }) {
       loginCallback(clientPortalGoogleAuthentication);
     },
-    onError
+    onError,
   });
   return { googleLogin, loading, clientPortalId };
 };
@@ -72,22 +74,34 @@ export const useFacebookLogin = () => {
     onCompleted({ clientPortalFacebookAuthentication }) {
       loginCallback(clientPortalFacebookAuthentication);
     },
-    onError
+    onError,
   });
   return { facebookLogin, loading, clientPortalId };
 };
+
 
 export const useRegister = (
   onCompleted?: BaseMutationOptions['onCompleted']
 ) => {
   const [register, { loading }] = useMutation(mutations.createUser, {
-    onCompleted: data => {
+    onCompleted: (data) => {
       !!onCompleted && onCompleted(data);
     },
-    onError
+    onError,
   });
 
   return { register, loading, clientPortalId };
+};
+
+export const useVerify = (onCompleted?: BaseMutationOptions['onCompleted']) => {
+  const [verify, { loading }] = useMutation(mutations.userVerify, {
+    onCompleted: (data) => {
+      !!onCompleted && onCompleted(data);
+    },
+    onError,
+  });
+
+  return { verify, loading, clientPortalId };
 };
 
 export const useUserEdit = () => {
@@ -97,33 +111,18 @@ export const useUserEdit = () => {
       setRefetchUser(true);
       toast.success('Хувийн мэдээлэл шинэчлэгдсэн');
     },
-    onError
+    onError,
   });
 
   return { loading, editUser };
 };
 
-export const useErxesCustomerEdit = () => {
-  const { erxesAppToken } = useAtomValue(configAtom) || {};
-  const [erxesCustomerEdit, { loading }] = useMutation(
-    mutations.erxesCustomerEdit,
-    {
-      context: {
-        headers: {
-          'erxes-app-token': erxesAppToken,
-        },
-      },
-      onError() {},
-    }
-  );
-  return { loading, erxesCustomerEdit };
-};
 
 export const useForgotPassword = () => {
   const [forgotPassword, { loading, data }] = useMutation(
     mutations.forgotPassword,
     {
-      onError
+      onError,
     }
   );
 
@@ -136,7 +135,7 @@ export const useChangePassword = () => {
   const [changePassword, { loading, data }] = useMutation(
     mutations.userChangePassword,
     {
-      onError
+      onError,
     }
   );
 
@@ -149,7 +148,7 @@ export const useResetPassword = () => {
   const [resetPassword, { loading, data }] = useMutation(
     mutations.resetPassword,
     {
-      onError
+      onError,
     }
   );
 
@@ -164,13 +163,12 @@ export const useLogout = () => {
     onCompleted() {
       triggerRefetchUser(true);
     },
-    onError
+    onError,
   });
 
   const handleLogout = () => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('refetchToken');
-    fbLogout();
     logout();
   };
 

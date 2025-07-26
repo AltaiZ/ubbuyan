@@ -1,9 +1,14 @@
 import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import { Input, InputProps } from './input';
 import { Button } from './button';
-import { EyeIcon } from 'lucide-react';
+import { EyeIcon, Key } from 'lucide-react';
 import { useState } from 'react';
+import { Separator } from '@radix-ui/react-separator';
+import { Eye } from 'lucide-react';
+import Image from 'next/image';
+import KeyImage from '@/zurag/view.png';
 
 const Password = React.forwardRef<
   HTMLInputElement,
@@ -13,29 +18,34 @@ const Password = React.forwardRef<
   return (
     <div
       className={cn(
-        'flex border overflow-hidden',
+        'flex border overflow-hidden ',
         containerClassName
       )}
     >
       <Input
         type={show ? 'text' : 'password'}
         className={cn(
-          'h-14 text-base px-4 py-2 text-xl border-none focus-visible:ring-0',
+          'border-none focus-visible:ring-none',
           className
         )}
         ref={ref}
         {...props}
         placeholder="•••••••••••••"
       />
+
+      <Separator orientation="vertical" className="border-l h-15" />
+
+      <Eye className="h-4 w-4 text-black" />
       <Button
         tabIndex={-1}
         size="sm"
-        variant="ghost"
-        className="h-12 px-3 rounded-none"
+        variant={'ghost'}
+        className="h-15 rounded-none"
         type="button"
         onClick={() => setShow((prev) => !prev)}
       >
-        <EyeIcon className="h-5 w-5" />
+      <Image src={KeyImage} alt="key icon" width={20} height={20} />
+
       </Button>
     </div>
   );

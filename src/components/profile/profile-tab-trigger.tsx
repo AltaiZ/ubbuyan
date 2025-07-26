@@ -25,12 +25,12 @@ const ProfileTabTrigger = ({
   return (
     <TabsTrigger
       value={value}
-      className="flex-1 h-16 py-3 px-4 justify-start items-start gap-3 border text-foreground data-[state=active]:text-secondary-foreground data-[state=active]:bg-secondary data-[state=active]:border-transparent transition-colors min-w-44"
+      className="flex-1 text-lg h-16 py-3 px-4 justify-start items-start gap-3 border text-foreground data-[state=active]:text-secondary-foreground data-[state=active]:bg-secondary data-[state=active]:border-transparent transition-colors min-w-44"
     >
       <Icon className="h-6 w-6 mt-1" strokeWidth={1.5} />
       <div className="text-left">
         {children}
-        <div className="text-xs opacity-70 mt-0.5">{description}</div>
+        <div className="text-lg opacity-70 mt-0.5">{description}</div>
       </div>
     </TabsTrigger>
   );
@@ -49,6 +49,7 @@ const ProfileTabsList = () => {
         description={firstName || '-'}
       >
         Хувийн мэдээлэл
+
       </ProfileTabTrigger>
       <ProfileTabTrigger
         value="phone"

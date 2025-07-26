@@ -6,8 +6,6 @@ import {
   atom,
   useAtomValue
 } from 'jotai';
-// import Apollo from '@/app/apolloClient';
-
 import Apollo from '@/app/apolloClient';
 
 import { atomWithStorage, selectAtom } from 'jotai/utils';

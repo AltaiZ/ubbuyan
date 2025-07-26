@@ -47,7 +47,7 @@ const LoginForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         <FormField
           control={form.control}
           name="login"
@@ -81,7 +81,6 @@ const LoginForm = () => {
                   <Link href="/forgot">Mартсан?</Link>
                 </Button>
               </div>
-
               <FormControl>
                 <Password {...field} autoComplete="current-password" />
               </FormControl>

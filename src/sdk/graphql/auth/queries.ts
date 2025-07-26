@@ -24,15 +24,6 @@ const userDetail = gql`
   }
 `;
 
-const erxesCustomerDetail = gql`
-  query CustomerDetail($id: String!) {
-    customerDetail(_id: $id) {
-      _id
-      company
-      position
-    }
-  }
-`;
 
 const currentConfig = gql`
   query CurrentConfig {
@@ -75,6 +66,6 @@ const branchDetail = gql`
   }
 `;
 
-const queries = { currentUser, currentConfig, userDetail, branchDetail, erxesCustomerDetail };
+const queries = { currentUser, currentConfig, userDetail, branchDetail };
 
 export default queries;

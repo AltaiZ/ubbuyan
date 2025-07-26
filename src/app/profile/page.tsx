@@ -6,10 +6,9 @@ import ChangePhone from '@/components/profile/profile-edit/change-phone';
 import ChangeEmail from '@/components/profile/profile-edit/change-email';
 import ChangePassword from '@/components/profile/profile-edit/change-password';
 import Email from '@/components/profile/profile-edit/email';
-import UserInfo from '@/components/profile/profile-edit/userform';
 const Profile = () => {
   return (
-    <ProfileLayout title="Хувийн мэдээлэл" description="Мэдээлэл засах">
+    <ProfileLayout title="Хувийн мэдээлэл" description="">
       <Tabs defaultValue="info" className="w-full">
         <ProfileTabsList />
         <TabsContent value="info">
@@ -24,9 +23,6 @@ const Profile = () => {
         <TabsContent value="email">
           <Email />
         </TabsContent>
-        {/* <TabsContent value="userinfo">
-          <UserInfo />
-        </TabsContent> */}
       </Tabs>
     </ProfileLayout>
   );

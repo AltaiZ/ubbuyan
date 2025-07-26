@@ -45,10 +45,10 @@ const ForgotForm = () => {
           className="text-green-500 animate-bounce h-12 w-12"
           strokeWidth={1.5}
         />
-        <p className="text-base font-medium my-1 text-center">
+        <p className="text-md font-medium my-1 text-center">
           Танд нууц үг солих холбоос бүхий имэйл илгээлээ.
         </p>
-        <p className="text-sm text-neutral-500">Та имэйл хаяг aa шалгана уу.</p>
+        <p className="text-md text-neutral-500">Та имэйл хаяг aa шалгана уу.</p>
       </div>
     );
   }

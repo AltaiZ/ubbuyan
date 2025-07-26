@@ -11,7 +11,7 @@ const ProfileLayout = ({
     <PrivateRoute>
       <div className="space-y-3 md:space-y-6 pt-6 md:pt-10 flex-auto container">
         <div className="space-y-0.5 -mx-2 md:mx-0">
-          <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
+          <h2 className="text-4xl font-bold text-black">{title}</h2>
           <p className="text-muted-foreground">{description}</p>
         </div>
         <div className="flex flex-col space-y-4 md:space-y-8 lg:flex-row lg:space-x-10 lg:space-y-0">

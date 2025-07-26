@@ -51,8 +51,8 @@ const ChangePhone = () => {
       >
         <SmartphoneIcon className="h-8 w-8 text-black/60" strokeWidth={1.7} />
         <div className="text-center space-y-1 mb-4">
-          <h3 className="font-medium">Дугаар оруулах</h3>
-          <div className="text-sm text-black/50">
+          <h2 className="">Дугаар оруулах</h2>
+          <div className="text-md text-black/50">
             Та зөвхөн өөрийн нэр дээрх гар утасны дугаараас хүсэлт илгээх
             шаардлагатай.
           </div>
@@ -88,7 +88,7 @@ const ChangePhone = () => {
           )}
         />
 
-        <Button disabled={loading} variant="non">
+        <Button disabled={loading} variant="non" className='h-14'>
           {loading && <LoadingIcon />}
           Дугаараа солих
         </Button>

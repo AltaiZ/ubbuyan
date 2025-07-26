@@ -21,10 +21,10 @@ export const createUrl = (
 
 export const READ_FILE = '/read-file?key=';
 
-export const ERXES_SASS = 'erxes-saas/';
+export const ERXES_SAAS = 'erxes-saas';
 
 export const readFile = (url: string = '') => {
-  if (url.startsWith(ERXES_SASS))
+  if (url.startsWith(ERXES_SAAS))
     return process.env.NEXT_PUBLIC_MAIN_API_DOMAIN + READ_FILE + url;
 
   if (url.includes(READ_FILE)) {
@@ -40,9 +40,9 @@ export const formatNum = (num: number | string, splitter?: string): string => {
   if (checked) {
     const options = splitter
       ? {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }
       : undefined;
 
     return checked.toLocaleString(undefined, options);
@@ -53,6 +53,10 @@ export const formatNum = (num: number | string, splitter?: string): string => {
 
 export const onError = (error: ApolloError) =>
   toast.error('Алдаа гарлаа!', { description: error.message });
+
+
+export const onErrorLogin = (error: ApolloError) =>
+  toast.error('Нэвтрэх нэр эсвэл Нууц үг буруу байна.');
 
 export const getLabel = (status: string) =>
   statusLabel[status as keyof typeof statusLabel] || status;
@@ -150,4 +154,18 @@ export function getSimilarColorWithOpacity(
       .slice(1);
 
   return blendedHex;
+}
+
+export function capitalize(string?: string) {
+  if (!string) {
+    return '';
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function getEnhancedNumber(number?: string) {
+  if (!number) return '';
+  const numberArr = number.split('_');
+  const numberPrefix = numberArr[0].slice(2);
+  return `${numberPrefix}_${Number(numberArr[1] || 0) + 0}`;
 }

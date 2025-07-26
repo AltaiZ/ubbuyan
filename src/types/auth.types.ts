@@ -1,15 +1,6 @@
-import { IProduct } from "./product.types";
-interface CustomField {
-  field: string;
-  value: any;
-}
-
 export type CustomerType = '' | 'user' | 'company';
 
 export interface Customer {
-  customFieldsData: CustomField[];
-  company: string;
-  position: string;
   _id: string;
   firstName?: string;
   lastName?: string;
@@ -39,6 +30,4 @@ export interface IConfig {
     };
     favIcon: string;
   };
-  deliveryProducts?: IProduct[];
-  speacialProductIds?: string[];
 }

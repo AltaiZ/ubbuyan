@@ -72,17 +72,6 @@ const forgotPassword = gql`
   }
 `;
 
-const erxesCustomerEdit = gql`
-  mutation CustomersEdit($id: String!, $company: String, $position: String) {
-    customersEdit(_id: $id, company: $company, position: $position) {
-      _id
-    }
-  }
-`;
-
-
-
-
 const userEdit = gql`
   mutation clientPortalUsersEdit(
     $clientPortalId: String
@@ -199,7 +188,6 @@ const mutations = {
   googleLogin,
   changePhone,
   socialPayLogin,
-  erxesCustomerEdit
 };
 
 export default mutations;

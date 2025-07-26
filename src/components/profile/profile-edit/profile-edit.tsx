@@ -34,18 +34,6 @@ const ProfileEdit = () => {
   });
   const user = useAtomValue(currentUserAtom);
 
-  const position =
-    user?.customFieldsData?.find((f) => f.field === "h6Fv-SOTVeC6LAgVEuY6t")
-      ?.value ?? null;
-  const company =
-    user?.customFieldsData?.find((f) => f.field === "b2yoKsTTs-SMtKAVyGsma")
-      ?.value ?? null;
-
-  const positionBorder = position ? "border border-gray-300" : "border border-red-600";
-  const companyBorder = company
-    ? "border border-gray-300"
-    : "border border-red-600";
-
   function onSubmit(values: z.infer<typeof formSchema>) {
     editUser({ variables: { ...values, _id } });
   }
@@ -90,22 +78,7 @@ const ProfileEdit = () => {
             </FormItem>
           )}
         />
-
-        <Button disabled={loading} variant="non">Өөрчлөлт хадгалах</Button>
-        <div className="text-sm text-black space-y-2">
-          <div className="flex items-center">
-            <span className="min-w-[80px]">{("Ажлын газар")}:</span>
-            <span className={`font-medium px-3 py-1 rounded ml-4 ${companyBorder}`}>
-              {company ?? ("Хоосон")}
-            </span>
-          </div>
-          <div className="flex items-center">
-            <span className="min-w-[80px]">{("Албан тушаал")}:</span>
-            <span className={`font-medium px-3 py-1 rounded ml-3 ${positionBorder}`}>
-              {position ?? ("Хоосон")}
-            </span>
-          </div>
-        </div>
+        <Button disabled={loading} variant="non" className='h-14' >Өөрчлөлт хадгалах</Button>
       </form>
     </Form>
   );
