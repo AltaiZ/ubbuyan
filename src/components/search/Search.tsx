@@ -63,7 +63,10 @@ const DeathNoteSearch: React.FC = () => {
   // apartment-ийн давхардсангүй утгуудыг гаргаж авах
   const apartmentOptions = useMemo(() => {
     const unique = Array.from(new Set(allData.map((entry) => entry.apartment)));
-    return unique.filter((a) => a); // null эсвэл хоосон бол хаяна
+    // null/undefined болон хоосон мөрүүдийг хаяж string төрлөөр нь нарийвчилна
+    return unique.filter(
+      (a): a is string => typeof a === "string" && a.trim().length > 0,
+    );
   }, [allData]);
 
   const deleteCandidates = useMemo(() => {
