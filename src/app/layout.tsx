@@ -25,6 +25,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/static/images/blue_logo.png" />
+        <link rel="shortcut icon" href="/static/images/blue_logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/static/images/blue_logo.png" />
         <link rel="stylesheet" href="/static/css/gallery_styles.css" />
         <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css" />

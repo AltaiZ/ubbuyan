@@ -5,12 +5,12 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_MAIN_API_DOMAIN:
-      "https://ulaanbaatarbuyan.app.erxes.io/gateway",
-    NEXT_PUBLIC_WS_DOMAIN: "wss://ulaanbaatarbuyan.app.erxes.io/api/graphql",
+      "https://ulaanbaatarbuyan.api.erxes.io/gateway",
+    NEXT_PUBLIC_WS_DOMAIN: "wss://ulaanbaatarbuyan.api.erxes.io/api/graphql",
     NEXT_PUBLIC_POS_TOKEN: "EjpiijsJBYxsE5TqzxAJgJNeUl9Qj5u9",
     NEXT_PUBLIC_CP_ID: "4-0OUgB_LJU-Wgarnca1H",
     NEXT_PUBLIC_ERXES_APP_TOKEN:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsibmFtZSI6InVsYWFuYmFhdGFyYnV5YW4iLCJjcmVhdGVkQXQiOiIyMDI0LTExLTIwVDAwOjA4OjM3Ljg4OFoiLCJ1c2VyR3JvdXBJZCI6IjRFSHlkVERBaXMyTGRRblpuIiwiZXhwaXJlRGF0ZSI6IjIwMjQtMTItMjBUMDY6MTM6MDcuMTE4WiIsIm5vRXhwaXJlIjpmYWxzZSwiYWxsb3dBbGxQZXJtaXNzaW9uIjpmYWxzZSwiX2lkIjoiWUpiZHliR25tSUJGOHR0bFZURUJXIiwiX192IjowfSwiaWF0IjoxNzMyMDgzMjIzLCJleHAiOjM0NjY3NTg0MTB9.L6qLzYonhgE6LPm4HULCrzaxXk5XRNfLU8CVknO55lI",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOnsibmFtZSI6IkFkbWluIiwiY3JlYXRlZEF0IjoiMjAyNS0wOS0yNVQwMToxNzoyNy4zNDZaIiwidXNlckdyb3VwSWQiOiI0RUh5ZFREQWlzMkxkUW5abiIsImV4cGlyZURhdGUiOiIyMDI1LTEwLTI5VDAyOjUwOjMwLjA4NloiLCJub0V4cGlyZSI6dHJ1ZSwiYWxsb3dBbGxQZXJtaXNzaW9uIjp0cnVlLCJfaWQiOiJOX0NnY1poa0Q2d2drUW9jLXpCcDciLCJfX3YiOjB9LCJpYXQiOjE3NTkxMTQyNDB9.loQHEL51FeaeJ9eKHlDAtPLoXv_KZbMTeVS0K94tFSs",
   },
 };
 

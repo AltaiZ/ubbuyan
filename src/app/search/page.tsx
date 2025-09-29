@@ -1,7 +1,12 @@
 import React from 'react';
 import Search from "@/components/search/Search"
+import PrivateRoute from "@/containers/auth/private-route"
 
 const Searchs = () => {
-    return(<Search/>)
+    return (
+        <PrivateRoute>
+            <Search/>
+        </PrivateRoute>
+    )
 }
 export default Searchs
