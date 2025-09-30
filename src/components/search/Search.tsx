@@ -8,7 +8,7 @@ interface FormData {
   born_year: string;
   dead_year: string;
   location: string;
-  apartment: string;
+  department: string;
   dead_id: string;
 }
 
@@ -18,7 +18,7 @@ interface Entry {
   born_year: number;
   dead_year: number;
   location: string;
-  apartment?: string | null;
+  department?: string | null;
   dead_id: string;
 }
 
@@ -28,7 +28,7 @@ const DeathNoteSearch: React.FC = () => {
   const [bornYear, setBornYear] = useState("");
   const [deadYear, setDeadYear] = useState("");
   const [location, setLocation] = useState("");
-  const [apartment, setApartment] = useState("");
+  const [department, setDepartment] = useState("");
   const [allData, setAllData] = useState<Entry[]>([]);
   const [filteredData, setFilteredData] = useState<Entry[]>([]);
   const [searchPerformed, setSearchPerformed] = useState(false);
@@ -42,7 +42,7 @@ const DeathNoteSearch: React.FC = () => {
     born_year: "",
     dead_year: "",
     location: "",
-    apartment: "",
+    department: "",
     dead_id: Date.now().toString(),
   });
 
@@ -60,9 +60,9 @@ const DeathNoteSearch: React.FC = () => {
     fetchData();
   }, []);
 
-  // apartment-ийн давхардсангүй утгуудыг гаргаж авах
-  const apartmentOptions = useMemo(() => {
-    const unique = Array.from(new Set(allData.map((entry) => entry.apartment)));
+  // department-ийн давхардсангүй утгуудыг гаргаж авах
+  const departmentOptions = useMemo(() => {
+    const unique = Array.from(new Set(allData.map((entry) => entry.department)));
     // null/undefined болон хоосон мөрүүдийг хаяж string төрлөөр нь нарийвчилна
     return unique.filter(
       (a): a is string => typeof a === "string" && a.trim().length > 0,
@@ -89,7 +89,7 @@ const DeathNoteSearch: React.FC = () => {
       const entryLastName = entry.last_name?.toLowerCase() || "";
       const entryFirstName = entry.first_name?.toLowerCase() || "";
       const entryLocation = entry.location?.toLowerCase() || "";
-      const entryApartment = entry.apartment || "";
+      const entryDepartment = entry.department || "";
 
       return (
         (!lname || entryLastName.includes(lnameLower)) &&
@@ -97,7 +97,7 @@ const DeathNoteSearch: React.FC = () => {
         (!bornYear || entry.born_year.toString().startsWith(bornYear)) &&
         (!deadYear || entry.dead_year.toString().startsWith(deadYear)) &&
         (!location || entryLocation.includes(locationLower)) &&
-        (!apartment || entryApartment === apartment)
+        (!department || entryDepartment === department)
       );
     });
 
@@ -179,15 +179,15 @@ const DeathNoteSearch: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="apartment">Цогцолбор</label>
+                    <label htmlFor="department">Цогцолбор</label>
                     <select
-                      id="apartment"
+                      id="department"
                       className="form-control"
-                      value={apartment}
-                      onChange={(e) => setApartment(e.target.value)}
+                      value={department}
+                      onChange={(e) => setDepartment(e.target.value)}
                     >
                       <option value="">-- Цоцолбор сонгох --</option>
-                      {apartmentOptions.map((opt) => (
+                      {departmentOptions.map((opt) => (
                         <option key={opt} value={opt}>
                           {opt}
                         </option>
@@ -248,14 +248,14 @@ const DeathNoteSearch: React.FC = () => {
                   </thead>
                   <tbody>
                     {filteredData.map((entry) => (
-                      <tr key={entry.dead_id + (entry.apartment || "")}>
+                      <tr key={entry.dead_id + (entry.department || "")}>
                         <td>{entry.last_name}</td>
                         <td>{entry.first_name}</td>
                         <td>{entry.born_year}</td>
                         <td>{entry.dead_year}</td>
                         <td>{entry.location}</td>
                         <td>
-                          {entry.apartment ? String(entry.apartment) : "Хоосон"}
+                          {entry.department ? String(entry.department) : "Хоосон"}
                         </td>
                       </tr>
                     ))}
@@ -368,7 +368,7 @@ const DeathNoteSearch: React.FC = () => {
                                 <td>{e.dead_year}</td>
                                 <td>{e.location}</td>
                                 <td>
-                                  {e.apartment ? String(e.apartment) : "Хоосон"}
+                                  {e.department ? String(e.department) : "Хоосон"}
                                 </td>
                                 <td>{e.dead_id}</td>
                               </tr>
@@ -542,13 +542,13 @@ const DeathNoteSearch: React.FC = () => {
                 <label>Цогцолбор</label>
                 <select
                   className="form-control"
-                  value={formData.apartment}
+                  value={formData.department}
                   onChange={(e) =>
-                    setFormData({ ...formData, apartment: e.target.value })
+                    setFormData({ ...formData, department: e.target.value })
                   }
                 >
                   <option value="">-- Сонгох --</option>
-                  {apartmentOptions.map((opt) => (
+                  {departmentOptions.map((opt) => (
                     <option key={opt} value={opt}>
                       {opt}
                     </option>
@@ -610,7 +610,7 @@ const DeathNoteSearch: React.FC = () => {
                         born_year: "",
                         dead_year: "",
                         location: "",
-                        apartment: "",
+                        department: "",
                         dead_id: Date.now().toString(),
                       });
                       setShowAddModal(false);

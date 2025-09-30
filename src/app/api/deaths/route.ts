@@ -7,9 +7,24 @@ const customPath = path.join(process.cwd(), 'data', 'custom.json');
 
 async function readBaseData() {
   // Dynamically import the large JS dataset on the server
+  // @ts-ignore - data/data.js is a plain JS asset without TS typings
   const mod = await import('../../../../data/data');
   // Expecting named export jsonData
   return (mod as any).jsonData || [];
+}
+
+// Normalize any entry to the new schema using `department`.
+function normalizeEntry(raw: any) {
+  const department = raw.department ?? raw.apartment ?? '';
+  return {
+    last_name: raw.last_name || '',
+    first_name: raw.first_name || '',
+    born_year: Number(raw.born_year) || 0,
+    dead_year: Number(raw.dead_year) || 0,
+    location: raw.location || '',
+    department,
+    dead_id: raw.dead_id || raw.id || Date.now().toString(),
+  };
 }
 
 export async function DELETE(request: Request) {
@@ -26,14 +41,14 @@ export async function DELETE(request: Request) {
     if (next.length === initialLen) {
       // Not found in custom store (cannot delete base dataset)
       const [base] = await Promise.all([readBaseData()]);
-      const merged = [...custom, ...base];
+      const merged = [...custom.map(normalizeEntry), ...base.map(normalizeEntry)];
       return NextResponse.json({ success: false, message: 'Entry not found or not deletable', list: merged, totalCount: merged.length }, { status: 404 });
     }
 
     await writeCustomData(next);
 
     const base = await readBaseData();
-    const merged = [...next, ...base];
+    const merged = [...next.map(normalizeEntry), ...base.map(normalizeEntry)];
     return NextResponse.json({ success: true, list: merged, totalCount: merged.length });
   } catch (e: any) {
     return NextResponse.json({ success: false, message: e?.message || 'Failed to delete entry' }, { status: 500 });
@@ -68,7 +83,7 @@ export async function GET() {
   try {
     const [base, custom] = await Promise.all([readBaseData(), readCustomData()]);
     // Merge: custom first so newest appear first
-    const merged = [...custom, ...base];
+    const merged = [...custom.map(normalizeEntry), ...base.map(normalizeEntry)];
     return NextResponse.json({ list: merged, totalCount: merged.length });
   } catch (e: any) {
     return NextResponse.json({ message: e?.message || 'Failed to read data' }, { status: 500 });
@@ -85,7 +100,7 @@ export async function POST(request: Request) {
       born_year: Number(body.born_year) || 0,
       dead_year: Number(body.dead_year) || 0,
       location: body.location || '',
-      apartment: body.apartment || '',
+      department: body.department ?? body.apartment ?? '',
       dead_id: body.dead_id || Date.now().toString(),
     };
 
@@ -95,7 +110,7 @@ export async function POST(request: Request) {
 
     // Return updated merged list
     const base = await readBaseData();
-    const merged = [...custom, ...base];
+    const merged = [...custom.map(normalizeEntry), ...base.map(normalizeEntry)];
 
     return NextResponse.json({ success: true, entry: newEntry, list: merged, totalCount: merged.length });
   } catch (e: any) {
