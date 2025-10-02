@@ -36,6 +36,8 @@ const DeathNoteSearch: React.FC = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteFilter, setDeleteFilter] = useState("");
   const [selectedToDelete, setSelectedToDelete] = useState<Entry | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(50);
   const [formData, setFormData] = useState<FormData>({
     first_name: "",
     last_name: "",
@@ -101,9 +103,21 @@ const DeathNoteSearch: React.FC = () => {
       );
     });
 
-    setFilteredData(result.slice(0, 20));
+    setFilteredData(result);
     setSearchPerformed(true);
+    setCurrentPage(1);
   };
+
+  // Pagination calculations for filtered results
+  const totalPages = useMemo(() => {
+    return Math.max(1, Math.ceil(filteredData.length / pageSize) || 1);
+  }, [filteredData.length, pageSize]);
+
+  const paginatedData = useMemo(() => {
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return filteredData.slice(startIndex, endIndex);
+  }, [filteredData, currentPage, pageSize]);
 
   return (
     <section className="ub_list">
@@ -247,7 +261,7 @@ const DeathNoteSearch: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredData.map((entry) => (
+                    {paginatedData.map((entry) => (
                       <tr key={entry.dead_id + (entry.department || "")}>
                         <td>{entry.last_name}</td>
                         <td>{entry.first_name}</td>
@@ -263,6 +277,69 @@ const DeathNoteSearch: React.FC = () => {
                 </table>
               ) : (
                 <p>Илэрц олдсонгүй</p>
+              )}
+
+              {filteredData.length > pageSize && (
+                <div
+                  className="d-flex justify-content-between align-items-center"
+                  style={{ marginTop: 12, gap: 8, flexWrap: "wrap" }}
+                >
+                  <div className="btn-group" role="group" aria-label="Pagination">
+                    <button
+                      className="btn btn-default"
+                      disabled={currentPage === 1}
+                      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                      type="button"
+                    >
+                      Өмнөх
+                    </button>
+                    {(() => {
+                      const pages: number[] = [];
+                      const maxButtons = 7;
+                      let start = Math.max(1, currentPage - 3);
+                      let end = Math.min(totalPages, start + maxButtons - 1);
+                      start = Math.max(1, end - maxButtons + 1);
+                      for (let i = start; i <= end; i++) pages.push(i);
+                      return pages.map((p) => (
+                        <button
+                          key={p}
+                          className={`btn ${p === currentPage ? "btn-primary" : "btn-default"}`}
+                          onClick={() => setCurrentPage(p)}
+                          type="button"
+                        >
+                          {p}
+                        </button>
+                      ));
+                    })()}
+                    <button
+                      className="btn btn-default"
+                      disabled={currentPage === totalPages}
+                      onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                      type="button"
+                    >
+                      Дараах
+                    </button>
+                  </div>
+                  <div className="d-flex align-items-center" style={{ gap: 8 }}>
+                    <span>
+                      Хуудас {currentPage} / {totalPages} — Нийт: {filteredData.length}
+                    </span>
+                    <select
+                      className="form-control"
+                      style={{ width: 100 }}
+                      value={pageSize}
+                      onChange={(e) => {
+                        const size = parseInt(e.target.value) || 50;
+                        setPageSize(size);
+                        setCurrentPage(1);
+                      }}
+                    >
+                      <option value={20}>20</option>
+                      <option value={50}>50</option>
+                      <option value={100}>100</option>
+                    </select>
+                  </div>
+                </div>
               )}
 
               {showDeleteModal && (
