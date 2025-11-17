@@ -48,7 +48,6 @@ const DeathNoteSearch: React.FC = () => {
     dead_id: Date.now().toString(),
   });
 
-  // Initial fetch from server API (merges base data.js + custom.json)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -62,10 +61,8 @@ const DeathNoteSearch: React.FC = () => {
     fetchData();
   }, []);
 
-  // department-ийн давхардсангүй утгуудыг гаргаж авах
   const departmentOptions = useMemo(() => {
     const unique = Array.from(new Set(allData.map((entry) => entry.department)));
-    // null/undefined болон хоосон мөрүүдийг хаяж string төрлөөр нь нарийвчилна
     return unique.filter(
       (a): a is string => typeof a === "string" && a.trim().length > 0,
     );
@@ -82,12 +79,13 @@ const DeathNoteSearch: React.FC = () => {
       .slice(0, 50);
   }, [allData, deleteFilter]);
 
-  const handleSearch = () => {
+  const handleSearch = (dataToSearch?: Entry[]) => {
+    const searchData = dataToSearch || allData;
     const lnameLower = lname.toLowerCase();
     const fnameLower = fname.toLowerCase();
     const locationLower = location.toLowerCase();
 
-    const result = allData.filter((entry) => {
+    const result = searchData.filter((entry) => {
       const entryLastName = entry.last_name?.toLowerCase() || "";
       const entryFirstName = entry.first_name?.toLowerCase() || "";
       const entryLocation = entry.location?.toLowerCase() || "";
@@ -108,7 +106,6 @@ const DeathNoteSearch: React.FC = () => {
     setCurrentPage(1);
   };
 
-  // Pagination calculations for filtered results
   const totalPages = useMemo(() => {
     return Math.max(1, Math.ceil(filteredData.length / pageSize) || 1);
   }, [filteredData.length, pageSize]);
@@ -217,7 +214,7 @@ const DeathNoteSearch: React.FC = () => {
                       <button
                         className="btn btn-default"
                         type="button"
-                        onClick={handleSearch}
+                        onClick={() => handleSearch()}
                       >
                         Хайх
                       </button>
@@ -496,11 +493,14 @@ const DeathNoteSearch: React.FC = () => {
                             .then((resp) => {
                               if (resp?.list) {
                                 setAllData(resp.list);
+                                setSelectedToDelete(null);
+                                if (searchPerformed) {
+                                  handleSearch(resp.list);
+                                }
+                                setShowDeleteModal(false);
+                              } else {
+                                alert('Failed to delete entry');
                               }
-                              // Clear selection and refresh filtered view if open
-                              setSelectedToDelete(null);
-                              if (searchPerformed) handleSearch();
-                              setShowDeleteModal(false);
                             })
                             .catch((e) =>
                               console.error("Failed to delete entry", e),
@@ -652,7 +652,6 @@ const DeathNoteSearch: React.FC = () => {
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  // Add the new entry to the data
                   const newEntry = {
                     ...formData,
                     dead_id: Date.now().toString(),
@@ -660,7 +659,6 @@ const DeathNoteSearch: React.FC = () => {
                     dead_year: parseInt(formData.dead_year) || 0,
                   };
 
-                  // Persist to server API
                   fetch("/api/deaths", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -670,30 +668,26 @@ const DeathNoteSearch: React.FC = () => {
                     .then((resp) => {
                       if (resp?.list) {
                         setAllData(resp.list);
+                        if (searchPerformed) {
+                          handleSearch(resp.list);
+                        }
+                        setFormData({
+                          first_name: "",
+                          last_name: "",
+                          born_year: "",
+                          dead_year: "",
+                          location: "",
+                          department: "",
+                          dead_id: Date.now().toString(),
+                        });
+                        setShowAddModal(false);
                       } else {
-                        // Fallback: prepend locally
-                        setAllData((prev) => [
-                          newEntry as unknown as Entry,
-                          ...prev,
-                        ]);
+                        alert('Failed to save entry. Please try again.');
                       }
-                      if (searchPerformed) {
-                        handleSearch();
-                      }
-                      // Reset form and close modal
-                      setFormData({
-                        first_name: "",
-                        last_name: "",
-                        born_year: "",
-                        dead_year: "",
-                        location: "",
-                        department: "",
-                        dead_id: Date.now().toString(),
-                      });
-                      setShowAddModal(false);
                     })
                     .catch((e) => {
                       console.error("Failed to save entry", e);
+                      alert('Failed to save entry. Please check your connection.');
                     });
                 }}
               >
