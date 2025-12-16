@@ -1,103 +1,245 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
+import { useQuery, useMutation } from '@apollo/client';
+import { queries, customerMutations } from '@/graphql';
 
 interface FormData {
-  first_name: string;
-  last_name: string;
-  born_year: string;
-  dead_year: string;
-  location: string;
+  firstName: string;
+  lastName: string;
   department: string;
-  dead_id: string;
+  birthYear: string;
+  deathYear: string;
+  section: string;
+  row: string;
+  monumentNumber: string;
 }
 
-interface Entry {
-  first_name: string;
-  last_name: string;
-  born_year: number;
-  dead_year: number;
-  location: string;
-  department?: string | null;
-  dead_id: string;
+interface Customer {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  middleName?: string;
+  birthDate?: string;
+  location?: string;
+  department?: string;
+  registrationNumber?: string;
+  primaryEmail?: string;
+  primaryPhone?: string;
+  customFieldsData?: any;
+}
+
+interface FieldGroup {
+  _id: string;
+  name: string;
+  fields: Array<{
+    _id: string;
+    text: string;
+    type: string;
+    options?: string[];
+  }>;
 }
 
 const DeathNoteSearch: React.FC = () => {
   const [lname, setLname] = useState("");
   const [fname, setFname] = useState("");
-  const [bornYear, setBornYear] = useState("");
-  const [deadYear, setDeadYear] = useState("");
   const [location, setLocation] = useState("");
   const [department, setDepartment] = useState("");
-  const [allData, setAllData] = useState<Entry[]>([]);
-  const [filteredData, setFilteredData] = useState<Entry[]>([]);
+  const [birthYear, setBirthYear] = useState("");
+  const [deathYear, setDeathYear] = useState("");
+  const [filteredData, setFilteredData] = useState<Customer[]>([]);
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteFilter, setDeleteFilter] = useState("");
-  const [selectedToDelete, setSelectedToDelete] = useState<Entry | null>(null);
+  const [selectedToDelete, setSelectedToDelete] = useState<Customer | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(50);
   const [formData, setFormData] = useState<FormData>({
-    first_name: "",
-    last_name: "",
-    born_year: "",
-    dead_year: "",
-    location: "",
+    firstName: "",
+    lastName: "",
     department: "",
-    dead_id: Date.now().toString(),
+    birthYear: "",
+    deathYear: "",
+    section: "",
+    row: "",
+    monumentNumber: "",
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/api/deaths", { cache: "no-store" });
-        const json = await res.json();
-        setAllData(json.list || []);
-      } catch (e) {
-        console.error("Failed to load data", e);
+  const { data, loading, error, refetch } = useQuery(queries.customersMain, {
+    variables: {
+      page: 1,
+      perPage: 10000,
+    },
+  });
+
+  const { data: fieldGroupsData } = useQuery(queries.fieldGroups, {
+    variables: {
+      contentType: "core:customer",
+    },
+  });
+
+  const [addCustomer] = useMutation(customerMutations.customersAdd);
+  const [removeCustomer] = useMutation(customerMutations.customersRemove);
+
+  const allData = useMemo(() => {
+    const customers = data?.customersMain?.list || [];
+    return customers.filter((customer: Customer) => {
+      const firstName = customer.firstName?.trim() || "";
+      const lastName = customer.lastName?.trim() || "";
+      
+      if (!firstName || !lastName) {
+        return false;
       }
-    };
-    fetchData();
-  }, []);
+      
+      const firstNameLower = firstName.toLowerCase();
+      const lastNameLower = lastName.toLowerCase();
+      const hasTestOrGomo = 
+        firstNameLower.includes("test") || 
+        firstNameLower.includes("gomo") ||
+        lastNameLower.includes("test") || 
+        lastNameLower.includes("gomo");
+      return !hasTestOrGomo;
+    });
+  }, [data]);
+
+  useEffect(() => {
+    if (fieldGroupsData?.fieldsGroups && allData.length > 0) {
+      console.log("=== CUSTOM FIELDS SUMMARY ===");
+      console.log(`Total customers: ${allData.length}`);
+      
+      // Count customers with custom field data
+      const customersWithData = allData.filter((c: Customer) => 
+        c.customFieldsData && Object.keys(c.customFieldsData).length > 0
+      );
+      console.log(`Customers with customFieldsData: ${customersWithData.length}`);
+      
+      if (customersWithData.length > 0) {
+        const sample = customersWithData[0];
+        console.log("Sample customer with data:", sample.firstName, sample.lastName);
+        console.log("Their customFieldsData:", sample.customFieldsData);
+      } else {
+        console.log("⚠️ NO CUSTOMERS HAVE CUSTOM FIELD DATA!");
+        console.log("Sample customer:", allData[0]);
+      }
+      
+      // Check for the specific fields we need
+      const targetFields = [
+        { text: "Төрсөн он", id: "ZbvEltvH8GedVoeHJMZac" },
+        { text: "Нас барсан он", id: "yGFQFLpZ5O_8uq1jt6tTM" },
+        { text: "Хэсэг ", id: "xRfZ-FvuBLNYKAJc3BcIc" },
+        { text: "Эгнээ ", id: "Ym7-Tpl2dJgfTzEN3Lm1A" },
+        { text: "Хөшөөний дугаар", id: "XT5uIa8m-3W5frxgHrC2h" },
+        { text: "Цогцолбор", id: "PnKDxjuxDNJq6qj__bf5g" },
+      ];
+      
+      targetFields.forEach(field => {
+        const count = allData.filter((c: Customer) => 
+          c.customFieldsData && c.customFieldsData[field.id]
+        ).length;
+        console.log(`  "${field.text}": ${count} customers have values`);
+      });
+    }
+  }, [fieldGroupsData, allData]);
+
+  const customFields = useMemo(() => {
+    const groups = fieldGroupsData?.fieldsGroups || [];
+    const fields: Record<string, any> = {};
+    groups.forEach((group: FieldGroup) => {
+      group.fields.forEach((field) => {
+        fields[field._id] = field;
+      });
+    });
+    return fields;
+  }, [fieldGroupsData]);
+
+  const departmentField = useMemo(() => {
+    const groups = fieldGroupsData?.fieldsGroups || [];
+    for (const group of groups) {
+      const field = group.fields.find((f: any) => f.text === "Цогцолбор");
+      if (field) return field;
+    }
+    return null;
+  }, [fieldGroupsData]);
+
+  const getCustomFieldValue = (customer: Customer, fieldText: string) => {
+    if (!customer.customFieldsData) {
+      return "";
+    }
+    
+    const groups = fieldGroupsData?.fieldsGroups || [];
+    for (const group of groups) {
+      const field = group.fields.find((f: any) => f.text === fieldText);
+      if (field) {
+        // Check if customFieldsData is an array or object
+        if (Array.isArray(customer.customFieldsData)) {
+          // It's an array - search through it
+          const fieldData = customer.customFieldsData.find((item: any) => 
+            item && item.field === field._id
+          );
+          if (fieldData) {
+            const value = fieldData.stringValue || fieldData.numberValue || fieldData.dateValue || fieldData.value;
+            if (value !== undefined && value !== null && value !== "") {
+              return value;
+            }
+          }
+        } else {
+          // It's an object - direct lookup
+          const value = customer.customFieldsData[field._id];
+          if (value !== undefined && value !== null && value !== "") {
+            return value;
+          }
+        }
+      }
+    }
+    return "";
+  };
+
 
   const departmentOptions = useMemo(() => {
-    const unique = Array.from(new Set(allData.map((entry) => entry.department)));
+    if (departmentField?.options && departmentField.options.length > 0) {
+      return departmentField.options;
+    }
+    const unique = Array.from(new Set(allData.map((entry: Customer) => getCustomFieldValue(entry, "Цогцолбор"))));
     return unique.filter(
       (a): a is string => typeof a === "string" && a.trim().length > 0,
     );
-  }, [allData]);
+  }, [departmentField, allData, fieldGroupsData]);
 
   const deleteCandidates = useMemo(() => {
     const q = deleteFilter.trim().toLowerCase();
     if (!q) return allData.slice(0, 20);
     return allData
-      .filter((e) => {
-        const full = `${e.last_name || ""} ${e.first_name || ""}`.toLowerCase();
+      .filter((e: Customer) => {
+        const full = `${e.lastName || ""} ${e.firstName || ""}`.toLowerCase();
         return full.includes(q);
       })
       .slice(0, 50);
   }, [allData, deleteFilter]);
 
-  const handleSearch = (dataToSearch?: Entry[]) => {
-    const searchData = dataToSearch || allData;
+  const handleSearch = () => {
     const lnameLower = lname.toLowerCase();
     const fnameLower = fname.toLowerCase();
     const locationLower = location.toLowerCase();
 
-    const result = searchData.filter((entry) => {
-      const entryLastName = entry.last_name?.toLowerCase() || "";
-      const entryFirstName = entry.first_name?.toLowerCase() || "";
-      const entryLocation = entry.location?.toLowerCase() || "";
-      const entryDepartment = entry.department || "";
+    const result = allData.filter((entry: Customer) => {
+      const entryLastName = entry.lastName?.toLowerCase() || "";
+      const entryFirstName = entry.firstName?.toLowerCase() || "";
+      const entryDepartment = getCustomFieldValue(entry, "Цогцолбор");
+      const entryBirthYear = getCustomFieldValue(entry, "Төрсөн он");
+      const entryDeathYear = getCustomFieldValue(entry, "Нас барсан он");
+      const entrySection = getCustomFieldValue(entry, "Хэсэг ");
+      const entryRow = getCustomFieldValue(entry, "Эгнээ ");
+      const entryMonumentNumber = getCustomFieldValue(entry, "Хөшөөний дугаар");
+      const combinedLocation = `${entrySection} ${entryRow} ${entryMonumentNumber}`.toLowerCase();
 
       return (
         (!lname || entryLastName.includes(lnameLower)) &&
         (!fname || entryFirstName.includes(fnameLower)) &&
-        (!bornYear || entry.born_year.toString().startsWith(bornYear)) &&
-        (!deadYear || entry.dead_year.toString().startsWith(deadYear)) &&
-        (!location || entryLocation.includes(locationLower)) &&
-        (!department || entryDepartment === department)
+        (!location || combinedLocation.includes(locationLower)) &&
+        (!department || entryDepartment === department) &&
+        (!birthYear || entryBirthYear.toString().includes(birthYear)) &&
+        (!deathYear || entryDeathYear.toString().includes(deathYear))
       );
     });
 
@@ -124,7 +266,7 @@ const DeathNoteSearch: React.FC = () => {
 
           <div style={{ maxWidth: "450px", margin: "0 auto" }}>
             <div className="ub_header">
-            <h2 className="sub_title">Бурхан болоочийн хайлтын систем</h2>
+            <h2 className="sub_title">Хэрэглэгчийн хайлтын систем</h2>
           </div>
             <div className="row">
               <div className="col-lg-12 col-md-12">
@@ -154,36 +296,36 @@ const DeathNoteSearch: React.FC = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="bornYear">Төрсөн он</label>
+                    <label htmlFor="birthYear">Төрсөн он</label>
                     <input
                       type="number"
                       className="form-control"
-                      id="bornYear"
+                      id="birthYear"
                       placeholder="Төрсөн он"
-                      value={bornYear}
-                      onChange={(e) => setBornYear(e.target.value)}
+                      value={birthYear}
+                      onChange={(e) => setBirthYear(e.target.value)}
                     />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="deadYear">Нас барсан он</label>
+                    <label htmlFor="deathYear">Нас барсан он</label>
                     <input
                       type="number"
                       className="form-control"
-                      id="deadYear"
+                      id="deathYear"
                       placeholder="Нас барсан он"
-                      value={deadYear}
-                      onChange={(e) => setDeadYear(e.target.value)}
+                      value={deathYear}
+                      onChange={(e) => setDeathYear(e.target.value)}
                     />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="location">Хаана оршоосон</label>
+                    <label htmlFor="location">Хаана оршоосон (Хэсэг, Эгнээ, Хөшөөний дугаар)</label>
                     <input
                       type="text"
                       className="form-control"
                       id="location"
-                      placeholder="Хаана оршоосон"
+                      placeholder="Хэсэг, Эгнээ, Хөшөөний дугаар"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
                     />
@@ -198,7 +340,7 @@ const DeathNoteSearch: React.FC = () => {
                       onChange={(e) => setDepartment(e.target.value)}
                     >
                       <option value="">-- Цоцолбор сонгох --</option>
-                      {departmentOptions.map((opt) => (
+                      {departmentOptions.map((opt: string) => (
                         <option key={opt} value={opt}>
                           {opt}
                         </option>
@@ -245,7 +387,11 @@ const DeathNoteSearch: React.FC = () => {
 
           {searchPerformed && (
             <div className="table-responsive" style={{ marginTop: "20px" }}>
-              {filteredData.length > 0 ? (
+              {loading ? (
+                <p>Уншиж байна...</p>
+              ) : error ? (
+                <p>Алдаа гарлаа: {error.message}</p>
+              ) : filteredData.length > 0 ? (
                 <table className="table table-bordered">
                   <thead>
                     <tr>
@@ -258,18 +404,25 @@ const DeathNoteSearch: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {paginatedData.map((entry) => (
-                      <tr key={entry.dead_id + (entry.department || "")}>
-                        <td>{entry.last_name}</td>
-                        <td>{entry.first_name}</td>
-                        <td>{entry.born_year}</td>
-                        <td>{entry.dead_year}</td>
-                        <td>{entry.location}</td>
-                        <td>
-                          {entry.department ? String(entry.department) : "Хоосон"}
-                        </td>
-                      </tr>
-                    ))}
+                    {paginatedData.map((entry: Customer) => {
+                      const section = getCustomFieldValue(entry, "Хэсэг ");
+                      const row = getCustomFieldValue(entry, "Эгнээ ");
+                      const monumentNumber = getCustomFieldValue(entry, "Хөшөөний дугаар");
+                      const combinedLocation = [section, row, monumentNumber].filter(v => v).join(" - ") || "-";
+                      
+                      return (
+                        <tr key={entry._id}>
+                          <td>{entry.lastName}</td>
+                          <td>{entry.firstName}</td>
+                          <td>{getCustomFieldValue(entry, "Төрсөн он") || "-"}</td>
+                          <td>{getCustomFieldValue(entry, "Нас барсан он") || "-"}</td>
+                          <td>{combinedLocation}</td>
+                          <td>
+                            {getCustomFieldValue(entry, "Цогцолбор") || "Хоосон"}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               ) : (
@@ -410,46 +563,51 @@ const DeathNoteSearch: React.FC = () => {
                               <th>Нас барсан он</th>
                               <th>Хаана оршоосон</th>
                               <th>Цогцолбор</th>
-                              <th>ID</th>
                             </tr>
                           </thead>
                           <tbody>
-                            {deleteCandidates.map((e) => (
-                              <tr
-                                key={e.dead_id}
-                                onClick={() => setSelectedToDelete(e)}
-                                style={{
-                                  cursor: "pointer",
-                                  background:
-                                    selectedToDelete?.dead_id === e.dead_id
-                                      ? "#f5c6cb"
-                                      : undefined,
-                                }}
-                              >
-                                <td>
-                                  <input
-                                    type="radio"
-                                    name="deleteSelect"
-                                    checked={
-                                      selectedToDelete?.dead_id === e.dead_id
-                                    }
-                                    onChange={() => setSelectedToDelete(e)}
-                                  />
-                                </td>
-                                <td>{e.last_name}</td>
-                                <td>{e.first_name}</td>
-                                <td>{e.born_year}</td>
-                                <td>{e.dead_year}</td>
-                                <td>{e.location}</td>
-                                <td>
-                                  {e.department ? String(e.department) : "Хоосон"}
-                                </td>
-                                <td>{e.dead_id}</td>
-                              </tr>
-                            ))}
+                            {deleteCandidates.map((e: Customer) => {
+                              const section = getCustomFieldValue(e, "Хэсэг ");
+                              const row = getCustomFieldValue(e, "Эгнээ ");
+                              const monumentNumber = getCustomFieldValue(e, "Хөшөөний дугаар");
+                              const combinedLocation = [section, row, monumentNumber].filter(v => v).join(" - ") || "-";
+                              
+                              return (
+                                <tr
+                                  key={e._id}
+                                  onClick={() => setSelectedToDelete(e)}
+                                  style={{
+                                    cursor: "pointer",
+                                    background:
+                                      selectedToDelete?._id === e._id
+                                        ? "#f5c6cb"
+                                        : undefined,
+                                  }}
+                                >
+                                  <td>
+                                    <input
+                                      type="radio"
+                                      name="deleteSelect"
+                                      checked={
+                                        selectedToDelete?._id === e._id
+                                      }
+                                      onChange={() => setSelectedToDelete(e)}
+                                    />
+                                  </td>
+                                  <td>{e.lastName}</td>
+                                  <td>{e.firstName}</td>
+                                  <td>{getCustomFieldValue(e, "Төрсөн он") || "-"}</td>
+                                  <td>{getCustomFieldValue(e, "Нас барсан он") || "-"}</td>
+                                  <td>{combinedLocation}</td>
+                                  <td>
+                                    {getCustomFieldValue(e, "Цогцолбор") || "Хоосон"}
+                                  </td>
+                                </tr>
+                              );
+                            })}
                             {deleteCandidates.length === 0 && (
                               <tr>
-                                <td colSpan={8} style={{ textAlign: "center" }}>
+                                <td colSpan={7} style={{ textAlign: "center" }}>
                                   Илэрц олдсонгүй
                                 </td>
                               </tr>
@@ -480,31 +638,24 @@ const DeathNoteSearch: React.FC = () => {
                         type="button"
                         className="btn btn-danger"
                         disabled={!selectedToDelete}
-                        onClick={() => {
+                        onClick={async () => {
                           if (!selectedToDelete) return;
-                          fetch("/api/deaths", {
-                            method: "DELETE",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                              dead_id: selectedToDelete.dead_id,
-                            }),
-                          })
-                            .then((res) => res.json())
-                            .then((resp) => {
-                              if (resp?.list) {
-                                setAllData(resp.list);
-                                setSelectedToDelete(null);
-                                if (searchPerformed) {
-                                  handleSearch(resp.list);
-                                }
-                                setShowDeleteModal(false);
-                              } else {
-                                alert('Failed to delete entry');
-                              }
-                            })
-                            .catch((e) =>
-                              console.error("Failed to delete entry", e),
-                            );
+                          try {
+                            await removeCustomer({
+                              variables: {
+                                customerIds: [selectedToDelete._id],
+                              },
+                            });
+                            await refetch();
+                            setSelectedToDelete(null);
+                            setShowDeleteModal(false);
+                            if (searchPerformed) {
+                              handleSearch();
+                            }
+                          } catch (e) {
+                            console.error("Failed to delete entry", e);
+                            alert('Failed to delete entry');
+                          }
                         }}
                       >
                         Баталгаажуулж устгах
@@ -536,10 +687,14 @@ const DeathNoteSearch: React.FC = () => {
             className="modal-dialog"
             style={{
               backgroundColor: "#fff",
-              margin: "10% auto",
+              margin: "5% auto",
               padding: "20px",
               width: "50%",
+              maxWidth: "600px",
               borderRadius: "5px",
+              maxHeight: "90vh",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             <div className="modal-header">
@@ -559,15 +714,22 @@ const DeathNoteSearch: React.FC = () => {
                 &times;
               </button>
             </div>
-            <div className="modal-body">
+            <div 
+              className="modal-body"
+              style={{
+                maxHeight: "calc(90vh - 150px)",
+                overflowY: "auto",
+                padding: "20px 0",
+              }}
+            >
               <div className="form-group">
                 <label>Овог</label>
                 <input
                   type="text"
                   className="form-control"
-                  value={formData.last_name}
+                  value={formData.lastName}
                   onChange={(e) =>
-                    setFormData({ ...formData, last_name: e.target.value })
+                    setFormData({ ...formData, lastName: e.target.value })
                   }
                 />
               </div>
@@ -576,9 +738,9 @@ const DeathNoteSearch: React.FC = () => {
                 <input
                   type="text"
                   className="form-control"
-                  value={formData.first_name}
+                  value={formData.firstName}
                   onChange={(e) =>
-                    setFormData({ ...formData, first_name: e.target.value })
+                    setFormData({ ...formData, firstName: e.target.value })
                   }
                 />
               </div>
@@ -587,9 +749,9 @@ const DeathNoteSearch: React.FC = () => {
                 <input
                   type="number"
                   className="form-control"
-                  value={formData.born_year}
+                  value={formData.birthYear}
                   onChange={(e) =>
-                    setFormData({ ...formData, born_year: e.target.value })
+                    setFormData({ ...formData, birthYear: e.target.value })
                   }
                 />
               </div>
@@ -598,20 +760,42 @@ const DeathNoteSearch: React.FC = () => {
                 <input
                   type="number"
                   className="form-control"
-                  value={formData.dead_year}
+                  value={formData.deathYear}
                   onChange={(e) =>
-                    setFormData({ ...formData, dead_year: e.target.value })
+                    setFormData({ ...formData, deathYear: e.target.value })
                   }
                 />
               </div>
               <div className="form-group">
-                <label>Хаана оршуулсан</label>
+                <label>Хэсэг</label>
                 <input
                   type="text"
                   className="form-control"
-                  value={formData.location}
+                  value={formData.section}
                   onChange={(e) =>
-                    setFormData({ ...formData, location: e.target.value })
+                    setFormData({ ...formData, section: e.target.value })
+                  }
+                />
+              </div>
+              <div className="form-group">
+                <label>Эгнээ</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={formData.row}
+                  onChange={(e) =>
+                    setFormData({ ...formData, row: e.target.value })
+                  }
+                />
+              </div>
+              <div className="form-group">
+                <label>Хөшөөний дугаар</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={formData.monumentNumber}
+                  onChange={(e) =>
+                    setFormData({ ...formData, monumentNumber: e.target.value })
                   }
                 />
               </div>
@@ -625,7 +809,7 @@ const DeathNoteSearch: React.FC = () => {
                   }
                 >
                   <option value="">-- Сонгох --</option>
-                  {departmentOptions.map((opt) => (
+                  {departmentOptions.map((opt: string) => (
                     <option key={opt} value={opt}>
                       {opt}
                     </option>
@@ -651,44 +835,82 @@ const DeathNoteSearch: React.FC = () => {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => {
-                  const newEntry = {
-                    ...formData,
-                    dead_id: Date.now().toString(),
-                    born_year: parseInt(formData.born_year) || 0,
-                    dead_year: parseInt(formData.dead_year) || 0,
-                  };
-
-                  fetch("/api/deaths", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(newEntry),
-                  })
-                    .then((res) => res.json())
-                    .then((resp) => {
-                      if (resp?.list) {
-                        setAllData(resp.list);
-                        if (searchPerformed) {
-                          handleSearch(resp.list);
+                onClick={async () => {
+                  try {
+                    const groups = fieldGroupsData?.fieldsGroups || [];
+                    const customFieldsData: any[] = [];
+                    
+                    for (const group of groups) {
+                      for (const field of group.fields) {
+                        let value = null;
+                        if (field.text === "Төрсөн он" && formData.birthYear) {
+                          value = formData.birthYear;
+                        } else if (field.text === "Нас барсан он" && formData.deathYear) {
+                          value = formData.deathYear;
+                        } else if (field.text === "Хэсэг " && formData.section) {
+                          value = formData.section;
+                        } else if (field.text === "Эгнээ " && formData.row) {
+                          value = formData.row;
+                        } else if (field.text === "Хөшөөний дугаар" && formData.monumentNumber) {
+                          value = formData.monumentNumber;
+                        } else if (field.text === "Цогцолбор" && formData.department) {
+                          value = formData.department;
                         }
-                        setFormData({
-                          first_name: "",
-                          last_name: "",
-                          born_year: "",
-                          dead_year: "",
-                          location: "",
-                          department: "",
-                          dead_id: Date.now().toString(),
-                        });
-                        setShowAddModal(false);
-                      } else {
-                        alert('Failed to save entry. Please try again.');
+                        
+                        if (value) {
+                          customFieldsData.push({
+                            field: field._id,
+                            value: value,
+                            stringValue: value,
+                          });
+                        }
                       }
-                    })
-                    .catch((e) => {
-                      console.error("Failed to save entry", e);
-                      alert('Failed to save entry. Please check your connection.');
+                    }
+
+                    console.log("Attempting to add customer with data:", {
+                      firstName: formData.firstName,
+                      lastName: formData.lastName,
+                      customFieldsData: customFieldsData,
                     });
+
+                    const result = await addCustomer({
+                      variables: {
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        customFieldsData: customFieldsData,
+                      },
+                    });
+                    
+                    console.log("Customer added successfully:", result);
+                    
+                    if (result.data?.customersAdd) {
+                      alert(`Амжилттай нэмэгдлээ! ${formData.firstName} ${formData.lastName}`);
+                      await refetch();
+                      setFormData({
+                        firstName: "",
+                        lastName: "",
+                        department: "",
+                        birthYear: "",
+                        deathYear: "",
+                        section: "",
+                        row: "",
+                        monumentNumber: "",
+                      });
+                      setShowAddModal(false);
+                      if (searchPerformed) {
+                        handleSearch();
+                      }
+                    } else {
+                      console.error("Customer was not created - result:", result);
+                      alert("Алдаа гарлаа: Хэрэглэгч үүсээгүй байна");
+                    }
+                  } catch (e: any) {
+                    console.error("Failed to save entry - Full error:", e);
+                    console.error("Error message:", e.message);
+                    console.error("GraphQL errors:", e.graphQLErrors);
+                    console.error("Network error:", e.networkError);
+                    alert(`Failed to save entry: ${e.message || 'Please check your connection.'}`);
+                  }
                 }}
               >
                 Хадгалах

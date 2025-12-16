@@ -304,6 +304,296 @@ const productDetail = gql`
   }
 `;
 
+const fieldGroups = gql`
+  query fieldsGroups(
+  $contentType: String!
+  $isDefinedByErxes: Boolean
+  $config: JSON
+) {
+  fieldsGroups(
+    contentType: $contentType
+    isDefinedByErxes: $isDefinedByErxes
+    config: $config
+  ) {
+    name
+    _id
+    description
+    code
+    order
+    isVisible
+    isVisibleInDetail
+    contentType
+    isDefinedByErxes
+    logicAction
+    logics {
+      fieldId
+      logicOperator
+      logicValue
+      __typename
+    }
+    isMultiple
+    alwaysOpen
+    parentId
+    config
+    lastUpdatedUser {
+      details {
+        fullName
+        __typename
+      }
+      __typename
+    }
+    fields {
+      type
+      text
+      canHide
+      validation
+      regexValidation
+      options
+      isVisibleToCreate
+      locationOptions {
+        lat
+        lng
+        description
+        __typename
+      }
+      objectListConfigs {
+        key
+        label
+        type
+        __typename
+      }
+      groupId
+      searchable
+      showInCard
+      isRequired
+      _id
+      description
+      code
+      order
+      isVisible
+      isVisibleInDetail
+      contentType
+      isDefinedByErxes
+      logicAction
+      logics {
+        fieldId
+        logicOperator
+        logicValue
+        __typename
+      }
+      lastUpdatedUser {
+        details {
+          fullName
+          __typename
+        }
+        __typename
+      }
+      logicAction
+      logics {
+        fieldId
+        logicOperator
+        logicValue
+        __typename
+      }
+      relationType
+      isDisabled
+      __typename
+    }
+    __typename
+  }
+}
+`
+const customersMain = gql`
+  query customersMain(
+  $page: Int
+  $perPage: Int
+  $segment: String
+  $tag: String
+  $type: String
+  $ids: [String]
+  $excludeIds: Boolean
+  $searchValue: String
+  $autoCompletionType: String
+  $autoCompletion: Boolean
+  $brand: String
+  $integration: String
+  $form: String
+  $startDate: String
+  $endDate: String
+  $leadStatus: String
+  $sortField: String
+  $sortDirection: Int
+  $dateFilters: String
+  $segmentData: String
+  $emailValidationStatus: String
+  $registrationNumber: String
+  $mainType: String
+  $mainTypeId: String
+  $relType: String
+  $isRelated: Boolean
+  $isSaved: Boolean
+) {
+  customersMain(
+    page: $page
+    perPage: $perPage
+    segment: $segment
+    tag: $tag
+    type: $type
+    ids: $ids
+    excludeIds: $excludeIds
+    autoCompletionType: $autoCompletionType
+    autoCompletion: $autoCompletion
+    searchValue: $searchValue
+    brand: $brand
+    integration: $integration
+    form: $form
+    startDate: $startDate
+    endDate: $endDate
+    leadStatus: $leadStatus
+    sortField: $sortField
+    sortDirection: $sortDirection
+    dateFilters: $dateFilters
+    segmentData: $segmentData
+    emailValidationStatus: $emailValidationStatus
+    registrationNumber: $registrationNumber
+    conformityMainType: $mainType
+    conformityMainTypeId: $mainTypeId
+    conformityRelType: $relType
+    conformityIsRelated: $isRelated
+    conformityIsSaved: $isSaved
+  ) {
+    list {
+      _id
+      firstName
+      middleName
+      lastName
+      avatar
+      sex
+      birthDate
+      primaryEmail
+      emails
+      primaryPhone
+      phones
+      state
+      visitorContactInfo
+      modifiedAt
+      position
+      department
+      leadStatus
+      hasAuthority
+      description
+      isSubscribed
+      code
+      emailValidationStatus
+      registrationNumber
+      phoneValidationStatus
+      score
+      isOnline
+      lastSeenAt
+      sessionCount
+      links
+      ownerId
+      owner {
+        _id
+        details {
+          fullName
+          __typename
+        }
+        __typename
+      }
+      integrationId
+      createdAt
+      remoteAddress
+      location
+      customFieldsData
+      trackedData
+      tagIds
+      getTags {
+        _id
+        name
+        colorCode
+        __typename
+      }
+      __typename
+    }
+    totalCount
+    __typename
+  }
+}
+` 
+
+const customerDetail = gql`
+  query customerDetail($_id: String!) {
+    customerDetail(_id: $_id) {
+      _id
+      firstName
+      middleName
+      lastName
+      avatar
+      sex
+      birthDate
+      primaryEmail
+      emails
+      primaryPhone
+      phones
+      state
+      visitorContactInfo
+      modifiedAt
+      position
+      department
+      leadStatus
+      hasAuthority
+      description
+      isSubscribed
+      code
+      emailValidationStatus
+      registrationNumber
+      phoneValidationStatus
+      score
+      isOnline
+      lastSeenAt
+      sessionCount
+      links
+      ownerId
+      owner {
+        _id
+        details {
+          fullName
+          __typename
+        }
+        __typename
+      }
+      integrationId
+      createdAt
+      remoteAddress
+      location
+      customFieldsData
+      trackedData
+      tagIds
+      getTags {
+        _id
+        name
+        colorCode
+        __typename
+      }
+      urlVisits
+      integration {
+        kind
+        name
+        isActive
+        __typename
+      }
+      companies {
+        _id
+        primaryName
+        website
+        __typename
+      }
+      __typename
+    }
+  }
+`
+
 const queries = {
   articleDetail,
   articles,
@@ -312,6 +602,9 @@ const queries = {
   products,
   productCategories,
   productDetail,
+  fieldGroups,
+  customersMain,
+  customerDetail,
 };
 
 export default queries;
