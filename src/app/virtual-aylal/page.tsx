@@ -1,14 +1,6 @@
 import React from "react";
+import PanoramaViewer from "@/components/PanoramaViewer";
 
 export default function page() {
-  return (
-    <iframe
-      frameBorder="0"
-      src="https://uptech-vr.com/vr_contents/UBVIRTUALTOUR/index.htm"
-      style={{
-        height: "100vh",
-        width: "100%",
-      }}
-    />
-  );
+  return <PanoramaViewer />;
 }
