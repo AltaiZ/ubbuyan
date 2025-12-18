@@ -12,8 +12,14 @@ export const metadata: Metadata = {
   title: "“УЛААНБААТАР БУЯН” ХХК",
   description: "“УЛААНБААТАР БУЯН” ХХК",
   icons: {
-    icon: "/static/images/blue_logo.png",
+    icon: [
+      { url: "/ub favicon/favicon.ico" },
+      { url: "/ub favicon/favicon.svg", type: "image/svg+xml" },
+      { url: "/ub favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: "/ub favicon/apple-touch-icon.png",
   },
+  manifest: "/ub favicon/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -24,9 +30,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/static/images/blue_logo.png" />
-        <link rel="shortcut icon" href="/static/images/blue_logo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/static/images/blue_logo.png" />
+        <link rel="icon" href="/ub favicon/favicon.ico" sizes="any" />
+        <link rel="icon" href="/ub favicon/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/ub favicon/apple-touch-icon.png" />
         <link rel="stylesheet" href="/static/css/gallery_styles.css" />
         <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css" />

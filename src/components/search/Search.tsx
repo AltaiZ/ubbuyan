@@ -94,12 +94,20 @@ const DeathNoteSearch: React.FC = () => {
       
       const firstNameLower = firstName.toLowerCase();
       const lastNameLower = lastName.toLowerCase();
+      
+      const isTestEntry = 
+        (firstNameLower === "doe" && lastNameLower === "john") ||
+        (firstNameLower === "john" && lastNameLower === "doe") ||
+        (firstNameLower === "alex" && lastNameLower === "toms") ||
+        (firstNameLower === "toms" && lastNameLower === "alex");
+      
       const hasTestOrGomo = 
         firstNameLower.includes("test") || 
         firstNameLower.includes("gomo") ||
         lastNameLower.includes("test") || 
         lastNameLower.includes("gomo");
-      return !hasTestOrGomo;
+      
+      return !hasTestOrGomo && !isTestEntry;
     });
   }, [data]);
 
@@ -108,7 +116,6 @@ const DeathNoteSearch: React.FC = () => {
       console.log("=== CUSTOM FIELDS SUMMARY ===");
       console.log(`Total customers: ${allData.length}`);
       
-      // Count customers with custom field data
       const customersWithData = allData.filter((c: Customer) => 
         c.customFieldsData && Object.keys(c.customFieldsData).length > 0
       );
@@ -218,6 +225,13 @@ const DeathNoteSearch: React.FC = () => {
   }, [allData, deleteFilter]);
 
   const handleSearch = () => {
+    setSearchPerformed(true);
+    setCurrentPage(1);
+  };
+
+  useEffect(() => {
+    if (!searchPerformed || loading) return;
+
     const lnameLower = lname.toLowerCase();
     const fnameLower = fname.toLowerCase();
     const locationLower = location.toLowerCase();
@@ -244,9 +258,7 @@ const DeathNoteSearch: React.FC = () => {
     });
 
     setFilteredData(result);
-    setSearchPerformed(true);
-    setCurrentPage(1);
-  };
+  }, [searchPerformed, loading, allData, lname, fname, location, department, birthYear, deathYear, fieldGroupsData]);
 
   const totalPages = useMemo(() => {
     return Math.max(1, Math.ceil(filteredData.length / pageSize) || 1);
@@ -391,7 +403,7 @@ const DeathNoteSearch: React.FC = () => {
                 <p>Уншиж байна...</p>
               ) : error ? (
                 <p>Алдаа гарлаа: {error.message}</p>
-              ) : filteredData.length > 0 ? (
+              ) : !loading && filteredData.length > 0 ? (
                 <table className="table table-bordered">
                   <thead>
                     <tr>
