@@ -47,8 +47,8 @@ const DeathNoteSearch: React.FC = () => {
   const [department, setDepartment] = useState("");
   const [birthYear, setBirthYear] = useState("");
   const [deathYear, setDeathYear] = useState("");
-  const [filteredData, setFilteredData] = useState<Customer[]>([]);
   const [searchPerformed, setSearchPerformed] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteFilter, setDeleteFilter] = useState("");
@@ -68,9 +68,11 @@ const DeathNoteSearch: React.FC = () => {
 
   const { data, loading, error, refetch } = useQuery(queries.customersMain, {
     variables: {
-      page: 1,
-      perPage: 10000,
+      page: currentPage,
+      perPage: pageSize,
+      searchValue: searchQuery,
     },
+    skip: !searchPerformed,
   });
 
   const { data: fieldGroupsData } = useQuery(queries.fieldGroups, {
@@ -83,6 +85,7 @@ const DeathNoteSearch: React.FC = () => {
   const [removeCustomer] = useMutation(customerMutations.customersRemove);
 
   const allData = useMemo(() => {
+    if (!searchPerformed) return [];
     const customers = data?.customersMain?.list || [];
     return customers.filter((customer: Customer) => {
       const firstName = customer.firstName?.trim() || "";
@@ -109,7 +112,7 @@ const DeathNoteSearch: React.FC = () => {
       
       return !hasTestOrGomo && !isTestEntry;
     });
-  }, [data]);
+  }, [data, searchPerformed]);
 
   useEffect(() => {
     if (fieldGroupsData?.fieldsGroups && allData.length > 0) {
@@ -225,20 +228,18 @@ const DeathNoteSearch: React.FC = () => {
   }, [allData, deleteFilter]);
 
   const handleSearch = () => {
+    const searchTerms = [lname, fname].filter(Boolean).join(" ").trim();
+    setSearchQuery(searchTerms);
     setSearchPerformed(true);
     setCurrentPage(1);
   };
 
-  useEffect(() => {
-    if (!searchPerformed || loading) return;
+  const filteredData = useMemo(() => {
+    if (!searchPerformed) return [];
 
-    const lnameLower = lname.toLowerCase();
-    const fnameLower = fname.toLowerCase();
     const locationLower = location.toLowerCase();
 
-    const result = allData.filter((entry: Customer) => {
-      const entryLastName = entry.lastName?.toLowerCase() || "";
-      const entryFirstName = entry.firstName?.toLowerCase() || "";
+    return allData.filter((entry: Customer) => {
       const entryDepartment = getCustomFieldValue(entry, "Цогцолбор");
       const entryBirthYear = getCustomFieldValue(entry, "Төрсөн он");
       const entryDeathYear = getCustomFieldValue(entry, "Нас барсан он");
@@ -248,27 +249,23 @@ const DeathNoteSearch: React.FC = () => {
       const combinedLocation = `${entrySection} ${entryRow} ${entryMonumentNumber}`.toLowerCase();
 
       return (
-        (!lname || entryLastName.includes(lnameLower)) &&
-        (!fname || entryFirstName.includes(fnameLower)) &&
         (!location || combinedLocation.includes(locationLower)) &&
         (!department || entryDepartment === department) &&
         (!birthYear || entryBirthYear.toString().includes(birthYear)) &&
         (!deathYear || entryDeathYear.toString().includes(deathYear))
       );
     });
+  }, [searchPerformed, allData, location, department, birthYear, deathYear, fieldGroupsData]);
 
-    setFilteredData(result);
-  }, [searchPerformed, loading, allData, lname, fname, location, department, birthYear, deathYear, fieldGroupsData]);
-
+  const totalCount = data?.customersMain?.totalCount || 0;
+  
   const totalPages = useMemo(() => {
-    return Math.max(1, Math.ceil(filteredData.length / pageSize) || 1);
-  }, [filteredData.length, pageSize]);
+    return Math.max(1, Math.ceil(totalCount / pageSize) || 1);
+  }, [totalCount, pageSize]);
 
   const paginatedData = useMemo(() => {
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    return filteredData.slice(startIndex, endIndex);
-  }, [filteredData, currentPage, pageSize]);
+    return filteredData;
+  }, [filteredData]);
 
   return (
     <section className="ub_list">
@@ -441,7 +438,7 @@ const DeathNoteSearch: React.FC = () => {
                 <p>Илэрц олдсонгүй</p>
               )}
 
-              {filteredData.length > pageSize && (
+{totalCount > pageSize && (
                 <div
                   className="d-flex justify-content-between align-items-center"
                   style={{ marginTop: 12, gap: 8, flexWrap: "wrap" }}
@@ -484,7 +481,7 @@ const DeathNoteSearch: React.FC = () => {
                   </div>
                   <div className="d-flex align-items-center" style={{ gap: 8 }}>
                     <span>
-                      Хуудас {currentPage} / {totalPages} — Нийт: {filteredData.length}
+                      Хуудас {currentPage} / {totalPages} — Нийт: {totalCount}
                     </span>
                     <select
                       className="form-control"
