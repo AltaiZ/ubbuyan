@@ -15,7 +15,7 @@ export default function PanoramaViewer() {
         
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden" style={{ height: "calc(100vh - 250px)", minHeight: "600px" }}>
           <iframe
-            src="/tour/index.htm"
+            src="/virt/index.htm"
             width="100%"
             height="100%"
             style={{ border: "none" }}
