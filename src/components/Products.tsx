@@ -3,7 +3,7 @@
 import { IPageProps } from "@/types";
 import React, { useEffect } from "react";
 import HomepageTab from "./homepage-tab/homepage-tab";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client/react";
 import { queries } from "@/graphql";
 import { IProducts } from "@/lib/products";
 
@@ -13,7 +13,7 @@ export default function Products({ searchParams }: IPageProps) {
   const activeTab = searchParams.activeTab;
 
   const [getProducts, { data: productsData, loading }] = useLazyQuery(
-    queries.products
+    queries.products,
   );
 
   useEffect(() => {
@@ -23,16 +23,16 @@ export default function Products({ searchParams }: IPageProps) {
           activeTab === "ontsloh"
             ? "IyBZvTVk0MEH8zzbXsjJv"
             : activeTab === "hairtsag"
-            ? "Gcd-Kq0cfnAerSq9udlUk"
-            : activeTab === "hoshoo"
-            ? "b53tve5NEAt2Wqf7A2ec3"
-            : activeTab === "suvarga"
-            ? "fVrZZn1XcQ0rc_OugTyVa"
-            : activeTab === "tsetseg"
-            ? "Gcd-Kq0cfnAerSq9udl"
-            : activeTab === "zed"
-            ? "JYYQypAlxufqG6Qds-CIl"
-            : "",
+              ? "Gcd-Kq0cfnAerSq9udlUk"
+              : activeTab === "hoshoo"
+                ? "b53tve5NEAt2Wqf7A2ec3"
+                : activeTab === "suvarga"
+                  ? "fVrZZn1XcQ0rc_OugTyVa"
+                  : activeTab === "tsetseg"
+                    ? "Gcd-Kq0cfnAerSq9udl"
+                    : activeTab === "zed"
+                      ? "JYYQypAlxufqG6Qds-CIl"
+                      : "",
       },
     });
   }, [productsData, activeTab]);

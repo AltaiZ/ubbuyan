@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { getClient } from "./ssClient";
+import { getClient } from "./client";
 import { queries } from "@/graphql";
 import { CommonParams } from "./kb";
 
@@ -26,7 +26,7 @@ export const getProducts: GetProducts = cache(async (params: any) => {
     variables: params?.variables,
     context: {
       headers: {
-        "erxes-app-token": process.env.NEXT_ERXES_APP_TOKEN,
+        "x-app-token": process.env.NEXT_ERXES_APP_TOKEN,
       },
     },
   });
@@ -46,7 +46,7 @@ export const getProductCategories: GetProductCategories = cache(
       variables: params?.variables,
       context: {
         headers: {
-          "erxes-app-token": process.env.NEXT_ERXES_APP_TOKEN,
+          "x-app-token": process.env.NEXT_ERXES_APP_TOKEN,
         },
       },
     });
@@ -57,7 +57,7 @@ export const getProductCategories: GetProductCategories = cache(
       categories,
       error_msg: error?.message,
     };
-  }
+  },
 );
 
 export const getProductDetail: GetProductDetail = cache(async (params: any) => {
@@ -66,7 +66,7 @@ export const getProductDetail: GetProductDetail = cache(async (params: any) => {
     variables: params?.variables,
     context: {
       headers: {
-        "erxes-app-token": process.env.NEXT_ERXES_APP_TOKEN,
+        "x-app-token": process.env.NEXT_ERXES_APP_TOKEN,
       },
     },
   });

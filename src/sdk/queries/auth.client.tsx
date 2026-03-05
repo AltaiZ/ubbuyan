@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/client';
-import { queries } from '@/sdk/graphql/auth';
+
 import { useSetAtom, useAtom, useAtomValue } from 'jotai';
 import {
   currentUserAtom,
@@ -8,6 +7,8 @@ import {
 } from '@/store/auth.store';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
+import { useQuery } from '@apollo/client/react';
+import { queries } from '@/graphql/auth';
 
 export const useCurrentUser = (onCompleted?: (data: any) => void) => {
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);

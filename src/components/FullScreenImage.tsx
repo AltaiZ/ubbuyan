@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 export default function FullScreenImage() {
+  
   return (
     <div id="content">
       <div className="main-body">

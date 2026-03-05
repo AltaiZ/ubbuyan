@@ -1,21 +1,22 @@
-import { getKbArticlesByCode, kbTopicDetail } from "@/lib/kb";
-import React, { useState } from "react";
+"use client";
+
+import React from "react";
 
 import HomeMedeeContent from "./homepage-tab/homemedee-content";
+import queries from "@/graphql/cms/queries";
+import { useQuery } from "@apollo/client/react";
 
-export const revalidate = 1;
 const ITEMS_PER_PAGE = 4;
 
-export default async function Blog() {
-  const { topic } = await kbTopicDetail({
+export default function Blog() {
+  const { data, loading, error } = useQuery(queries.cmsPostList, {
     variables: {
-      _id: "6FNIwcb39FRfoeYiP4FcI",
+      categoryIds: ["kdYDLrJsKoBx3MwO5K1bA"],
     },
   });
 
-  const articles = topic?.categories?.flatMap((item) => item.articles);
-
-  const PageArticles = articles.slice(ITEMS_PER_PAGE);
+  const posts = (data as any)?.cpPostList?.posts || [];
+  const pagePosts = posts.slice(0, ITEMS_PER_PAGE);
 
   const tabs = [
     { name: "Мэдээ мэдээлэл", id: "nrC0GCqQm0KS6F2xawdmL" },
@@ -23,6 +24,9 @@ export default async function Blog() {
     { name: "Мэдлэгийн сан", id: "XCQcgWmMO8VBkiS6llRdQ" },
     { name: "Зурхайч лам нар", id: "lam-nar" },
   ];
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading posts</div>;
 
   return (
     <div>
@@ -32,8 +36,10 @@ export default async function Blog() {
           Сүүлийн үеийн мэдээлэл, мэдлэг, арга хэмжээ зэргийг та эндээс авах
           боломжтой.
         </p>
-        <HomeMedeeContent tabs={tabs} articles={PageArticles} />
+
+        <HomeMedeeContent tabs={tabs} articles={pagePosts} />
       </div>
+
       <div className="read_more">
         <a href="/medee-medeelel">
           <img src="/static/images/sum-red.png" />

@@ -4,8 +4,8 @@ import "./globals.css";
 import Script from "next/script";
 import HeaderTop from "../components/HeaderTop";
 import Footer from "../components/Footer";
-import Apollo from "./apolloClient";
 import { Toaster } from "sonner";
+import { ApolloWrapper } from "@/lib/apollo-wrapper";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -45,14 +45,14 @@ export default function RootLayout({
  
       </head>
       <body className={inter.className}>
-        <Apollo>
+        <ApolloWrapper>
           <HeaderTop />
           {children}
           <Footer />
           <Script src="/static/js/scripts.js" />
           <Script src="/static/js/custom.js" />
           <Toaster richColors closeButton position="top-left"/>
-        </Apollo>
+        </ApolloWrapper>
       </body>
     </html>
   );
