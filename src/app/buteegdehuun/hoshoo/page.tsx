@@ -1,54 +1,38 @@
+"use client";
+
 import React from "react";
-import { getKbArticlesByCode, kbTopicDetail } from "../../../lib/kb";
+import { useQuery } from "@apollo/client/react";
+import queries from "@/graphql/cms/queries";
 import { PaginationPart } from "../../../components/pagination";
-import HomepageTab from "./components/hoshoo-tabe";
 
-export const revalidate = 1;
-const ITEMS_PER_PAGE = 16; // Хуудас бүрт үзүүлэх нийт зүйлс
+const ITEMS_PER_PAGE = 16;
 
-export default async function Page({
+export default function Page({
   searchParams,
 }: {
-  searchParams: {
-    activeTab: any;
-    page: string;
-  };
+  searchParams: { page?: string };
 }) {
-  const activeTab = searchParams.activeTab;
-
-  const { topic } = await kbTopicDetail({
-    variables: {
-      _id: activeTab === "bugd" ? "6I-4nRhunj8yCTD4NXF31" : "",
-    },
+  const { data, loading, error } = useQuery(queries.cmsPostList, {
+    variables: {},
+    fetchPolicy: "no-cache",
   });
 
-  const category = topic?.categories?.map((item) => item);
+  const allPosts = (data as any)?.cpPostList?.posts || [];
 
-  const items = category?.map((item) => item);
-
-  const data = items?.map((item) => item?.articles);
-
-
-  const { articles } = await getKbArticlesByCode(
-    activeTab === "dangaar"
-      ? "dangaar"
-      : activeTab === "bagts"
-      ? "bagtsaar"
-      : activeTab === "horgo"
-      ? "horgo"
-      : ""
+  const hoshooPosts = allPosts.filter((post: any) =>
+    post?.categories?.some((cat: any) => {
+      const value = cat?.slug || cat?.name || "";
+      return String(value).toLowerCase().trim() === "hushuu";
+    })
   );
 
-  const tabs = [
-    { name: "Бүгд", id: "bugd" },
-    { name: "Дангаар", id: "dangaar" },
-    { name: "Багцаар", id: "bagts" },
-    { name: "Хорго", id: "horgo" },
-  ];
+  const reversedArticles = [...hoshooPosts].reverse();
 
-  const reversedArticles = [...articles].reverse();
-  const currentPage = parseInt(searchParams.page as string) || 1;
-  const totalPages = Math.ceil(reversedArticles.length / ITEMS_PER_PAGE);
+  const currentPage = parseInt(searchParams?.page || "1", 10) || 1;
+  const totalPages = Math.max(
+    1,
+    Math.ceil(reversedArticles.length / ITEMS_PER_PAGE)
+  );
   const safeCurrentPage = Math.min(Math.max(currentPage, 1), totalPages);
   const startIndex = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -73,14 +57,14 @@ export default async function Page({
         <div className="row p_tab hidden-xs">
           <div className="container">
             <ul className="nav nav-tabs" role="tablist">
-              <li className="col-md-2 ">
+              <li className="col-md-2">
                 <a href="/buteegdehuun/">
                   <img src="/static/images/tab1.png" width="25" height="25" />
                   Онцлох
                 </a>
                 <div className="arrow-down" />
               </li>
-              <li className="col-md-2 ">
+              <li className="col-md-2">
                 <a href="/buteegdehuun/hairtsag">
                   <img src="/static/images/tab2.png" width="25" height="25" />
                   Хайрцаг
@@ -94,27 +78,28 @@ export default async function Page({
                 </a>
                 <div className="arrow-down" />
               </li>
-              <li className="col-md-2 ">
+              <li className="col-md-2">
                 <a href="/buteegdehuun/sats-suvarga">
                   <img src="/static/images/tab4.png" width="25" height="25" />
                   Сац суварга
                 </a>
                 <div className="arrow-down" />
               </li>
-              <li className="col-md-2 ">
+              <li className="col-md-2">
                 <a href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%85%D2%AF%D0%BD%D0%B4%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D1%86%D1%8D%D1%86%D1%8D%D0%B3/">
                   <img src="/static/images/tab5.png" width="25" height="25" />
                   Хүндэтгэлийн цэцэг
                 </a>
                 <div className="arrow-down" />
               </li>
-              <li className="col-md-2 ">
+              <li className="col-md-2">
                 <a href="/buteegdehuun/zed/">Зэд</a>
                 <div className="arrow-down" />
               </li>
             </ul>
           </div>
         </div>
+
         <div className="mobilehproducts">
           <ul
             className="nav nav-tabs blog_buttons mobile-tab visible-xs"
@@ -146,6 +131,7 @@ export default async function Page({
                       </div>
                     </li>
                   </div>
+
                   <div className="owl-item">
                     <li>
                       <div className="item">
@@ -153,12 +139,17 @@ export default async function Page({
                           className="product-name"
                           href="/buteegdehuun/hairtsag"
                         >
-                          <img src="/static/tab2.png" width="25" height="25" />
+                          <img
+                            src="/static/images/tab2.png"
+                            width="25"
+                            height="25"
+                          />
                           <span>Хайрцаг</span>
                         </a>
                       </div>
                     </li>
                   </div>
+
                   <div className="owl-item">
                     <li>
                       <div className="item">
@@ -173,6 +164,7 @@ export default async function Page({
                       </div>
                     </li>
                   </div>
+
                   <div className="owl-item">
                     <li>
                       <div className="item">
@@ -190,6 +182,7 @@ export default async function Page({
                       </div>
                     </li>
                   </div>
+
                   <div className="owl-item">
                     <li>
                       <div className="item">
@@ -207,6 +200,7 @@ export default async function Page({
                       </div>
                     </li>
                   </div>
+
                   <div className="owl-item">
                     <li>
                       <div className="item">
@@ -223,12 +217,12 @@ export default async function Page({
                   </div>
                 </div>
               </div>
+
               <div className="owl-nav disabled">
                 <div className="owl-prev">
                   <svg
                     aria-hidden="true"
                     className="svg-inline--fa fa-angle-left fa-w-8 fa-4x"
-                    data-fa-i2svg=""
                     data-icon="angle-left"
                     data-prefix="fa"
                     role="img"
@@ -245,7 +239,6 @@ export default async function Page({
                   <svg
                     aria-hidden="true"
                     className="svg-inline--fa fa-angle-right fa-w-8 fa-4x"
-                    data-fa-i2svg=""
                     data-icon="angle-right"
                     data-prefix="fa"
                     role="img"
@@ -259,80 +252,68 @@ export default async function Page({
                   </svg>
                 </div>
               </div>
+
               <div className="owl-dots disabled" />
             </div>
           </ul>
         </div>
 
         <div className="container">
-          <ul className="filter-menu display-ul">
-            {tabs.map((tab) => (
-              <HomepageTab
-                key={tab.id}
-                name={tab.name}
-                id={tab.id}
-                searchParams={searchParams}
-              />
-            ))}
-          </ul>
+          {loading && <div style={{ padding: "20px 0" }}>Уншиж байна...</div>}
 
-          {data?.map((innerArray) =>
-            innerArray.map((item) => (
-              <div
-                className="pc_tab col-md-3 col-sm-6 col-xs-6"
-                key={item?._id}
-              >
-                <a href={`/buteegdehuun/hoshoo/${item?._id}`}>
-                  <div
-                    className="p_img"
-                    style={{
-                      background: `url(https://khankhujirt.app.erxes.io/api/read-file?key=${item?.image?.url})`,
-                      backgroundSize: "cover",
-                    }}
-                  >
-                    <div className="overlay">
-                      <img
-                        className="c_arrow"
-                        src="/static/sites/ulaanbaatarbuyannew/default/images/sum-white.png"
-                      />
-                    </div>
-                  </div>
-                  <h3>{item.title}</h3>
-                  <div className="price_field">
-                    <h5 className="price-name">Үнэ: </h5>
-                    <h3 className="price">{item.summary}</h3>
-                  </div>
-                </a>
-              </div>
-            ))
-          )}
-          {paginatedArticles?.map((item) => (
-            <div className="pc_tab col-md-3 col-sm-6 col-xs-6" key={item?._id}>
-              <a href={`/buteegdehuun/hoshoo/${item?._id}`}>
-                <div
-                  className="p_img"
-                  style={{
-                    background: `url(https://khankhujirt.app.erxes.io/api/read-file?key=${item?.image?.url})`,
-                    backgroundSize: "cover",
-                  }}
-                >
-                  <div className="overlay">
-                    <img
-                      className="c_arrow"
-                      src="/static/sites/ulaanbaatarbuyannew/default/images/sum-white.png"
-                    />
-                  </div>
-                </div>
-                <h3>{item.title}</h3>
-                <div className="price_field">
-                  <h5 className="price-name">Үнэ: </h5>
-                  <h3 className="price">{item.summary}</h3>
-                </div>
-              </a>
+          {error && (
+            <div style={{ padding: "20px 0" }}>
+              Алдаа гарлаа: {error.message}
             </div>
-          ))}
+          )}
+
+          {!loading && !error && (
+            <div className="row">
+              {paginatedArticles.map((item: any) => (
+                <div
+                  key={item._id}
+                  className="pc_tab col-md-3 col-sm-6 col-xs-6"
+                >
+                  <a href={`/buteegdehuun/${item?._id}`}>
+                    <div
+                      className="p_img"
+                      style={{
+                        background: item?.image?.url
+                          ? `url(https://khankhujirt.app.erxes.io/api/read-file?key=${item.image.url})`
+                          : "url(/static/images/no-image.png)",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      <div className="overlay">
+                        <img
+                          className="c_arrow"
+                          src="/static/sites/ulaanbaatarbuyannew/default/images/sum-white.png"
+                          alt="arrow"
+                        />
+                      </div>
+                    </div>
+
+                    <h3>{item.title}</h3>
+
+                    <div className="price_field">
+                      <h5 className="price-name">Үнэ:</h5>
+                      <h3 className="price">
+                        {item.summary ? item.summary : "0₮"}
+                      </h3>
+                    </div>
+                  </a>
+                </div>
+              ))}
+
+              {paginatedArticles.length === 0 && (
+                <div style={{ padding: "20px 0" }}>Бүтээгдэхүүн олдсонгүй</div>
+              )}
+            </div>
+          )}
         </div>
       </section>
+
       <div className="container mt-[-60px]">
         <div className="pagination">
           <PaginationPart
