@@ -45,17 +45,29 @@ export default function MedeeMedeelelPage() {
 
   return (
     <div className="container wrapper" style={{ padding: "40px 0" }}>
-      <h1>Мэдээ мэдээлэл</h1>
+      <h1 style={{ marginBottom: "30px" }}>Мэдээ мэдээлэл</h1>
 
-      <div style={{ marginTop: "30px" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "20px",
+          overflowX: "auto",
+          paddingBottom: "10px",
+          scrollSnapType: "x mandatory",
+        }}
+      >
         {posts.map((post: any) => (
           <div
             key={post._id}
             style={{
+              minWidth: "350px",
+              maxWidth: "350px",
+              flex: "0 0 auto",
               border: "1px solid #eee",
               padding: "20px",
-              marginBottom: "20px",
               borderRadius: "8px",
+              background: "#fff",
+              scrollSnapAlign: "start",
             }}
           >
             {post?.thumbnail?.url ? (
@@ -64,8 +76,8 @@ export default function MedeeMedeelelPage() {
                 alt={post.title}
                 style={{
                   width: "100%",
-                  maxWidth: "400px",
-                  height: "auto",
+                  height: "220px",
+                  objectFit: "cover",
                   marginBottom: "15px",
                   borderRadius: "6px",
                 }}
@@ -78,9 +90,7 @@ export default function MedeeMedeelelPage() {
               {post.excerpt || "Товч мэдээлэл байхгүй"}
             </p>
 
-            <Link href={`/medee-medeelel/${post._id}`}>
-              Дэлгэрэнгүй
-            </Link>
+            <Link href={`/medee-medeelel/${post._id}`}>Дэлгэрэнгүй</Link>
           </div>
         ))}
       </div>

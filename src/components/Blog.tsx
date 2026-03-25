@@ -5,7 +5,7 @@ import HomeMedeeContent from "./homepage-tab/homemedee-content";
 import queries from "@/graphql/cms/queries";
 import { useQuery } from "@apollo/client/react";
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 20;
 
 export default function Blog() {
   const { data, loading, error } = useQuery(queries.cmsPostList, {
@@ -16,8 +16,13 @@ export default function Blog() {
   const allPosts = (data as any)?.cpPostList?.posts || [];
 
   const posts = allPosts.filter((post: any) =>
-    post?.categories?.some(
-      (cat: any) => cat?.name?.toLowerCase()?.trim() === "news"
+    post?.categories?.some((cat: any) =>
+      [
+        "news",
+        "arga-hemjee",
+        "medlegiin-san",
+        "zurhaich-lam-nar",
+      ].includes(cat?.name)
     )
   );
 
@@ -25,9 +30,9 @@ export default function Blog() {
 
   const tabs = [
     { name: "Мэдээ мэдээлэл", id: "news" },
-    { name: "Арга хэмжээ", id: "event" },
-    { name: "Мэдлэгийн сан", id: "knowledge" },
-    { name: "Зурхайч лам нар", id: "lam-nar" },
+    { name: "Арга хэмжээ", id: "arga-hemjee" },
+    { name: "Мэдлэгийн сан", id: "medlegiin-san" },
+    { name: "Зурхайч лам нар", id: "zurhaich-lam-nar" },
   ];
 
   if (loading) return <div>Loading...</div>;
