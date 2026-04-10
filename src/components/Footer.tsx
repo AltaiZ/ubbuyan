@@ -40,6 +40,9 @@ export default function Footer() {
                     Буяны цагаалга, хүргэлтийн хоолны үйлчилгээ
                   </a>
                 </li>
+                <li className=" hidden-xs" role="presentation">
+                  <a href="/altan-san/">Ард түмний алтан сан</a>
+                </li>
               </ul>
             </div>
             <div className="col-md-3 col-sm-6 footer_menu">

@@ -1,7 +1,8 @@
 import React from "react";
+import ServiceArticlePageClient from "@/components/service/ServiceArticlePageClient";
 
-export default function page() {
-  return (
+export default function Page() {
+  const fallback = (
     <div
       id="content"
       style={{
@@ -570,5 +571,18 @@ export default function page() {
         </section>
       </div>
     </div>
+  );
+
+  return (
+    <ServiceArticlePageClient
+      candidates={[
+        "чандарлах үйлчилгээ",
+        "chandarlah",
+        "chandarlah uilchilgee",
+        "chandarlah-uilchilgee",
+      ]}
+      title="Чандарлах үйлчилгээ"
+      fallback={fallback}
+    />
   );
 }

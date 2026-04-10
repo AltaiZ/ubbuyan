@@ -59,7 +59,7 @@ export default function HeaderNav() {
                     <a href="/tuw-bairnii-uichilgee/">Төв байрны үйлчилгээ</a>
                   </li>
                   <li>
-                    <a href="/huuli-erh-zui">Ард түмний алтан сан</a>
+                    <a href="/altan-san/">Ард түмний алтан сан</a>
                   </li>
                 </ul>
               </li>
@@ -221,7 +221,7 @@ export default function HeaderNav() {
                 </a>
               </li>
               <li className="None">
-                <a href="">Ард түмний алтан сан</a>
+                <a href="/altan-san/">Ард түмний алтан сан</a>
               </li>
             </ul>
           </li>

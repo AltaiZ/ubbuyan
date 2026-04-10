@@ -1,7 +1,8 @@
 import React from "react";
+import CmsArticlePageClient from "@/components/about/CmsArticlePageClient";
 
-export default function page() {
-  return (
+export default function Page() {
+  const fallback = (
     <div
       id="content"
       style={{
@@ -106,5 +107,18 @@ export default function page() {
         </article>
       </section>
     </div>
+  );
+
+  return (
+    <CmsArticlePageClient
+      candidates={[
+        "бидний өвөр төрх, ялгамж чанар",
+        "bidnii uwur turh yalgamj chanar",
+        "yalgamj",
+        "yalgamj chanar",
+      ]}
+      title="Бидний өвөр төрх, ялгамж чанар"
+      fallback={fallback}
+    />
   );
 }
