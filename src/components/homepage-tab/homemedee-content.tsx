@@ -29,7 +29,18 @@ export default function HomeMedeeContent({
     );
   }, [articles, activeNewTab]);
 
-  const perArticles = filteredArticles.slice(0, ITEMS_PER_PAGE);
+  const sortedArticles = useMemo(() => {
+    return [...filteredArticles].sort((a: any, b: any) => {
+      const left = new Date(a?.createdAt || 0).getTime();
+      const right = new Date(b?.createdAt || 0).getTime();
+      return right - left;
+    });
+  }, [filteredArticles]);
+
+  const perArticles =
+    activeNewTab === "zurhaich-lam-nar"
+      ? sortedArticles
+      : sortedArticles.slice(0, ITEMS_PER_PAGE);
 
   return (
     <div>

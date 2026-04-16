@@ -19,6 +19,21 @@ export default function Page() {
 
   const allPosts = (data as any)?.cpPostList?.posts || [];
   const post = allPosts.find((item: any) => item?._id === id);
+  const shouldSearchById = Boolean(id) && !loading && !post;
+
+  const {
+    data: searchedData,
+    loading: searchedLoading,
+    error: searchedError,
+  } = useQuery(queries.cmsPostList, {
+    variables: { searchValue: id },
+    fetchPolicy: "no-cache",
+    skip: !shouldSearchById,
+  });
+
+  const searchedPosts = (searchedData as any)?.cpPostList?.posts || [];
+  const searchedPost = searchedPosts.find((item: any) => item?._id === id);
+  const activePost = post || searchedPost;
 
   const getCategoryNames = (item: any): string[] =>
     item?.categories?.map((cat: any) => String(cat?.name || "").toLowerCase().trim()) || [];
@@ -65,7 +80,7 @@ export default function Page() {
     return ["news", "event", "knowledge"];
   };
 
-  const currentCategoryNames = post ? getCategoryNames(post) : [];
+  const currentCategoryNames = activePost ? getCategoryNames(activePost) : [];
   const currentSection = detectSection(currentCategoryNames);
   const targetSections = getTargetSections(currentSection);
 
@@ -81,7 +96,7 @@ export default function Page() {
     })
     .slice(0, 10);
 
-  if (loading) {
+  if (loading || (shouldSearchById && searchedLoading)) {
     return (
       <div className="container wrapper" style={{ padding: "40px 0" }}>
         Уншиж байна...
@@ -89,15 +104,15 @@ export default function Page() {
     );
   }
 
-  if (error) {
+  if (error || searchedError) {
     return (
       <div className="container wrapper" style={{ padding: "40px 0" }}>
-        Алдаа гарлаа: {error.message}
+        Алдаа гарлаа: {(error || searchedError)?.message}
       </div>
     );
   }
 
-  if (!post) {
+  if (!activePost) {
     return (
       <div className="container wrapper" style={{ padding: "40px 0" }}>
         Мэдээлэл олдсонгүй
@@ -118,7 +133,7 @@ export default function Page() {
               color: "#111",
             }}
           >
-            {post.title}
+            {activePost.title}
           </h1>
 
           <div
@@ -129,8 +144,8 @@ export default function Page() {
             }}
           >
             Published:{" "}
-            {post?.createdAt
-              ? new Date(post.createdAt).toLocaleDateString("mn-MN", {
+            {activePost?.createdAt
+              ? new Date(activePost.createdAt).toLocaleDateString("mn-MN", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
@@ -140,11 +155,11 @@ export default function Page() {
 
           <div style={{ marginBottom: "25px", color: "#999" }}>Share:</div>
 
-          {post?.thumbnail?.url ? (
+          {activePost?.thumbnail?.url ? (
             <div style={{ marginBottom: "30px" }}>
               <img
-                src={post.thumbnail.url}
-                alt={post.title}
+                src={activePost.thumbnail.url}
+                alt={activePost.title}
                 style={{
                   width: "100%",
                   height: "auto",
@@ -154,7 +169,7 @@ export default function Page() {
             </div>
           ) : null}
 
-          {post?.excerpt ? (
+          {activePost?.excerpt ? (
             <p
               style={{
                 marginBottom: "20px",
@@ -163,7 +178,7 @@ export default function Page() {
                 lineHeight: "1.8",
               }}
             >
-              {post.excerpt}
+              {activePost.excerpt}
             </p>
           ) : null}
 
@@ -173,7 +188,7 @@ export default function Page() {
               lineHeight: "2",
               color: "#333",
             }}
-            dangerouslySetInnerHTML={{ __html: post.content || "" }}
+            dangerouslySetInnerHTML={{ __html: activePost.content || "" }}
           />
         </div>
 

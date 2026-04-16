@@ -120,7 +120,7 @@ export default function HeaderNav() {
                     </a>
                   </li>
                   <li>
-                    <a href="/medee-medeelel/arag-hemjee/">Арга хэмжээ</a>
+                    <a href="/medee-medeelel/arga-hemjee/">Арга хэмжээ</a>
                   </li>
                   <li>
                     <a href="/medleg-medeelel/medlegiin-san/">Мэдлэгийн сан</a>

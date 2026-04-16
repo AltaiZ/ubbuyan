@@ -51,7 +51,7 @@ export default async function page({ searchParams }: any) {
                   </a>
                 </li>
                 <li>
-                  <a href="/medee-medeelel/arag-hemjee">Арга хэмжээ</a>
+                  <a href="/medee-medeelel/arga-hemjee">Арга хэмжээ</a>
                 </li>
                 <li>
                   <a href="/medleg-medeelel/medlegiin-san">Мэдлэгийн сан</a>
@@ -105,7 +105,7 @@ export default async function page({ searchParams }: any) {
                         </span>
                         <h4>
                           <a
-                            href={`/medleg-medeelel/${item._id}`}
+                            href={`/medee-medeelel/${item._id}`}
                             className="medleg_title"
                           >
                             {item.title}

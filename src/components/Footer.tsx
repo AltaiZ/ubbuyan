@@ -110,7 +110,7 @@ export default function Footer() {
                   <a href="/medee-medeelel/tugemel-asuult">Түгээмэл асуулт</a>
                 </li>
                 <li className=" hidden-xs" role="presentation">
-                  <a href="/medee-medeelel/arag-hemjee">Арга хэмжээ</a>
+                  <a href="/medee-medeelel/arga-hemjee">Арга хэмжээ</a>
                 </li>
                 <li className=" hidden-xs" role="presentation">
                   <a href="/search">serch</a>

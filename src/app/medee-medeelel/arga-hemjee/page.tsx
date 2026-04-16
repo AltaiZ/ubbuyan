@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  redirect("/medee-medeelel/tv1DKnZQnF-g3BmHb5R-r");
+  redirect("/medee-medeelel/bDL8pqQK5tqL8Ib0wbSsU");
 }

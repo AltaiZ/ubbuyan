@@ -186,6 +186,13 @@ export async function getKbArticleDetail(
   const { data } = await client.query<any>({
     query: KB_ARTICLE_DETAIL,
     variables,
+    context: token
+      ? {
+          headers: {
+            "x-app-token": token,
+          },
+        }
+      : undefined,
     fetchPolicy: "no-cache",
   });
 

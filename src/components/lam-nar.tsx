@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { useQuery } from "@apollo/client/react";
+import queries from "@/graphql/cms/queries";
 
 function cleanHtml(html: string) {
   return html
@@ -17,6 +19,34 @@ export default function LamNar({
   cmsLams?: any[];
 }) {
   const [activeTab, setActiveTab] = useState("list");
+  const { data: searchedLamData } = useQuery(queries.cmsPostList, {
+    variables: { searchValue: "лам" },
+    fetchPolicy: "no-cache",
+  });
+
+  const mergedLams = useMemo(() => {
+    const searchedLamPosts = ((searchedLamData as any)?.cpPostList?.posts || []).filter(
+      (item: any) =>
+        item?.categories?.some(
+          (cat: any) =>
+            String(cat?.name || "").toLowerCase().trim() === "zurhaich-lam-nar"
+        )
+    );
+
+    const byId = new Map<string, any>();
+
+    [...searchedLamPosts, ...cmsLams].forEach((item: any) => {
+      if (item?._id) {
+        byId.set(item._id, item);
+      }
+    });
+
+    return Array.from(byId.values()).sort((a: any, b: any) => {
+      const left = new Date(a?.createdAt || 0).getTime();
+      const right = new Date(b?.createdAt || 0).getTime();
+      return right - left;
+    });
+  }, [cmsLams, searchedLamData]);
 
   return (
     <div id="content" style={{ display: "block" }}>
@@ -49,7 +79,7 @@ export default function LamNar({
             {activeTab === "list" && (
               <div className="lam_more">
                 <div className="list" id="tab2-1" style={{ display: "block" }}>
-                  {cmsLams.map((item: any) => (
+                  {mergedLams.map((item: any) => (
                     <div key={item._id} className="lam row">
                       <div className="col-md-6 info">
                         <img

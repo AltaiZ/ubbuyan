@@ -28,7 +28,7 @@ export default async function page() {
           </li>
           <li role="presentation" className="active">
             <a
-              href="/medee-medeelel/arag-hemjee"
+              href="/medee-medeelel/arga-hemjee"
               aria-controls="arga_hemjee"
               role="tab"
               data-toggle="tab"

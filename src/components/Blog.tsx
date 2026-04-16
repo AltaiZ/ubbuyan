@@ -15,15 +15,18 @@ export default function Blog() {
 
   const allPosts = (data as any)?.cpPostList?.posts || [];
 
+  const allowedCategories = new Set([
+    "news",
+    "arga-hemjee",
+    "medlegiin-san",
+    "zurhaich-lam-nar",
+  ]);
+
   const posts = allPosts.filter((post: any) =>
-    post?.categories?.some((cat: any) =>
-      [
-        "news",
-        "arga-hemjee",
-        "medlegiin-san",
-        "zurhaich-lam-nar",
-      ].includes(cat?.name)
-    )
+    post?.categories?.some((cat: any) => {
+      const value = String(cat?.slug || cat?.name || "").toLowerCase().trim();
+      return allowedCategories.has(value);
+    })
   );
 
   const pagePosts = posts.slice(0, ITEMS_PER_PAGE);
