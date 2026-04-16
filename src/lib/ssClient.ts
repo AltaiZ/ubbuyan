@@ -7,6 +7,12 @@ export function getClient() {
         process.env.ERXES_API_URL ||
         process.env.NEXT_PUBLIC_GRAPHQL_URI ||
         "https://ulaanbaatarbuyanmn.next.erxes.io/gateway/graphql",
+      headers: {
+        "x-app-token":
+          process.env.ERXES_APP_TOKEN ||
+          process.env.NEXT_PUBLIC_ERXES_APP_TOKEN ||
+          "",
+      },
       fetch,
     }),
     cache: new InMemoryCache(),

@@ -17,8 +17,13 @@ export default function CmsArticlePageClient({
   title,
   fallback,
 }: Props) {
+  const searchValue =
+    candidates.find((candidate) => /[a-z0-9-]/i.test(candidate)) ||
+    candidates[0] ||
+    title;
+
   const { data } = useQuery(cmsQueries.cmsPostList, {
-    variables: {},
+    variables: { searchValue },
     fetchPolicy: "no-cache",
   });
 

@@ -10,8 +10,13 @@ import {
 } from "@apollo/client-integration-nextjs";
 
 export function makeClient() {
+  const uri =
+    process.env.ERXES_API_URL ||
+    process.env.NEXT_PUBLIC_GRAPHQL_URI ||
+    "https://ulaanbaatarbuyanmn.next.erxes.io/gateway/graphql";
+
   const httpLink = new HttpLink({
-    uri: process.env.ERXES_API_URL,
+    uri,
     credentials: "include", // Include cookies
     headers: {
       // Remove the CORS header - it's not needed here

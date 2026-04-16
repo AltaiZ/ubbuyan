@@ -64,8 +64,35 @@ export async function getCmsPosts() {
   return (data?.cpPostList?.posts || []) as CmsPost[];
 }
 
+export async function searchCmsPosts(searchValue: string) {
+  const client = getClient();
+  const { data } = await client.query<any>({
+    query: cmsQueries.cmsPostList,
+    variables: { searchValue },
+    fetchPolicy: "no-cache",
+  });
+
+  return (data?.cpPostList?.posts || []) as CmsPost[];
+}
+
 export async function findCmsPostByCandidates(candidates: string[]) {
-  const posts = await getCmsPosts();
+  const collectedPosts: CmsPost[] = [];
+  const seenIds = new Set<string>();
+
+  for (const candidate of candidates) {
+    const posts = await searchCmsPosts(candidate);
+
+    for (const post of posts) {
+      if (!post?._id || seenIds.has(post._id)) {
+        continue;
+      }
+
+      seenIds.add(post._id);
+      collectedPosts.push(post);
+    }
+  }
+
+  const posts = collectedPosts.length ? collectedPosts : await getCmsPosts();
 
   return findMatchingCmsPost(posts, candidates);
 }

@@ -1,7 +1,8 @@
 import React from "react";
-import CmsArticlePageClient from "@/components/about/CmsArticlePageClient";
+import CmsArticlePage from "@/components/about/CmsArticlePage";
+import { findCmsPostByCandidates } from "@/lib/cmsPosts";
 
-export default function Page() {
+export default async function Page() {
   const fallback = (
     <div
       id="content"
@@ -411,16 +412,22 @@ export default function Page() {
     </div>
   );
 
-  return (
-    <CmsArticlePageClient
-      candidates={[
-        "гадаад харилцаа",
-        "gadaad hariltsaa",
-        "gadaad-hariltsaa",
-        "international relations",
-      ]}
-      title="Гадаад харилцаа"
-      fallback={fallback}
-    />
-  );
+  let post = null;
+
+  try {
+    post = await findCmsPostByCandidates([
+      "гадаад харилцаа",
+      "gadaad hariltsaa",
+      "gadaad-hariltsaa",
+      "international relations",
+    ]);
+  } catch (error) {
+    console.error("GADAAD HARILTSAA CMS ERROR:", error);
+  }
+
+  if (post) {
+    return <CmsArticlePage post={post} title="Гадаад харилцаа" />;
+  }
+
+  return fallback;
 }
