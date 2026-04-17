@@ -83,7 +83,7 @@ export default function Footer() {
                   <a href="/buteegdehuun/">Сац суварга</a>
                 </li>
                 <li className=" hidden-xs" role="presentation">
-                  <a href="/buteegdehuun/">Хүндэтгэлийн цэцэг</a>
+                  <a href="/buteegdehuun/tsetseg">Хүндэтгэлийн цэцэг</a>
                 </li>
                 <li className=" hidden-xs" role="presentation">
                   <a href="/buteegdehuun/">Зэд</a>

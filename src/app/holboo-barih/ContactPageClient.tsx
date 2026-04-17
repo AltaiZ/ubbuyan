@@ -13,7 +13,7 @@ type Props = {
 
 export default function ContactPageClient({ fallbackContent }: Props) {
   const { data } = useQuery(cmsQueries.cmsPostList, {
-    variables: {},
+    variables: { searchValue: "holboo barih" },
     fetchPolicy: "no-cache",
   });
 
@@ -21,8 +21,13 @@ export default function ContactPageClient({ fallbackContent }: Props) {
     ((data as any)?.cpPostList?.posts || []) as CmsPost[],
     [
       "холбоо барих",
+      "холбоо барих утас",
       "holboo barih",
+      "holboo-barih",
+      "holboo barikh",
+      "holboo",
       "contact",
+      "contact us",
       "эрдэнэт хүмүүнийг мөнхжүүлж дурсгалыг нь хүндэтгэн дээдлье",
     ]
   );

@@ -10,20 +10,17 @@ type Props = {
   candidates: string[];
   title: string;
   fallback: React.ReactNode;
+  searchValue?: string;
 };
 
 export default function CmsArticlePageClient({
   candidates,
   title,
   fallback,
+  searchValue,
 }: Props) {
-  const searchValue =
-    candidates.find((candidate) => /[a-z0-9-]/i.test(candidate)) ||
-    candidates[0] ||
-    title;
-
   const { data } = useQuery(cmsQueries.cmsPostList, {
-    variables: { searchValue },
+    variables: searchValue ? { searchValue } : {},
     fetchPolicy: "no-cache",
   });
 

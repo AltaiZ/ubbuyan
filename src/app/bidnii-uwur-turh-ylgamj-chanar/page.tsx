@@ -111,11 +111,20 @@ export default function Page() {
 
   return (
     <CmsArticlePageClient
+      searchValue="uvur yalgamj"
       candidates={[
         "бидний өвөр төрх, ялгамж чанар",
+        "бидний өвөр төрх ялгамж чанар",
+        "өвөр төрх",
+        "ялгамж чанар",
+        "yalgamj-chanar",
+        "uvur yalgamj",
+        "uvur yalgamj",
+        "uvur-yalgamj",
         "bidnii uwur turh yalgamj chanar",
         "yalgamj",
         "yalgamj chanar",
+        "uvur turh",
       ]}
       title="Бидний өвөр төрх, ялгамж чанар"
       fallback={fallback}

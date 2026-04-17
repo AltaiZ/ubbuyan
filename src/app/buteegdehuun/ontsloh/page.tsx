@@ -68,7 +68,7 @@ export default async function Page({
                 <div className="arrow-down" />
               </li>
               <li className="col-md-2 ">
-                <a href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%85%D2%AF%D0%BD%D0%B4%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D1%86%D1%8D%D1%86%D1%8D%D0%B3/">
+                <a href="/buteegdehuun/tsetseg">
                   <img src="/static/images/tab5.png" width="25" height="25" />
                   Хүндэтгэлийн цэцэг
                 </a>
@@ -161,7 +161,7 @@ export default async function Page({
                       <div className="item">
                         <a
                           className="product-name"
-                          href="/%D0%B1%D2%AF%D1%82%D1%8D%D1%8D%D0%B3%D0%B4%D1%8D%D1%85%D2%AF%D2%AF%D0%BD%D2%AF%D2%AF%D0%B4/%D1%85%D2%AF%D0%BD%D0%B4%D1%8D%D1%82%D0%B3%D1%8D%D0%BB%D0%B8%D0%B9%D0%BD-%D1%86%D1%8D%D1%86%D1%8D%D0%B3/"
+                          href="/buteegdehuun/tsetseg"
                         >
                           <img
                             src="/static/images/tab5.png"

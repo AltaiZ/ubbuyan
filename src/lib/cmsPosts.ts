@@ -16,6 +16,7 @@ function normalizeValue(value?: string | null) {
   return String(value || "")
     .toLowerCase()
     .replace(/[^a-z0-9а-яёөүңә\s-]+/gi, " ")
+    .replace(/[-_/]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -38,14 +39,15 @@ function scoreMatch(post: CmsPost, candidates: string[]) {
     }
 
     for (const value of values) {
+      const compactValue = value.replace(/\s+/g, "");
+      const compactNeedle = needle.replace(/\s+/g, "");
+
       if (value === needle) {
-        score = Math.max(score, 3);
+        score = Math.max(score, 5);
+      } else if (compactValue === compactNeedle) {
+        score = Math.max(score, 4);
       } else if (value.includes(needle) || needle.includes(value)) {
-        score = Math.max(score, 2);
-      } else if (
-        value.replace(/\s+/g, "") === needle.replace(/\s+/g, "")
-      ) {
-        score = Math.max(score, 1);
+        score = Math.max(score, 3);
       }
     }
   }

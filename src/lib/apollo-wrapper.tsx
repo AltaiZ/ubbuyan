@@ -8,19 +8,17 @@ import {
   ApolloClient as NextSSRApolloClient,
   SSRMultipartLink,
 } from "@apollo/client-integration-nextjs";
+import { getErxesAppToken, getErxesGraphqlUri } from "./erxes-config";
 
 export function makeClient() {
-  const uri =
-    process.env.ERXES_API_URL ||
-    process.env.NEXT_PUBLIC_GRAPHQL_URI ||
-    "https://ulaanbaatarbuyanmn.next.erxes.io/gateway/graphql";
+  const uri = getErxesGraphqlUri();
+  const token = getErxesAppToken();
 
   const httpLink = new HttpLink({
     uri,
     credentials: "include", // Include cookies
     headers: {
-      // Remove the CORS header - it's not needed here
-      "x-app-token": process.env.ERXES_APP_TOKEN || "",
+      ...(token ? { "x-app-token": token } : {}),
     },
     fetchOptions: { cache: "no-store" },
   });
