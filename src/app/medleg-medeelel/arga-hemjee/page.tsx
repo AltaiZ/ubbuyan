@@ -1,5 +1,6 @@
 import { getKbArticlesByCode } from "@/lib/kb";
 import React from "react";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 export default async function page() {
   const { articles } = await getKbArticlesByCode("arag-hemjee");
@@ -68,8 +69,8 @@ export default async function page() {
                             className="img-responsive"
                             width={240}
                             height={180}
-                            alt={item.title}
-                            src={`https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.image?.url}`}
+                            alt={item.title || ""}
+                            src={resolveCmsMediaUrl(item?.image?.url)}
                           />
                         </a>
                       </div>

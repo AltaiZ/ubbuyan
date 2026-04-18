@@ -6,6 +6,7 @@ import HomepageTab from "./homepage-tab/homepage-tab";
 import { useLazyQuery } from "@apollo/client/react";
 import { queries } from "@/graphql";
 import { IProducts } from "@/lib/products";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -90,7 +91,7 @@ export default function Products({ searchParams }: IPageProps) {
                     <div
                       className="p_img"
                       style={{
-                        background: `url(https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.attachment?.url}) no-repeat center`,
+                        background: `url(${resolveCmsMediaUrl(item?.attachment?.url)}) no-repeat center`,
                         backgroundSize: "cover",
                       }}
                     >

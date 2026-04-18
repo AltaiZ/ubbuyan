@@ -30,6 +30,7 @@ const cmsPostList = gql`
       }
       posts {
         _id
+        slug
         type
         customPostType {
           _id
@@ -61,6 +62,7 @@ const cmsPostList = gql`
         categories {
           _id
           name
+          slug
           __typename
         }
         featured

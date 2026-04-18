@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import HomeMedeeTab from "./homemedee-tab";
 import LamNar from "../lam-nar";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -85,14 +86,17 @@ export default function HomeMedeeContent({
             perArticles
               .slice()
               .reverse()
-              .map((item: any) => (
-                <div key={item._id} className="pc_tab col-md-3 col-sm-6">
+              .map((item: any) => {
+                const imageUrl = resolveCmsMediaUrl(item?.thumbnail?.url);
+
+                return (
+                  <div key={item._id} className="pc_tab col-md-3 col-sm-6">
                   <a href={`/medee-medeelel/${item._id}`}>
                     <div
                       className="p_img"
                       style={{
-                        background: item?.thumbnail?.url
-                          ? `url(${item.thumbnail.url}) no-repeat center`
+                        background: imageUrl
+                          ? `url(${imageUrl}) no-repeat center`
                           : `url(/static/images/news.jpg) no-repeat center`,
                         backgroundSize: "cover",
                       }}
@@ -111,8 +115,9 @@ export default function HomeMedeeContent({
                       <i>{item?.excerpt || item?.summary || ""}</i>
                     </div>
                   </a>
-                </div>
-              ))
+                  </div>
+                );
+              })
           ) : (
             <div style={{ padding: "20px 0" }}>Пост олдсонгүй</div>
           )}

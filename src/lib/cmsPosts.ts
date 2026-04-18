@@ -3,12 +3,14 @@ import cmsQueries from "@/graphql/cms/queries";
 
 export type CmsPost = {
   _id: string;
+  slug?: string | null;
   title?: string | null;
   content?: string | null;
   excerpt?: string | null;
   categories?: Array<{
     _id?: string | null;
     name?: string | null;
+    slug?: string | null;
   }> | null;
 };
 
@@ -23,8 +25,12 @@ function normalizeValue(value?: string | null) {
 
 function scoreMatch(post: CmsPost, candidates: string[]) {
   const values = [
+    post.slug,
     post.title,
-    ...(post.categories || []).map((category) => category?.name || ""),
+    ...(post.categories || []).flatMap((category) => [
+      category?.name || "",
+      category?.slug || "",
+    ]),
   ]
     .map(normalizeValue)
     .filter(Boolean);
@@ -112,4 +118,24 @@ export function findMatchingCmsPost(posts: CmsPost[], candidates: string[]) {
     .sort((left, right) => right.score - left.score);
 
   return matches[0]?.post || null;
+}
+
+export function findMatchingCmsPosts(posts: CmsPost[], candidateGroups: string[][]) {
+  const safePosts = posts || [];
+  const usedIds = new Set<string>();
+
+  return candidateGroups
+    .map((candidates) => {
+      const post = findMatchingCmsPost(
+        safePosts.filter((item) => item?._id && !usedIds.has(item._id)),
+        candidates
+      );
+
+      if (post?._id) {
+        usedIds.add(post._id);
+      }
+
+      return post;
+    })
+    .filter(Boolean) as CmsPost[];
 }

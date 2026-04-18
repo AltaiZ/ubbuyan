@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import queries from "@/graphql/cms/queries";
 import { useQuery } from "@apollo/client/react";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 export default function MedeeMedeelelPage() {
   const { data, loading, error } = useQuery(queries.cmsPostList, {
@@ -70,9 +71,9 @@ export default function MedeeMedeelelPage() {
               scrollSnapAlign: "start",
             }}
           >
-            {post?.thumbnail?.url ? (
+            {resolveCmsMediaUrl(post?.thumbnail?.url) ? (
               <img
-                src={post.thumbnail.url}
+                src={resolveCmsMediaUrl(post?.thumbnail?.url)}
                 alt={post.title}
                 style={{
                   width: "100%",

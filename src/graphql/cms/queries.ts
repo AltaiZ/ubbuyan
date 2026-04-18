@@ -24,6 +24,7 @@ export const cmsPostList = gql`
       totalCount
       posts {
         _id
+        slug
         title
         content
         excerpt
@@ -37,6 +38,7 @@ export const cmsPostList = gql`
         categories {
           _id
           name
+          slug
         }
         images {
           url

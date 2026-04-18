@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useQuery } from "@apollo/client/react";
 import queries from "@/graphql/cms/queries";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 type SectionKey = "news" | "event" | "knowledge" | null;
 
@@ -34,6 +35,7 @@ export default function Page() {
   const searchedPosts = (searchedData as any)?.cpPostList?.posts || [];
   const searchedPost = searchedPosts.find((item: any) => item?._id === id);
   const activePost = post || searchedPost;
+  const activeThumbnailUrl = resolveCmsMediaUrl(activePost?.thumbnail?.url);
 
   const getCategoryNames = (item: any): string[] =>
     item?.categories?.map((cat: any) => String(cat?.name || "").toLowerCase().trim()) || [];
@@ -155,10 +157,10 @@ export default function Page() {
 
           <div style={{ marginBottom: "25px", color: "#999" }}>Share:</div>
 
-          {activePost?.thumbnail?.url ? (
+          {activeThumbnailUrl ? (
             <div style={{ marginBottom: "30px" }}>
               <img
-                src={activePost.thumbnail.url}
+                src={activeThumbnailUrl}
                 alt={activePost.title}
                 style={{
                   width: "100%",
@@ -226,9 +228,9 @@ export default function Page() {
                     overflow: "hidden",
                   }}
                 >
-                  {item?.thumbnail?.url ? (
+                  {resolveCmsMediaUrl(item?.thumbnail?.url) ? (
                     <img
-                      src={item.thumbnail.url}
+                      src={resolveCmsMediaUrl(item?.thumbnail?.url)}
                       alt={item.title}
                       style={{
                         width: "100%",

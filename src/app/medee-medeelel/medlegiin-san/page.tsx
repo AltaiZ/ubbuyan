@@ -1,6 +1,7 @@
 import { PaginationPart } from "@/components/pagination";
 import { getKbArticlesByCode } from "@/lib/kb";
 import React from "react";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 export const revalidate = 1;
 const ITEMS_PER_PAGE = 9;
@@ -213,7 +214,7 @@ export default async function page({
                   <div
                     className="p_img"
                     style={{
-                      background: `url(https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.image?.url}) no-repeat center`,
+                      background: `url(${resolveCmsMediaUrl(item?.image?.url)}) no-repeat center`,
                       backgroundSize: "cover",
                     }}
                   >

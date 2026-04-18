@@ -8,6 +8,7 @@ import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 export default function Slider({ article }: { article: any }) {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
@@ -30,7 +31,7 @@ export default function Slider({ article }: { article: any }) {
           (attachment: { url: any }, index: React.Key | null | undefined) => (
             <SwiperSlide key={index}>
               <img
-                src={`https://ulaanbaatarbuyan.api.erxes.io/api/read-file?key=${attachment.url}`}
+                src={resolveCmsMediaUrl(attachment.url)}
                 alt=""
                 className="w-full md:w-[80%] h-[500px] mx-auto"
               />
@@ -51,7 +52,7 @@ export default function Slider({ article }: { article: any }) {
           (attachment: { url: any }, index: React.Key | null | undefined) => (
             <SwiperSlide key={index}>
               <img
-                src={`https://ulaanbaatarbuyan.api.erxes.io/api/read-file?key=${attachment.url}`}
+                src={resolveCmsMediaUrl(attachment.url)}
                 alt=""
                 className={`thumbnail ${
                   selectedIndex === index ? "active" : ""

@@ -3,6 +3,7 @@ import React from "react";
 import HomepageTab from "./homepage-tab/ContainerProduct";
 import { useRouter } from "next/router";
 import { IPageProps } from "@/types";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 export default async function HProducts({ searchParams }: IPageProps) {
   const activeTab = searchParams?.activeTab;
@@ -70,7 +71,7 @@ export default async function HProducts({ searchParams }: IPageProps) {
                     <div
                       className="p_img"
                       style={{
-                        background: `url(https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.attachment?.url}) no-repeat center`,
+                        background: `url(${resolveCmsMediaUrl(item?.attachment?.url)}) no-repeat center`,
                         backgroundSize: "cover",
                       }}
                     >

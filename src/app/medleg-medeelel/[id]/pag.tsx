@@ -1,5 +1,6 @@
 import { getKbArticleDetail, getKbArticlesByCode } from "@/lib/kb";
 import React from "react";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 export default async function pag({ params }: any) {
   const { article } = await getKbArticleDetail({
@@ -21,7 +22,8 @@ export default async function pag({ params }: any) {
               <a href={`/medee-medeelel/${item._id}`}>
                 <div className="col-md-4 np r_img">
                   <img
-                    src={`https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.image?.url}`}
+                    src={resolveCmsMediaUrl(item?.image?.url)}
+                    alt={item.title || ""}
                   />
                 </div>
                 <div className="col-md-8 r_text">

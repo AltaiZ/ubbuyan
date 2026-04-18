@@ -9,9 +9,13 @@ import Erxesform from "./component/erxesForm";
 
 type Props = {
   fallbackContent: string;
+  initialPost?: CmsPost | null;
 };
 
-export default function ComplaintPageClient({ fallbackContent }: Props) {
+export default function ComplaintPageClient({
+  fallbackContent,
+  initialPost = null,
+}: Props) {
   const { data } = useQuery(cmsQueries.cmsPostList, {
     variables: {},
     fetchPolicy: "no-cache",
@@ -22,7 +26,7 @@ export default function ComplaintPageClient({ fallbackContent }: Props) {
     ["санал гомдол", "sanal gomdol", "complaint", "feedback"]
   );
 
-  const content = post?.content || fallbackContent;
+  const content = post?.content || initialPost?.content || fallbackContent;
 
   return (
     <div id="content" style={{ display: "block" }}>

@@ -1,6 +1,7 @@
 import { PaginationPart } from "@/components/pagination";
 import { getKbArticlesByCode } from "@/lib/kb";
 import React from "react";
+import { resolveCmsMediaUrl } from "@/lib/cms-media";
 
 export const revalidate = 1;
 const ITEMS_PER_PAGE = 9;
@@ -77,8 +78,8 @@ export default async function page({ searchParams }: any) {
                             className="img-responsive"
                             width={240}
                             height={180}
-                            alt={item.title}
-                            src={`https://ulaanbaatarbuyan.app.erxes.io/api/read-file?key=${item?.image?.url}`}
+                            alt={item.title || ""}
+                            src={resolveCmsMediaUrl(item?.image?.url)}
                           />
                         </a>
                       </div>
