@@ -1,6 +1,6 @@
 import { getKbArticlesByCode } from "@/lib/kb";
 import React from "react";
-import { resolveCmsMediaUrl } from "@/lib/cms-media";
+import { resolveCmsPostThumbnailUrl } from "@/lib/cms-media";
 
 export default async function page() {
   const { articles } = await getKbArticlesByCode("arag-hemjee");
@@ -70,7 +70,10 @@ export default async function page() {
                             width={240}
                             height={180}
                             alt={item.title || ""}
-                            src={resolveCmsMediaUrl(item?.image?.url)}
+                            src={
+                              resolveCmsPostThumbnailUrl(item) ||
+                              "/static/images/news.jpg"
+                            }
                           />
                         </a>
                       </div>

@@ -25,6 +25,7 @@ export const cmsPostList = gql`
       posts {
         _id
         slug
+        type
         title
         content
         excerpt
@@ -45,6 +46,7 @@ export const cmsPostList = gql`
           type
           name
         }
+        customFieldsData
       }
     }
   }

@@ -18,9 +18,12 @@ export default function ServiceArticlePageClient({
   fallback,
 }: Props) {
   const { data } = useQuery(cmsQueries.cmsPostList, {
-    variables: {},
-    fetchPolicy: "no-cache",
-  });
+  variables: {
+    sortField: "createdAt",
+    sortDirection: "DESC",
+  },
+  fetchPolicy: "no-cache",
+});
 
   const posts = ((data as any)?.cpPostList?.posts || []) as any[];
   const post = findMatchingCmsPost(posts, candidates);

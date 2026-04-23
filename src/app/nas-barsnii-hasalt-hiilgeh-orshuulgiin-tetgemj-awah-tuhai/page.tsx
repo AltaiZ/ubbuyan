@@ -1,13 +1,30 @@
+"use client";
 import React from "react";
+import { useQuery } from "@apollo/client/react";
+import cmsQueries from "@/graphql/cms/queries";
 
-export default function page() {
+export default function Page() {
+  const { data } = useQuery(cmsQueries.cmsPostList, {
+    variables: { sortField: "createdAt", sortDirection: "DESC" },
+    fetchPolicy: "no-cache",
+  });
+
+  const posts = (data as any)?.cpPostList?.posts || [];
+
+  const getContent = (category: string) => {
+    const post = posts.find((p: any) =>
+      p.categories?.some((c: any) => c.name === category)
+    );
+    return post?.content || null;
+  };
+
+  const material = getContent("nas-barsnii-material");
+  const tetgemj = getContent("orshuulgiin-tetgemj");
+  const burduuleh = getContent("tetgemj-burduuleh-material");
+  const erh = getContent("tetgemj-avah-erh");
+
   return (
-    <div
-      id="content"
-      style={{
-        display: "block",
-      }}
-    >
+    <div id="content" style={{ display: "block" }}>
       <section className="simple_page container">
         <div className="tus">
           <hr />
@@ -15,116 +32,49 @@ export default function page() {
             <img src="/static/images/icon12.png" />
           </div>
         </div>
-        <div className="emgenel" data-spy="scroll" data-target=".sidebar">
+        <div className="emgenel">
           <div className="container">
             <div className="row">
               <div className="hidden-xs col-md-3 col-md-offset-0 sidebar emgenelsubmenu">
                 <ul className="nav nav-list tetgemj affix emgenelsubmenu">
-                  <li>
-                    <a className="active" href="#material">
-                      <h4>Нас барсны хасалт хийлгэхэд бүрдүүлэх материал</h4>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#tetgemj">
-                      <h4>Оршуулгын тэтгэмж авах</h4>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#burduuleh_material">
-                      <h4>Оршуулгын тэтгэмж авахад бүрдүүлэх материал</h4>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#erh">
-                      <h4>Оршуулгын тэтгэмж авах эрх</h4>
-                    </a>
-                  </li>
+                  <li><a className="active" href="#material"><h4>Нас барсны хасалт хийлгэхэд бүрдүүлэх материал</h4></a></li>
+                  <li><a href="#tetgemj"><h4>Оршуулгын тэтгэмж авах</h4></a></li>
+                  <li><a href="#burduuleh_material"><h4>Оршуулгын тэтгэмж авахад бүрдүүлэх материал</h4></a></li>
+                  <li><a href="#erh"><h4>Оршуулгын тэтгэмж авах эрх</h4></a></li>
                 </ul>
               </div>
               <div className="col-md-8 col-md-offset-1 content">
                 <section id="material">
                   <h3>Нас барсны хасалт хийлгэхэд бүрдүүлэх материал:</h3>
-                  <p> </p>
-                  <ol>
-                    <li>
-                      Талийгаачийн иргэний үнэмлэх /Насанд хүрээгүй бол төрсний
-                      гэрчилгээ, эцэг эхийн иргэний үнэмлэх, эцэг эхийн
-                      гэрлэлтийн баталгаа, бичиг баримтгүй хүн бол оршин сууж
-                      байсан хорооны тодорхойлолт, оршин суух хаяг байхгүй
-                      тохиолдолд архивын лавлагаа/
-                    </li>
-                    <li>
-                      Нас барсан тухай эмнэлгийн магадлагаа “АМ-07 маягт”
-                      /Өвчний улмаас гэртээ нас барсан тохиолдолд өрхийн
-                      эмнэлгийн тодорхойлолт авч харьяа дүүргийн эмнэлгээс
-                      “АМ-07 маягт” авна. Зуурдаар нас барсан тохиолдолд Шүүх
-                      эмнэлгийн “АМ-07 маягт”/
-                    </li>
-                    <li>
-                      Хасалт хийлгэхээр материал бүрдүүлсэн хүн өөрийн бичиг
-                      баримттай ирэх
-                    </li>
-                  </ol>
-                  <p />
+                  {material ? (
+                    <div dangerouslySetInnerHTML={{ __html: material }} />
+                  ) : (
+                    <p>Мэдээлэл удахгүй нэмэгдэнэ.</p>
+                  )}
                 </section>
                 <section id="tetgemj">
                   <h3>Оршуулгын тэтгэмж авах:</h3>
-                  <p> </p>
-                  <p>
-                    Нийслэлийн төвийн дүүргийн /БГД, БЗД, СБД, СХД, ЧД, ХУД/
-                    иргэд “Улаанбаатар Буян” ХХК-ийн байранд байрлах “Нийслэлийн
-                    Нийгмийн даатгалын сан”-гаас оршуулгын тэтгэмж авна.
-                  </p>
-                  <p />
+                  {tetgemj ? (
+                    <div dangerouslySetInnerHTML={{ __html: tetgemj }} />
+                  ) : (
+                    <p>Мэдээлэл удахгүй нэмэгдэнэ.</p>
+                  )}
                 </section>
                 <section id="burduuleh_material">
                   <h3>Оршуулгын тэтгэмж авахад бүрдүүлэх материал:</h3>
-                  <p> </p>
-                  <ol>
-                    <li>Нас барсны гэрчилгээ</li>
-                    <li>Талийгаачийн иргэний үнэмлэх</li>
-                    <li>
-                      Нийгмийн даатгалын дэвтэр /Тэтгэмжийн даатгалын шимтгэлийг
-                      төлснийг гэрчлэх хөдөлмөрийн дэвтэр буюу архивын лавлагаа/
-                    </li>
-                    <li>Тэтгэвэрийн дэвтэр</li>
-                    <li>Тэтгэмж хүлээн авах хүний иргэний үнэмлэх акт</li>
-                  </ol>
-                  <p>
-                    Хэрвээ үйлдвэрлэлийн осол, мэргэжлээс шалтгаалсан өвчний
-                    улмаас нас барсан бол Үйлдвэрлэлийн
-                    <br />
-                    ослын акт
-                  </p>
-                  <p />
+                  {burduuleh ? (
+                    <div dangerouslySetInnerHTML={{ __html: burduuleh }} />
+                  ) : (
+                    <p>Мэдээлэл удахгүй нэмэгдэнэ.</p>
+                  )}
                 </section>
                 <section id="erh">
                   <h3>Оршуулгын тэтгэмж авах эрх:</h3>
-                  <p> </p>
-                  <ol>
-                    <li>
-                      Тэтгэмжийн даатгалын шимтгэлийг 36 сараас доошгүй
-                      хугацаагаар төлсөн даатгуулагч нь ердийн өвчин, ахуйн
-                      ослын улмаас нас барвал түүний оршуулганд зориулан
-                      оршуулгын тэтгэмж олгоно.
-                    </li>
-                    <li>
-                      Даатгуулагч нь үйлдвэрлэлийн осол, мэргэжлээс шалтгаалсан
-                      өвчний улмаас нас барсан бол оршуулгын тэтгэмжийг шимтгэл
-                      төлсөн хугацааг харгалзахгүйгээр олгоно.
-                    </li>
-                    <li>
-                      Нийгмийн даатгалын хуульд заасан тэтгэвэр, тэтгэмж авч
-                      байсан иргэн нас барвал түүний оршуулганд зориулан
-                      оршуулгын тэтгэмж олгоно.
-                    </li>
-                  </ol>
-                  <p>
-                    Оршуулгын тэтгэмж авах иргэн нь даатгуулагчыг нас барснаас
-                    хойш 28 хоногийн дотор багтаан хүсэлт гаргах эрхтэй.
-                  </p>
-                  <p />
+                  {erh ? (
+                    <div dangerouslySetInnerHTML={{ __html: erh }} />
+                  ) : (
+                    <p>Мэдээлэл удахгүй нэмэгдэнэ.</p>
+                  )}
                 </section>
               </div>
             </div>

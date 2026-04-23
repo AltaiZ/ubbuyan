@@ -1,15 +1,21 @@
 import { PaginationPart } from "@/components/pagination";
-import { getKbArticlesByCode } from "@/lib/kb";
+import { getCmsPosts } from "@/lib/cmsPosts";
 import React from "react";
-import { resolveCmsMediaUrl } from "@/lib/cms-media";
+import { resolveCmsPostThumbnailUrl } from "@/lib/cms-media";
 
 export const revalidate = 1;
 const ITEMS_PER_PAGE = 9;
 
 export default async function page({ searchParams }: any) {
-  const { articles } = await getKbArticlesByCode("medleg-medeelel");
-  // console.log(articles);
-  const reversedArticles = [...articles].reverse();
+  const allPosts = await getCmsPosts();
+  const allowedCategories = new Set(["medleg-medeelel", "knowledge", "knowledge-base"]);
+  const posts = allPosts.filter((post: any) =>
+    post?.categories?.some((cat: any) => {
+      const value = String(cat?.slug || cat?.name || "").toLowerCase().trim();
+      return allowedCategories.has(value);
+    })
+  );
+  const reversedArticles = [...posts].reverse();
   const currentPage = parseInt(searchParams.page as string) || 1;
   const totalPages = Math.ceil(reversedArticles.length / ITEMS_PER_PAGE);
   const safeCurrentPage = Math.min(Math.max(currentPage, 1), totalPages);
@@ -79,7 +85,10 @@ export default async function page({ searchParams }: any) {
                             width={240}
                             height={180}
                             alt={item.title || ""}
-                            src={resolveCmsMediaUrl(item?.image?.url)}
+                            src={
+                              resolveCmsPostThumbnailUrl(item) ||
+                              "/static/images/news.jpg"
+                            }
                           />
                         </a>
                       </div>
@@ -102,7 +111,7 @@ export default async function page({ searchParams }: any) {
                               fill="currentColor"
                             />
                           </svg>
-                          {item.summary}
+                          {item.excerpt || item.summary || ""}
                         </span>
                         <h4>
                           <a

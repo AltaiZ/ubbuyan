@@ -22,12 +22,19 @@ export default function Blog() {
     "zurhaich-lam-nar",
   ]);
 
-  const posts = allPosts.filter((post: any) =>
+  const filteredPosts = allPosts.filter((post: any) =>
     post?.categories?.some((cat: any) => {
       const value = String(cat?.slug || cat?.name || "").toLowerCase().trim();
       return allowedCategories.has(value);
     })
   );
+
+  const posts = [
+    ...filteredPosts,
+    ...allPosts.filter(
+      (post: any) => !filteredPosts.some((filtered: any) => filtered?._id === post?._id)
+    ),
+  ];
 
   const pagePosts = posts.slice(0, ITEMS_PER_PAGE);
 

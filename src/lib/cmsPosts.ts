@@ -109,7 +109,7 @@ export function findMatchingCmsPost(posts: CmsPost[], candidates: string[]) {
   const safePosts = posts || [];
 
   const matches = safePosts
-    .filter((post) => post?.content || post?.excerpt)
+    .filter((post) => post?.content || post?.excerpt || post?.title)
     .map((post) => ({
       post,
       score: scoreMatch(post, candidates),

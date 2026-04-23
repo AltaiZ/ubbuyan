@@ -1,6 +1,6 @@
 import { getKbArticleDetail, getKbArticlesByCode } from "@/lib/kb";
 import React from "react";
-import { resolveCmsMediaUrl } from "@/lib/cms-media";
+import { resolveCmsPostThumbnailUrl } from "@/lib/cms-media";
 
 export default async function pag({ params }: any) {
   const { article } = await getKbArticleDetail({
@@ -22,7 +22,10 @@ export default async function pag({ params }: any) {
               <a href={`/medee-medeelel/${item._id}`}>
                 <div className="col-md-4 np r_img">
                   <img
-                    src={resolveCmsMediaUrl(item?.image?.url)}
+                    src={
+                      resolveCmsPostThumbnailUrl(item) ||
+                      "/static/images/news.jpg"
+                    }
                     alt={item.title || ""}
                   />
                 </div>

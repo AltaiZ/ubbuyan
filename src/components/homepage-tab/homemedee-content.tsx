@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import HomeMedeeTab from "./homemedee-tab";
 import LamNar from "../lam-nar";
-import { resolveCmsMediaUrl } from "@/lib/cms-media";
+import { getCmsPostThumbnailCandidates } from "@/lib/cms-media";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -87,20 +87,43 @@ export default function HomeMedeeContent({
               .slice()
               .reverse()
               .map((item: any) => {
-                const imageUrl = resolveCmsMediaUrl(item?.thumbnail?.url);
+                const thumbnailCandidates = getCmsPostThumbnailCandidates(item);
+                const imageUrl = thumbnailCandidates[0] || "/static/images/news.jpg";
 
                 return (
                   <div key={item._id} className="pc_tab col-md-3 col-sm-6">
                   <a href={`/medee-medeelel/${item._id}`}>
                     <div
                       className="p_img"
-                      style={{
-                        background: imageUrl
-                          ? `url(${imageUrl}) no-repeat center`
-                          : `url(/static/images/news.jpg) no-repeat center`,
-                        backgroundSize: "cover",
-                      }}
+                      style={{ position: "relative", overflow: "hidden" }}
                     >
+                      <img
+                        src={imageUrl}
+                        alt={item?.title || "news image"}
+                        data-fallbacks={JSON.stringify([
+                          ...thumbnailCandidates.slice(1),
+                          "/static/images/news.jpg",
+                        ])}
+                        onError={(event) => {
+                          const target = event.currentTarget;
+                          const raw = target.getAttribute("data-fallbacks") || "[]";
+                          const fallbackList = JSON.parse(raw) as string[];
+                          const next = fallbackList.shift();
+
+                          if (!next) {
+                            return;
+                          }
+
+                          target.setAttribute("data-fallbacks", JSON.stringify(fallbackList));
+                          target.src = next;
+                        }}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          display: "block",
+                        }}
+                      />
                       <div className="overlay">
                         <img
                           className="c_arrow"

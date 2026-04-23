@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useQuery } from "@apollo/client/react";
 import queries from "@/graphql/cms/queries";
-import { resolveCmsMediaUrl } from "@/lib/cms-media";
+import { getCmsPostThumbnailCandidates, resolveCmsPostThumbnailUrl } from "@/lib/cms-media";
 
 type SectionKey = "news" | "event" | "knowledge" | null;
 
@@ -35,7 +35,7 @@ export default function Page() {
   const searchedPosts = (searchedData as any)?.cpPostList?.posts || [];
   const searchedPost = searchedPosts.find((item: any) => item?._id === id);
   const activePost = post || searchedPost;
-  const activeThumbnailUrl = resolveCmsMediaUrl(activePost?.thumbnail?.url);
+  const activeThumbnailUrl = resolveCmsPostThumbnailUrl(activePost);
 
   const getCategoryNames = (item: any): string[] =>
     item?.categories?.map((cat: any) => String(cat?.name || "").toLowerCase().trim()) || [];
@@ -162,6 +162,22 @@ export default function Page() {
               <img
                 src={activeThumbnailUrl}
                 alt={activePost.title}
+                data-fallbacks={JSON.stringify(
+                  getCmsPostThumbnailCandidates(activePost).slice(1)
+                )}
+                onError={(event) => {
+                  const target = event.currentTarget;
+                  const raw = target.getAttribute("data-fallbacks") || "[]";
+                  const fallbackList = JSON.parse(raw) as string[];
+                  const next = fallbackList.shift();
+
+                  if (!next) {
+                    return;
+                  }
+
+                  target.setAttribute("data-fallbacks", JSON.stringify(fallbackList));
+                  target.src = next;
+                }}
                 style={{
                   width: "100%",
                   height: "auto",
@@ -206,19 +222,23 @@ export default function Page() {
           </h3>
 
           <div>
-            {otherPosts.map((item: any) => (
-              <Link
-                key={item._id}
-                href={`/medee-medeelel/${item._id}`}
-                style={{
-                  display: "flex",
-                  gap: "14px",
-                  marginBottom: "14px",
-                  textDecoration: "none",
-                  color: "#222",
-                  alignItems: "flex-start",
-                }}
-              >
+            {otherPosts.map((item: any) => {
+              const thumbnailCandidates = getCmsPostThumbnailCandidates(item);
+              const thumbnailUrl = thumbnailCandidates[0];
+
+              return (
+                <Link
+                  key={item._id}
+                  href={`/medee-medeelel/${item._id}`}
+                  style={{
+                    display: "flex",
+                    gap: "14px",
+                    marginBottom: "14px",
+                    textDecoration: "none",
+                    color: "#222",
+                    alignItems: "flex-start",
+                  }}
+                >
                 <div
                   style={{
                     width: "120px",
@@ -228,10 +248,24 @@ export default function Page() {
                     overflow: "hidden",
                   }}
                 >
-                  {resolveCmsMediaUrl(item?.thumbnail?.url) ? (
+                  {thumbnailUrl ? (
                     <img
-                      src={resolveCmsMediaUrl(item?.thumbnail?.url)}
+                      src={thumbnailUrl}
                       alt={item.title}
+                      data-fallbacks={JSON.stringify(thumbnailCandidates.slice(1))}
+                      onError={(event) => {
+                        const target = event.currentTarget;
+                        const raw = target.getAttribute("data-fallbacks") || "[]";
+                        const fallbackList = JSON.parse(raw) as string[];
+                        const next = fallbackList.shift();
+
+                        if (!next) {
+                          return;
+                        }
+
+                        target.setAttribute("data-fallbacks", JSON.stringify(fallbackList));
+                        target.src = next;
+                      }}
                       style={{
                         width: "100%",
                         height: "100%",
@@ -251,8 +285,9 @@ export default function Page() {
                 >
                   {item.title}
                 </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -1,28 +1,36 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import HeaderNav from "./HeaderNav";
+
 export default function HeaderTop() {
+  const [phone, setPhone] = useState("7016-2222");
+  const [email, setEmail] = useState("info@ubbuyan.mn");
+
+  useEffect(() => {
+    fetch("/api/contact-info")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.phone) setPhone(data.phone);
+        if (data.email) setEmail(data.email);
+      });
+  }, []);
+
   return (
     <div>
       <div className="header-top">
         <div className="container">
           <ul>
             <li className="number">
-              <a href="tel:7016-2222">
-                <img src="/static/images/02.png" /> 7016-2222
+              <a href={"tel:" + phone}>
+                <img src="/static/images/02.png" /> {phone}
               </a>
             </li>
             <li className="email">
-              <a href="mailto: info@ubbuyan.mn">
-                <img src="/static/images/01.png" /> info@ubbuyan.mn
+              <a href={"mailto:" + email}>
+                <img src="/static/images/01.png" /> {email}
               </a>
             </li>
-            
-            {/* <li className="email">
-              <a href="/plugins/ub_buyan/online/book/select/">
-                <img src="/static/images/01.png" /> Цахим айлтгал
-              </a>
-            </li> */}
           </ul>
         </div>
       </div>

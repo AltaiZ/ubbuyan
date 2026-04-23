@@ -1,42 +1,30 @@
 "use client";
 
 import React from "react";
-import { ApolloLink, HttpLink } from "@apollo/client";
+import { HttpLink } from "@apollo/client";
 import {
   ApolloNextAppProvider,
   InMemoryCache as NextSSRInMemoryCache,
   ApolloClient as NextSSRApolloClient,
-  SSRMultipartLink,
 } from "@apollo/client-integration-nextjs";
-import { getErxesAppToken, getErxesGraphqlUri } from "./erxes-config";
+import { getErxesGraphqlUri } from "./erxes-config";
 
 export function makeClient() {
   const uri = getErxesGraphqlUri();
-  const token = getErxesAppToken();
+  const token = process.env.NEXT_PUBLIC_ERXES_APP_TOKEN || "";
 
   const httpLink = new HttpLink({
     uri,
-    credentials: "include", // Include cookies
+    credentials: "include",
     headers: {
       ...(token ? { "x-app-token": token } : {}),
     },
     fetchOptions: { cache: "no-store" },
   });
 
-  // For SSR, you typically want to chain the SSRMultipartLink
-  const link =
-    typeof window === "undefined"
-      ? ApolloLink.from([
-          new SSRMultipartLink({
-            stripDefer: true,
-          }),
-          httpLink,
-        ])
-      : httpLink;
-
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
-    link,
+    link: httpLink,
   });
 }
 
