@@ -1,8 +1,9 @@
 import React from "react";
+import ServiceArticlePage from "@/components/service/ServiceArticlePage";
+import { findCmsPostByCandidates } from "@/lib/cmsPosts";
 
-export default function page() {
-  return (
-    <div
+const fallback = (
+  <div
       id="content"
       style={{
         display: "block",
@@ -3064,5 +3065,29 @@ export default function page() {
         type="text/javascript"
       />
     </div>
-  );
+);
+
+export default async function page() {
+  const candidates = [
+    "Зүүн буяны төв цогцолбор",
+    "zuun-buyanii-tuv",
+    "zvvn-buynii-tuw-tsogtsolbr",
+  ];
+
+  try {
+    const post = await findCmsPostByCandidates(candidates);
+
+    if (post) {
+      return (
+        <ServiceArticlePage
+          post={post}
+          title="Зүүн буяны төв цогцолбор"
+        />
+      );
+    }
+  } catch (error) {
+    console.error("CMS ERROR: zvvn-buynii-tuw-tsogtsolbr", error);
+  }
+
+  return fallback;
 }

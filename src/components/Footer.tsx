@@ -61,10 +61,14 @@ export default function Footer() {
                   </a>
                 </li>
                 <li className=" hidden-xs" role="presentation">
-                  <a href="#">Дурсгалын цэцэрлэгт хүрээлэн</a>
+                  <a href="/dursagliin-tsetserlegt-hureelen/">
+                    Дурсгалын цэцэрлэгт хүрээлэн
+                  </a>
                 </li>
                 <li className=" hidden-xs" role="presentation">
-                  <a href="#">Диваажингийн цэцэрлэгт хүрээлэн</a>
+                  <a href="/diwaajingiin-tsetserlegt-hureelen/">
+                    Диваажингийн цэцэрлэгт хүрээлэн
+                  </a>
                 </li>
               </ul>
             </div>

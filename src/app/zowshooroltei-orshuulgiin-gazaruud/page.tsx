@@ -1,8 +1,9 @@
 import React from "react";
+import CmsArticlePage from "@/components/about/CmsArticlePage";
+import { findCmsPostByCandidates } from "@/lib/cmsPosts";
 
-export default function page() {
-  return (
-    <div
+const fallback = (
+  <div
       id="content"
       style={{
         display: "block",
@@ -3047,5 +3048,26 @@ export default function page() {
         </article>
       </section>
     </div>
-  );
+);
+
+export default async function page() {
+  const candidates = [
+    "Зөвшөөрөлтэй оршуулгын газрууд",
+    "zuvshuurult-orshuulga",
+    "zowshooroltei-orshuulgiin-gazaruud",
+  ];
+
+  try {
+    const post = await findCmsPostByCandidates(candidates);
+
+    if (post) {
+      return (
+        <CmsArticlePage post={post} title="Зөвшөөрөлтэй оршуулгын газрууд" />
+      );
+    }
+  } catch (error) {
+    console.error("CMS ERROR: zowshooroltei-orshuulgiin-gazaruud", error);
+  }
+
+  return fallback;
 }

@@ -1,7 +1,165 @@
-const CharPage = ({ params }: { params: { char: string } }) => {
-  const fixedItems = items.filter((item) => item.startWord === params.char);
+import cmsQueries from "@/graphql/cms/queries";
+import { getClient } from "@/lib/ssClient";
 
-  console.log({ params: params.char });
+type CmsPost = {
+  _id?: string;
+  title?: string | null;
+  content?: string | null;
+  excerpt?: string | null;
+  createdAt?: string | null;
+  categories?: Array<{
+    name?: string | null;
+    slug?: string | null;
+  }> | null;
+};
+
+const LETTER_TO_ROUTE: Record<string, string> = {
+  А: "a",
+  A: "a",
+  Б: "b",
+  B: "b",
+  В: "w",
+  W: "w",
+  Г: "g",
+  G: "g",
+  Д: "d",
+  D: "d",
+  Е: "ye",
+  E: "ye",
+  Ё: "yo",
+  Ж: "j",
+  J: "j",
+  З: "z",
+  Z: "z",
+  И: "i",
+  I: "i",
+  К: "k",
+  K: "k",
+  Л: "l",
+  L: "l",
+  М: "m",
+  M: "m",
+  Н: "n",
+  N: "n",
+  О: "o",
+  O: "o",
+  Ө: "u",
+  U: "u",
+  Р: "r",
+  R: "r",
+  С: "s",
+  S: "s",
+  Т: "t",
+  T: "t",
+  У: "uu",
+  Ү: "v",
+  V: "v",
+  Ф: "pi",
+  P: "pi",
+  Х: "h",
+  H: "h",
+  Ц: "ts",
+  Ч: "ch",
+  C: "ch",
+  Ш: "sh",
+  Э: "e",
+  Ю: "yu",
+  Y: "yu",
+  Я: "ya",
+};
+
+const ROUTE_TO_LETTER: Record<string, string> = {
+  a: "А",
+  b: "Б",
+  w: "В",
+  g: "Г",
+  d: "Д",
+  ye: "Е",
+  yo: "Ё",
+  j: "Ж",
+  z: "З",
+  i: "И",
+  k: "К",
+  l: "Л",
+  m: "М",
+  n: "Н",
+  o: "О",
+  u: "Ө",
+  r: "Р",
+  s: "С",
+  t: "Т",
+  uu: "У",
+  v: "Ү",
+  pi: "Ф",
+  h: "Х",
+  ts: "Ц",
+  ch: "Ч",
+  sh: "Ш",
+  e: "Э",
+  yu: "Ю",
+  ya: "Я",
+};
+
+function cleanText(value?: string | null) {
+  return String(value || "")
+    .replace(/[\u200B-\u200D\uFEFF]/g, "")
+    .trim();
+}
+
+function getRouteKeyFromTitle(title?: string | null) {
+  const cleaned = cleanText(title);
+
+  if (!cleaned) {
+    return "";
+  }
+
+  const firstChar = cleaned.charAt(0).toUpperCase();
+  return LETTER_TO_ROUTE[firstChar] || "";
+}
+
+function isMongolYosZanshilPost(post: CmsPost) {
+  return (post.categories || []).some((category) => {
+    const value = String(category?.slug || category?.name || "")
+      .toLowerCase()
+      .trim();
+
+    return value === "mongol-yos-zanshil" || value === "монгол ёс заншил";
+  });
+}
+
+function shouldShowCmsTitle(title: string, currentChar: string) {
+  const cleaned = cleanText(title);
+  if (!cleaned) return false;
+
+  const currentLetter = ROUTE_TO_LETTER[currentChar] || "";
+
+  return cleaned !== currentLetter && cleaned.toUpperCase() !== currentChar.toUpperCase();
+}
+
+async function getCmsItemsByChar(char: string) {
+  const client = getClient();
+  const { data } = await client.query<any>({
+    query: cmsQueries.cmsPostList,
+    variables: {
+      sortField: "createdAt",
+      sortDirection: "DESC",
+    },
+    fetchPolicy: "no-cache",
+  });
+
+  const posts = ((data?.cpPostList?.posts || []) as CmsPost[])
+    .filter(isMongolYosZanshilPost)
+    .filter((post) => getRouteKeyFromTitle(post.title) === char);
+
+  return posts;
+}
+
+const CharPage = async ({ params }: { params: { char: string } }) => {
+  const fixedItems = items.filter((item) => item.startWord === params.char);
+  const cmsItems = await getCmsItemsByChar(params.char).catch((error) => {
+    console.error("MONGOL YOS ZANSHIL CMS ERROR:", error);
+    return [] as CmsPost[];
+  });
 
   return (
     <div
@@ -724,6 +882,26 @@ const CharPage = ({ params }: { params: { char: string } }) => {
             />
           </div>
           <div className="filter-result">
+            {cmsItems.map((post, index) => {
+              const html = post.content || post.excerpt || "";
+              const letter = ROUTE_TO_LETTER[params.char] || params.char.toUpperCase();
+
+              return (
+                <div key={post._id || `cms-${index}`} className="row">
+                  <div className="col-md-3 onlyone">
+                    <h4>{letter}</h4>
+                  </div>
+                  <div className="col-md-9">
+                    <div className="filter-text">
+                      {shouldShowCmsTitle(post.title || "", params.char) ? (
+                        <h5>{post.title}</h5>
+                      ) : null}
+                      <div dangerouslySetInnerHTML={{ __html: html }} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
             {fixedItems.map((item, index) => (
               <div key={index} className="row">
                 <div className="col-md-3 onlyone">

@@ -1,8 +1,9 @@
 import React from "react";
+import ServiceArticlePage from "@/components/service/ServiceArticlePage";
+import { findCmsPostByCandidates } from "@/lib/cmsPosts";
 
-export default function page() {
-  return (
-    <div
+const fallback = (
+  <div
       id="content"
       style={{
         display: "block",
@@ -3063,5 +3064,29 @@ export default function page() {
         type="text/javascript"
       />
     </div>
-  );
+);
+
+export default async function page() {
+  const candidates = [
+    "Диваажингийн цэцэрлэгт хүрээлэн",
+    "divaajingiin-tsetserlegt",
+    "diwaajingiin-tsetserlegt-hureelen",
+  ];
+
+  try {
+    const post = await findCmsPostByCandidates(candidates);
+
+    if (post) {
+      return (
+        <ServiceArticlePage
+          post={post}
+          title="Диваажингийн цэцэрлэгт хүрээлэн"
+        />
+      );
+    }
+  } catch (error) {
+    console.error("CMS ERROR: diwaajingiin-tsetserlegt-hureelen", error);
+  }
+
+  return fallback;
 }

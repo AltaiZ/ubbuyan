@@ -7,6 +7,7 @@ export default function HeaderNav() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div>
       <nav className="navbar navbar-default nav-justified hidden-xs">
@@ -155,10 +156,7 @@ export default function HeaderNav() {
             ×
           </button>
         </div>
-      
-      
-      
-      
+
         <ul className="ml-20">
           <li className="active" role="presentation">
             <a href="/">Нүүр</a>
@@ -266,7 +264,6 @@ export default function HeaderNav() {
           <li className="" role="presentation">
             <a href="/contactus/">Холбоо барих</a>
           </li>
-   
         </ul>
       </div>
       <span
@@ -276,8 +273,6 @@ export default function HeaderNav() {
       >
         ☰
       </span>
-
-
     </div>
   );
 }
