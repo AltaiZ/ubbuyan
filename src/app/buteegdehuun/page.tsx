@@ -4,6 +4,7 @@ import React from "react";
 import { useQuery } from "@apollo/client/react";
 import queries from "@/graphql/cms/queries";
 import { PaginationPart } from "../../components/pagination";
+import { getCmsPostThumbnailCandidates } from "@/lib/cms-media";
 
 const ITEMS_PER_PAGE = 16;
 
@@ -270,29 +271,59 @@ export default function Page({
           {!loading && !error && (
             <div className="row">
               {paginatedArticles.map((item: any) => (
-                <div
-                  key={item._id}
-                  className="pc_tab col-md-3 col-sm-6 col-xs-6"
-                >
+                <div key={item._id} className="pc_tab col-md-3 col-sm-6 col-xs-6">
                   <a href={`/buteegdehuun/${item?._id}`}>
-                    <div
-                      className="p_img"
-                      style={{
-                        background: item?.image?.url
-                          ? `url(https://khankhujirt.app.erxes.io/api/read-file?key=${item.image.url})`
-                          : "url(/static/images/no-image.png)",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    >
-                      <div className="overlay">
-                        <img
-                          className="c_arrow"
-                          src="/static/sites/ulaanbaatarbuyannew/default/images/sum-white.png"
-                          alt="arrow"
-                        />
-                      </div>
-                    </div>
+                    {(() => {
+                      const thumbnailCandidates = getCmsPostThumbnailCandidates(item);
+                      const imageUrl =
+                        thumbnailCandidates[0] || "/static/images/no-image.png";
+
+                      return (
+                        <div
+                          className="p_img"
+                          style={{ position: "relative", overflow: "hidden" }}
+                        >
+                          <img
+                            src={imageUrl}
+                            alt={item?.title || "product image"}
+                            data-fallbacks={JSON.stringify([
+                              ...thumbnailCandidates.slice(1),
+                              "/static/images/no-image.png",
+                            ])}
+                            onError={(event) => {
+                              const target = event.currentTarget;
+                              const raw =
+                                target.getAttribute("data-fallbacks") || "[]";
+                              const fallbackList = JSON.parse(raw) as string[];
+                              const next = fallbackList.shift();
+
+                              if (!next) {
+                                return;
+                              }
+
+                              target.setAttribute(
+                                "data-fallbacks",
+                                JSON.stringify(fallbackList)
+                              );
+                              target.src = next;
+                            }}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                              display: "block",
+                            }}
+                          />
+                          <div className="overlay">
+                            <img
+                              className="c_arrow"
+                              src="/static/images/sum-white.png"
+                              alt="arrow"
+                            />
+                          </div>
+                        </div>
+                      );
+                    })()}
 
                     <h3>{item.title}</h3>
 

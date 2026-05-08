@@ -6,6 +6,7 @@ import cmsQueries from "@/graphql/cms/queries";
 import { findMatchingCmsPost } from "@/lib/cmsPosts";
 import type { CmsPost } from "@/lib/cmsPosts";
 import Erxesform from "./component/erxesForm";
+import { normalizeCmsHtml } from "@/lib/cmsMedia";
 
 type Props = {
   fallbackContent: string;
@@ -45,7 +46,7 @@ export default function ComplaintPageClient({
         <div className="col-md-6 col-md-offset-2 sanal">
           <div
             dangerouslySetInnerHTML={{
-              __html: content,
+              __html: normalizeCmsHtml(content),
             }}
           />
         </div>

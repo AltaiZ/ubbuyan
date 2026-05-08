@@ -3,6 +3,8 @@
 import React, { useMemo, useState } from "react";
 import { useQuery } from "@apollo/client/react";
 import queries from "@/graphql/cms/queries";
+import { getCmsPostThumbnailCandidates } from "@/lib/cms-media";
+import { normalizeCmsHtml } from "@/lib/cmsMedia";
 
 export default function Page({
   params,
@@ -25,23 +27,10 @@ export default function Page({
   const images = useMemo(() => {
     if (!post) return [];
 
-    const list: string[] = [];
-
-    if (post?.thumbnail?.url) {
-      list.push(post.thumbnail.url);
-    }
-
-    if (Array.isArray(post?.images)) {
-      post.images.forEach((img: any) => {
-        if (img?.url) list.push(img.url);
-      });
-    }
-
-    return [...new Set(list)];
+    return getCmsPostThumbnailCandidates(post);
   }, [post]);
 
-  const activeImageUrl =
-    images[activeImage] || post?.thumbnail?.url || "/static/images/no-image.png";
+  const activeImageUrl = images[activeImage] || "/static/images/no-image.png";
 
   if (loading) {
     return <div className="container" style={{ padding: "40px 0" }}>Уншиж байна...</div>;
@@ -72,10 +61,7 @@ export default function Page({
               style={{
                 width: "100%",
                 minHeight: "520px",
-                backgroundImage:
-                  activeImageUrl !== "/static/images/no-image.png"
-                    ? `url(https://khankhujirt.app.erxes.io/api/read-file?key=${activeImageUrl})`
-                    : `url(${activeImageUrl})`,
+                backgroundImage: `url(${activeImageUrl})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
@@ -98,7 +84,7 @@ export default function Page({
                         border: activeImage === index ? "2px solid #d6a06b" : "1px solid #ddd",
                         borderRadius: "4px",
                         height: "150px",
-                        backgroundImage: `url(https://khankhujirt.app.erxes.io/api/read-file?key=${img})`,
+                        backgroundImage: `url(${img})`,
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center",
@@ -125,7 +111,9 @@ export default function Page({
             {post.content && (
               <div style={{ marginTop: "25px" }}>
                 <div
-                  dangerouslySetInnerHTML={{ __html: post.content }}
+                  dangerouslySetInnerHTML={{
+                    __html: normalizeCmsHtml(post.content),
+                  }}
                 />
               </div>
             )}

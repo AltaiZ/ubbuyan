@@ -7,11 +7,11 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
-import { getErxesGraphqlUri } from "./erxes-config";
+import { getErxesAppToken, getErxesGraphqlUri } from "./erxes-config";
 
 export function makeClient() {
   const uri = getErxesGraphqlUri();
-  const token = process.env.NEXT_PUBLIC_ERXES_APP_TOKEN || "";
+  const token = getErxesAppToken();
 
   const httpLink = new HttpLink({
     uri,
@@ -29,7 +29,7 @@ export function makeClient() {
 }
 
 export function ApolloWrapper({ children }: { children: React.ReactNode }) {
-  const [client] = React.useState(makeClient);
+  const [client] = React.useState(() => makeClient());
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }

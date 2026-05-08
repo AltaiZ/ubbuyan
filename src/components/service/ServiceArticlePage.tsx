@@ -1,5 +1,6 @@
 import React from "react";
 import type { CmsPost } from "@/lib/cmsPosts";
+import { normalizeCmsHtml } from "@/lib/cmsMedia";
 
 type Props = {
   post: CmsPost;
@@ -17,7 +18,7 @@ export default function ServiceArticlePage({ post, title }: Props) {
             <h2 className="sub_title">{post.title || title}</h2>
             <div
               className="service-content"
-              dangerouslySetInnerHTML={{ __html: html }}
+              dangerouslySetInnerHTML={{ __html: normalizeCmsHtml(html) }}
             />
           </article>
         </section>

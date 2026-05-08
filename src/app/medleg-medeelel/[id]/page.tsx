@@ -7,5 +7,5 @@ export default function Page() {
   const params = useParams();
   const id = params?.id as string;
 
-  return <CmsPostDetailPageClient id={id} detailHrefBase="/medee-medeelel" />;
+  return <CmsPostDetailPageClient id={id} detailHrefBase="/medleg-medeelel" />;
 }

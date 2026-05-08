@@ -7,7 +7,13 @@ import { useQuery } from "@apollo/client/react";
 
 const ITEMS_PER_PAGE = 20;
 
-export default function Blog() {
+export default function Blog({
+  initialTab = "news",
+  showReadMore = true,
+}: {
+  initialTab?: string;
+  showReadMore?: boolean;
+}) {
   const { data, loading, error } = useQuery(queries.cmsPostList, {
     variables: {},
     fetchPolicy: "no-cache",
@@ -57,15 +63,21 @@ export default function Blog() {
           боломжтой.
         </p>
 
-        <HomeMedeeContent tabs={tabs} articles={pagePosts} />
+        <HomeMedeeContent
+          tabs={tabs}
+          articles={pagePosts}
+          initialTab={initialTab}
+        />
       </div>
 
-      <div className="read_more">
-        <a href="/medee-medeelel">
-          <img src="/static/images/sum-red.png" alt="read more" />
-        </a>
-        <p>бүгдийг харах</p>
-      </div>
+      {showReadMore ? (
+        <div className="read_more">
+          <a href="/medee-medeelel">
+            <img src="/static/images/sum-red.png" alt="read more" />
+          </a>
+          <p>бүгдийг харах</p>
+        </div>
+      ) : null}
     </div>
   );
 }

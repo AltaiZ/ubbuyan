@@ -1,5 +1,3 @@
-// lib/client.ts
-
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import { getErxesAppToken, getErxesGraphqlUri } from "./erxes-config";
 

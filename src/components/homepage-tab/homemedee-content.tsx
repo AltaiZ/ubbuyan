@@ -10,11 +10,15 @@ const ITEMS_PER_PAGE = 4;
 export default function HomeMedeeContent({
   tabs,
   articles,
+  initialTab,
 }: {
   tabs: any[];
   articles: any[];
+  initialTab?: string;
 }) {
-  const [activeNewTab, setActiveNewsTab] = useState(tabs[0]?.id || "news");
+  const [activeNewTab, setActiveNewsTab] = useState(
+    initialTab || tabs[0]?.id || "news"
+  );
 
   const filteredArticles = useMemo(() => {
     if (!articles?.length) return [];
@@ -88,56 +92,61 @@ export default function HomeMedeeContent({
               .reverse()
               .map((item: any) => {
                 const thumbnailCandidates = getCmsPostThumbnailCandidates(item);
-                const imageUrl = thumbnailCandidates[0] || "/static/images/news.jpg";
+                const imageUrl =
+                  thumbnailCandidates[0] || "/static/images/news.jpg";
 
                 return (
                   <div key={item._id} className="pc_tab col-md-3 col-sm-6">
-                  <a href={`/medee-medeelel/${item._id}`}>
-                    <div
-                      className="p_img"
-                      style={{ position: "relative", overflow: "hidden" }}
-                    >
-                      <img
-                        src={imageUrl}
-                        alt={item?.title || "news image"}
-                        data-fallbacks={JSON.stringify([
-                          ...thumbnailCandidates.slice(1),
-                          "/static/images/news.jpg",
-                        ])}
-                        onError={(event) => {
-                          const target = event.currentTarget;
-                          const raw = target.getAttribute("data-fallbacks") || "[]";
-                          const fallbackList = JSON.parse(raw) as string[];
-                          const next = fallbackList.shift();
-
-                          if (!next) {
-                            return;
-                          }
-
-                          target.setAttribute("data-fallbacks", JSON.stringify(fallbackList));
-                          target.src = next;
-                        }}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          display: "block",
-                        }}
-                      />
-                      <div className="overlay">
+                    <a href={`/medee-medeelel/${item._id}`}>
+                      <div
+                        className="p_img"
+                        style={{ position: "relative", overflow: "hidden" }}
+                      >
                         <img
-                          className="c_arrow"
-                          src="/static/images/8.png"
-                          alt="arrow"
-                        />
-                      </div>
-                    </div>
+                          src={imageUrl}
+                          alt={item?.title || "news image"}
+                          data-fallbacks={JSON.stringify([
+                            ...thumbnailCandidates.slice(1),
+                            "/static/images/news.jpg",
+                          ])}
+                          onError={(event) => {
+                            const target = event.currentTarget;
+                            const raw =
+                              target.getAttribute("data-fallbacks") || "[]";
+                            const fallbackList = JSON.parse(raw) as string[];
+                            const next = fallbackList.shift();
 
-                    <div className="garchig">
-                      <h4>{item?.title}</h4>
-                      <i>{item?.excerpt || item?.summary || ""}</i>
-                    </div>
-                  </a>
+                            if (!next) {
+                              return;
+                            }
+
+                            target.setAttribute(
+                              "data-fallbacks",
+                              JSON.stringify(fallbackList)
+                            );
+                            target.src = next;
+                          }}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            display: "block",
+                          }}
+                        />
+                        <div className="overlay">
+                          <img
+                            className="c_arrow"
+                            src="/static/images/8.png"
+                            alt="arrow"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="garchig">
+                        <h4>{item?.title}</h4>
+                        <i>{item?.excerpt || item?.summary || ""}</i>
+                      </div>
+                    </a>
                   </div>
                 );
               })

@@ -1,22 +1,36 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 import type { CmsPost } from "@/lib/cmsPosts";
+import { findMatchingCmsPost } from "@/lib/cmsPosts";
+import cmsQueries from "@/graphql/cms/queries";
+import { useQuery } from "@apollo/client/react";
+import { normalizeCmsHtml } from "@/lib/cmsMedia";
 
-export default function AboutClient({ post }: { post?: CmsPost | null }) {
-  const [title, setTitle] = useState(post?.title || "Бидний тухай");
-  const [content, setContent] = useState(post?.content || "");
+type Props = {
+  post?: CmsPost | null;
+};
 
-  useEffect(() => {
-    fetch("/api/about")
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.title) setTitle(data.title);
-        if (data.content) {
-          const plain = data.content.replace(/<[^>]*>/g, "").trim();
-          if (plain) setContent(plain);
-        }
-      });
-  }, []);
+function htmlOrFallback(content?: string | null, fallback?: string) {
+  return {
+    __html: normalizeCmsHtml(
+      content && content.trim() ? content : fallback || ""
+    ),
+  };
+}
+
+export default function AboutClient({ post }: Props) {
+  const [show, setShow] = useState(false);
+  const { data } = useQuery(cmsQueries.cmsPostList, {
+    variables: {},
+    fetchPolicy: "no-cache",
+  });
+  const livePost = findMatchingCmsPost(
+    ((data as any)?.cpPostList?.posts || []) as CmsPost[],
+    ["бидний тухай", "bidnii tuhai", "tuhai"]
+  );
+  const currentPost = livePost || post;
+  const fallback = `<p>Бидний тухай мэдээлэл удахгүй нэмэгдэнэ.</p>`;
 
   return (
     <div id="content" style={{ display: "block" }}>
@@ -26,7 +40,8 @@ export default function AboutClient({ post }: { post?: CmsPost | null }) {
           src="/static/images/-2468521239344344000_1800_x_1012.jpg"
         />
       </div>
-      <section className="about">
+
+      <section className="hidden-xs about">
         <div className="np np1">
           <div className="row">
             <div className="col-md-5 col-md-offset-1 aboutvideo">
@@ -36,13 +51,113 @@ export default function AboutClient({ post }: { post?: CmsPost | null }) {
                 height="315"
                 src="https://www.youtube.com/embed/ntpEog0lzww"
                 width="100%"
-              />
+              ></iframe>
             </div>
+
             <div className="col-md-5 col-md-offset-1 abouttext">
-              <h5 className="sub_title">{title}</h5>
-              <div style={{ textAlign: "justify" }}>
-                <p>{content}</p>
-              </div>
+              <h5 className="sub_title">
+                {currentPost?.title || "БИДНИЙ ТУХАЙ"}
+              </h5>
+
+              {!show && (
+                <div
+                  className="aboutShow"
+                  style={{ height: "136px", overflow: "hidden" }}
+                  dangerouslySetInnerHTML={htmlOrFallback(
+                    currentPost?.content,
+                    fallback
+                  )}
+                />
+              )}
+
+              {show && (
+                <div
+                  className="aboutShow"
+                  dangerouslySetInnerHTML={htmlOrFallback(
+                    currentPost?.content,
+                    fallback
+                  )}
+                />
+              )}
+
+              {!show && (
+                <button
+                  className="button triggerShow"
+                  onClick={() => setShow(true)}
+                >
+                  Дэлгэрэнгүй
+                </button>
+              )}
+
+              {show && (
+                <button
+                  className="button triggerHide"
+                  onClick={() => setShow(false)}
+                >
+                  Хураах
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="hidden-lg about">
+        <div className="np np1">
+          <div className="row">
+            <div className="col-md-5 col-md-offset-1 aboutvideo">
+              <iframe
+                allowFullScreen
+                frameBorder="0"
+                height="315"
+                src="https://www.youtube.com/embed/ntpEog0lzww"
+                width="100%"
+              ></iframe>
+            </div>
+
+            <div className="col-md-5 col-md-offset-1 abouttext">
+              <h5 className="sub_title">
+                {currentPost?.title || "БИДНИЙ ТУХАЙ"}
+              </h5>
+
+              {!show && (
+                <div
+                  className="aboutShow"
+                  style={{ height: "136px", overflow: "hidden" }}
+                  dangerouslySetInnerHTML={htmlOrFallback(
+                    currentPost?.content,
+                    fallback
+                  )}
+                />
+              )}
+
+              {show && (
+                <div
+                  className="aboutShow"
+                  dangerouslySetInnerHTML={htmlOrFallback(
+                    currentPost?.content,
+                    fallback
+                  )}
+                />
+              )}
+
+              {!show && (
+                <button
+                  className="button triggerShow"
+                  onClick={() => setShow(true)}
+                >
+                  Дэлгэрэнгүй
+                </button>
+              )}
+
+              {show && (
+                <button
+                  className="button triggerHide"
+                  onClick={() => setShow(false)}
+                >
+                  Хураах
+                </button>
+              )}
             </div>
           </div>
         </div>

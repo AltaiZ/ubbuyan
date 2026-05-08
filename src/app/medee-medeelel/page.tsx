@@ -26,7 +26,8 @@ export default function MedeeMedeelelPage() {
   const posts = [
     ...filteredPosts,
     ...allPosts.filter(
-      (post: any) => !filteredPosts.some((filtered: any) => filtered?._id === post?._id)
+      (post: any) =>
+        !filteredPosts.some((filtered: any) => filtered?._id === post?._id)
     ),
   ];
 
@@ -100,7 +101,10 @@ export default function MedeeMedeelelPage() {
                       return;
                     }
 
-                    target.setAttribute("data-fallbacks", JSON.stringify(fallbackList));
+                    target.setAttribute(
+                      "data-fallbacks",
+                      JSON.stringify(fallbackList)
+                    );
                     target.src = next;
                   }}
                   style={{
@@ -113,11 +117,11 @@ export default function MedeeMedeelelPage() {
                 />
               ) : null}
 
-            <h2 style={{ marginBottom: "10px" }}>{post.title}</h2>
+              <h2 style={{ marginBottom: "10px" }}>{post.title}</h2>
 
-            <p style={{ marginBottom: "15px", color: "#666" }}>
-              {post.excerpt || "Товч мэдээлэл байхгүй"}
-            </p>
+              <p style={{ marginBottom: "15px", color: "#666" }}>
+                {post.excerpt || "Товч мэдээлэл байхгүй"}
+              </p>
 
               <Link href={`/medee-medeelel/${post._id}`}>Дэлгэрэнгүй</Link>
             </div>

@@ -6,6 +6,7 @@ import cmsQueries from "@/graphql/cms/queries";
 import { findMatchingCmsPost } from "@/lib/cmsPosts";
 import type { CmsPost } from "@/lib/cmsPosts";
 import ErxesForm from "./component/erxesForm";
+import { normalizeCmsHtml } from "@/lib/cmsMedia";
 
 type Props = {
   fallbackContent: string;
@@ -48,7 +49,7 @@ export default function ContactPageClient({ fallbackContent }: Props) {
           <h3>{title}</h3>
           <div
             dangerouslySetInnerHTML={{
-              __html: content,
+              __html: normalizeCmsHtml(content),
             }}
           />
           <div className="tus">

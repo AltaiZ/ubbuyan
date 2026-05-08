@@ -1,5 +1,6 @@
 import React from "react";
 import type { CmsPost } from "@/lib/cmsPosts";
+import { normalizeCmsHtml } from "@/lib/cmsMedia";
 
 type Props = {
   post: CmsPost;
@@ -32,7 +33,7 @@ export default function CmsArticlePage({ post, title }: Props) {
           <div
             className="jy"
             dangerouslySetInnerHTML={{
-              __html: html,
+              __html: normalizeCmsHtml(html),
             }}
           />
         </article>

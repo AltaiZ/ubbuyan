@@ -8,6 +8,9 @@ export type CmsPost = {
   content?: string | null;
   excerpt?: string | null;
   summary?: string | null;
+  thumbnail?: {
+    url?: string | null;
+  } | null;
   categories?: Array<{
     _id?: string | null;
     name?: string | null;
