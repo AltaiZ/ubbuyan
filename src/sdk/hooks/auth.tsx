@@ -1,4 +1,4 @@
-import { BaseMutationOptions, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client/react';
 import { mutations } from '../graphql/auth';
 import { useSetAtom } from 'jotai';
 import {
@@ -11,6 +11,8 @@ import { onError } from '@/lib/utils';
 import { onErrorLogin } from '@/lib/utils';
 
 const clientPortalId = process.env.NEXT_PUBLIC_CP_ID;
+
+type MutationOnCompleted = (data: any) => void;
 
 interface ILoginData {
   token?: string;
@@ -47,7 +49,7 @@ const useLoginCallback = () => {
 export const useLogin = (onCompleted?: () => void) => {
   const { loginCallback } = useLoginCallback();
 
-  const [login, { loading }] = useMutation(mutations.login, {
+  const [login, { loading }] = useMutation<any>(mutations.login, {
     onCompleted: ({ clientPortalLogin }) => {
       loginCallback(clientPortalLogin, onCompleted);
     },
@@ -59,7 +61,7 @@ export const useLogin = (onCompleted?: () => void) => {
 
 export const useGoogleLogin = () => {
   const { loginCallback } = useLoginCallback();
-  const [googleLogin, { loading }] = useMutation(mutations.googleLogin, {
+  const [googleLogin, { loading }] = useMutation<any>(mutations.googleLogin, {
     onCompleted({ clientPortalGoogleAuthentication }) {
       loginCallback(clientPortalGoogleAuthentication);
     },
@@ -70,7 +72,7 @@ export const useGoogleLogin = () => {
 
 export const useFacebookLogin = () => {
   const { loginCallback } = useLoginCallback();
-  const [facebookLogin, { loading }] = useMutation(mutations.fbLogin, {
+  const [facebookLogin, { loading }] = useMutation<any>(mutations.fbLogin, {
     onCompleted({ clientPortalFacebookAuthentication }) {
       loginCallback(clientPortalFacebookAuthentication);
     },
@@ -81,9 +83,9 @@ export const useFacebookLogin = () => {
 
 
 export const useRegister = (
-  onCompleted?: BaseMutationOptions['onCompleted']
+  onCompleted?: MutationOnCompleted
 ) => {
-  const [register, { loading }] = useMutation(mutations.createUser, {
+  const [register, { loading }] = useMutation<any>(mutations.createUser, {
     onCompleted: (data) => {
       !!onCompleted && onCompleted(data);
     },
@@ -93,8 +95,8 @@ export const useRegister = (
   return { register, loading, clientPortalId };
 };
 
-export const useVerify = (onCompleted?: BaseMutationOptions['onCompleted']) => {
-  const [verify, { loading }] = useMutation(mutations.userVerify, {
+export const useVerify = (onCompleted?: MutationOnCompleted) => {
+  const [verify, { loading }] = useMutation<any>(mutations.userVerify, {
     onCompleted: (data) => {
       !!onCompleted && onCompleted(data);
     },
@@ -106,7 +108,7 @@ export const useVerify = (onCompleted?: BaseMutationOptions['onCompleted']) => {
 
 export const useUserEdit = () => {
   const setRefetchUser = useSetAtom(refetchCurrentUserAtom);
-  const [editUser, { loading }] = useMutation(mutations.userEdit, {
+  const [editUser, { loading }] = useMutation<any>(mutations.userEdit, {
     onCompleted() {
       setRefetchUser(true);
       toast.success('Хувийн мэдээлэл шинэчлэгдсэн');
@@ -119,7 +121,7 @@ export const useUserEdit = () => {
 
 
 export const useForgotPassword = () => {
-  const [forgotPassword, { loading, data }] = useMutation(
+  const [forgotPassword, { loading, data }] = useMutation<any>(
     mutations.forgotPassword,
     {
       onError,
@@ -132,7 +134,7 @@ export const useForgotPassword = () => {
 };
 
 export const useChangePassword = () => {
-  const [changePassword, { loading, data }] = useMutation(
+  const [changePassword, { loading, data }] = useMutation<any>(
     mutations.userChangePassword,
     {
       onError,
@@ -145,7 +147,7 @@ export const useChangePassword = () => {
 };
 
 export const useResetPassword = () => {
-  const [resetPassword, { loading, data }] = useMutation(
+  const [resetPassword, { loading, data }] = useMutation<any>(
     mutations.resetPassword,
     {
       onError,
@@ -159,7 +161,7 @@ export const useResetPassword = () => {
 
 export const useLogout = () => {
   const triggerRefetchUser = useSetAtom(refetchCurrentUserAtom);
-  const [logout, { loading }] = useMutation(mutations.logout, {
+  const [logout, { loading }] = useMutation<any>(mutations.logout, {
     onCompleted() {
       triggerRefetchUser(true);
     },

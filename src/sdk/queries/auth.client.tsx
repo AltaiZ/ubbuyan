@@ -15,8 +15,10 @@ export const useCurrentUser = (onCompleted?: (data: any) => void) => {
   const [loading, setLoading] = useAtom(loadingUserAtom);
   const [refetchUser, setRefetchUser] = useAtom(refetchCurrentUserAtom);
 
-  const { data, refetch } = useQuery(queries.currentUser, {
-    onError(error) {
+  const { data, error, refetch } = useQuery<any>(queries.currentUser);
+
+  useEffect(() => {
+    if (error) {
       setLoading(false);
       if (error.message === 'token expired') {
         return sessionStorage.removeItem('token');
@@ -26,8 +28,8 @@ export const useCurrentUser = (onCompleted?: (data: any) => void) => {
         return setCurrentUser(null);
       }
       toast.error(error.message);
-    },
-  });
+    }
+  }, [error]);
 
   useEffect(() => {
     if (data) {
@@ -51,11 +53,14 @@ export const useCurrentUser = (onCompleted?: (data: any) => void) => {
 export const useUserDetail = () => {
   const refetchUser = useAtomValue(refetchCurrentUserAtom);
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
-  const { loading, refetch } = useQuery(queries.userDetail, {
-    onCompleted({ clientPortalCurrentUser }) {
+  const { data, loading, refetch } = useQuery<any>(queries.userDetail);
+
+  useEffect(() => {
+    if (data?.clientPortalCurrentUser) {
+      const { clientPortalCurrentUser } = data;
       setCurrentUser({ ...currentUser, ...clientPortalCurrentUser });
-    },
-  });
+    }
+  }, [data]);
 
   useEffect(() => {
     if (refetchUser) {

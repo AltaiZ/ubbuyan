@@ -7,6 +7,7 @@ export type CmsPost = {
   title?: string | null;
   content?: string | null;
   excerpt?: string | null;
+  summary?: string | null;
   categories?: Array<{
     _id?: string | null;
     name?: string | null;

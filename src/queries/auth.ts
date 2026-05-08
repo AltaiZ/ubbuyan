@@ -3,7 +3,7 @@ import { queries } from "../graphql/auth";
 import { getClient } from "@/lib/client";
 
 export const getConfig = cache(async () => {
-  const { data, error } = await getClient().query({
+  const { data, error } = await getClient().query<any>({
     query: queries.currentConfig,
   });
   const { currentConfig } = data || {};
@@ -17,7 +17,7 @@ export const getBranchDetail = cache(async () => {
 
   if (!branchId) return { name };
 
-  const { data, error } = await getClient().query({
+  const { data, error } = await getClient().query<any>({
     query: queries.branchDetail,
     variables: {
       id: branchId,

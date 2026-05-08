@@ -21,7 +21,7 @@ type GetProductDetail = (params?: CommonParams) => Promise<{
 }>;
 
 export const getProducts: GetProducts = cache(async (params: any) => {
-  const { data, error } = await getClient().query({
+  const { data, error } = await getClient().query<any>({
     query: queries.products,
     variables: params?.variables,
     context: {
@@ -41,7 +41,7 @@ export const getProducts: GetProducts = cache(async (params: any) => {
 
 export const getProductCategories: GetProductCategories = cache(
   async (params: any) => {
-    const { data, error } = await getClient().query({
+    const { data, error } = await getClient().query<any>({
       query: queries.productCategories,
       variables: params?.variables,
       context: {
@@ -61,7 +61,7 @@ export const getProductCategories: GetProductCategories = cache(
 );
 
 export const getProductDetail: GetProductDetail = cache(async (params: any) => {
-  const { data, error } = await getClient().query({
+  const { data, error } = await getClient().query<any>({
     query: queries.productDetail,
     variables: params?.variables,
     context: {

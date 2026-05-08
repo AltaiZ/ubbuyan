@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client/react';
 import { queries, customerMutations } from '@/graphql';
 
 interface FormData {
@@ -66,7 +66,7 @@ const DeathNoteSearch: React.FC = () => {
     monumentNumber: "",
   });
 
-  const { data, loading, error, refetch } = useQuery(queries.customersMain, {
+  const { data, loading, error, refetch } = useQuery<any>(queries.customersMain, {
     variables: {
       page: currentPage,
       perPage: pageSize,
@@ -75,14 +75,14 @@ const DeathNoteSearch: React.FC = () => {
     skip: !searchPerformed,
   });
 
-  const { data: fieldGroupsData } = useQuery(queries.fieldGroups, {
+  const { data: fieldGroupsData } = useQuery<any>(queries.fieldGroups, {
     variables: {
       contentType: "core:customer",
     },
   });
 
-  const [addCustomer] = useMutation(customerMutations.customersAdd);
-  const [removeCustomer] = useMutation(customerMutations.customersRemove);
+  const [addCustomer] = useMutation<any>(customerMutations.customersAdd);
+  const [removeCustomer] = useMutation<any>(customerMutations.customersRemove);
 
   const allData = useMemo(() => {
     if (!searchPerformed) return [];

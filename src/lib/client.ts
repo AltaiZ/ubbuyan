@@ -1,10 +1,9 @@
 // lib/client.ts
 
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
-import { registerApolloClient } from "@apollo/experimental-nextjs-app-support";
 import { getErxesAppToken, getErxesGraphqlUri } from "./erxes-config";
 
-export const { getClient } = registerApolloClient(() => {
+export function getClient() {
   const token = getErxesAppToken();
 
   return new ApolloClient({
@@ -15,4 +14,4 @@ export const { getClient } = registerApolloClient(() => {
       headers: token ? { "x-app-token": token } : {},
     }),
   });
-});
+}

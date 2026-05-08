@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { HttpLink } from "@apollo/client";
 import {
-  ApolloNextAppProvider,
-  InMemoryCache as NextSSRInMemoryCache,
-  ApolloClient as NextSSRApolloClient,
-} from "@apollo/client-integration-nextjs";
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
 import { getErxesGraphqlUri } from "./erxes-config";
 
 export function makeClient() {
@@ -22,16 +22,14 @@ export function makeClient() {
     fetchOptions: { cache: "no-store" },
   });
 
-  return new NextSSRApolloClient({
-    cache: new NextSSRInMemoryCache(),
+  return new ApolloClient({
+    cache: new InMemoryCache(),
     link: httpLink,
   });
 }
 
 export function ApolloWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <ApolloNextAppProvider makeClient={makeClient}>
-      {children}
-    </ApolloNextAppProvider>
-  );
+  const [client] = React.useState(makeClient);
+
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }

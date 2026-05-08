@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import type { CmsPost } from "@/lib/cmsPosts";
 
-export default function AboutClient() {
-  const [title, setTitle] = useState("Бидний тухай");
-  const [content, setContent] = useState("");
+export default function AboutClient({ post }: { post?: CmsPost | null }) {
+  const [title, setTitle] = useState(post?.title || "Бидний тухай");
+  const [content, setContent] = useState(post?.content || "");
 
   useEffect(() => {
     fetch("/api/about")

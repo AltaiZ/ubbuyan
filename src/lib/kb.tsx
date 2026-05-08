@@ -110,7 +110,7 @@ export async function findKbArticleByCandidates(candidates: string[]) {
 
 export const getKbArticlesByCode = cache(async (code: string) => {
   try {
-    const kbCat = await getClient().query({
+    const kbCat = await getClient().query<any>({
       query: queries.kbCategoryId,
       variables: { _id: code },
       context: token

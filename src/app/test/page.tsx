@@ -1,6 +1,7 @@
 'use client';
 
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
+import { useQuery } from '@apollo/client/react';
 import React from 'react';
 
 const GET_CUSTOMERS = gql`
@@ -19,7 +20,7 @@ const GET_CUSTOMERS = gql`
 `;
 
 const TestPage = () => {
-  const { loading, error, data } = useQuery(GET_CUSTOMERS, {
+  const { loading, error, data } = useQuery<any>(GET_CUSTOMERS, {
     variables: {
       type: 'customer',
       searchValue: '',

@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import type { ReadonlyURLSearchParams } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
-import { type ApolloError } from '@apollo/client';
+import { type ErrorLike } from '@apollo/client';
 import { toast } from 'sonner';
 import { ORDER_STATUSES, statusLabel } from './constants';
 
@@ -51,11 +51,11 @@ export const formatNum = (num: number | string, splitter?: string): string => {
   return '0';
 };
 
-export const onError = (error: ApolloError) =>
+export const onError = (error: ErrorLike) =>
   toast.error('Алдаа гарлаа!', { description: error.message });
 
 
-export const onErrorLogin = (error: ApolloError) =>
+export const onErrorLogin = (error: ErrorLike) =>
   toast.error('Нэвтрэх нэр эсвэл Нууц үг буруу байна.');
 
 export const getLabel = (status: string) =>

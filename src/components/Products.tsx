@@ -13,7 +13,7 @@ const ITEMS_PER_PAGE = 4;
 export default function Products({ searchParams }: IPageProps) {
   const activeTab = searchParams.activeTab;
 
-  const [getProducts, { data: productsData, loading }] = useLazyQuery(
+  const [getProducts, { data: productsData, loading }] = useLazyQuery<any>(
     queries.products,
   );
 

@@ -11,12 +11,6 @@ importers:
       '@apollo/client':
         specifier: ^4.1.6
         version: 4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)
-      '@apollo/client-integration-nextjs':
-        specifier: ^0.14.4
-        version: 0.14.4(@apollo/client@4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2))(@types/react@18.3.27)(graphql@16.13.1)(next@14.2.35(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)
-      '@apollo/experimental-nextjs-app-support':
-        specifier: ^0.11.6
-        version: 0.11.11(@apollo/client@4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2))(graphql@16.13.1)(next@14.2.35(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@egjs/react-view360':
         specifier: ^4.0.0-beta.7
         version: 4.0.0-beta.7
@@ -184,31 +178,6 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  '@apollo/client-integration-nextjs@0.14.4':
-    resolution: {integrity: sha512-4fXHqP3Nh87PvJ3lOU7i/phFPrcfuhla4lWF0H9zyIm1TJGRMZRfJ/27SU87pb/f0rzGKKPzKH+N8dmKOqY3qQ==}
-    peerDependencies:
-      '@apollo/client': ^4.0.0
-      next: ^15.2.3 || ^16.0.0
-      react: ^19
-      rxjs: ^7.3.0
-
-  '@apollo/client-react-streaming@0.11.11':
-    resolution: {integrity: sha512-h7u/D5GDq5mn2BXaWBiK9z+i90mzmBCnOeRt4Iarc1qwTt40Q4u2yEXPw8ma1BywZ2uLJyVuAb6EyA605eqeEQ==}
-    peerDependencies:
-      '@apollo/client': ^3.10.4
-      graphql: ^16 || >=17.0.0-alpha.2
-      react: ^18 || >=19.0.0-rc
-      react-dom: ^18 || >=19.0.0-rc
-
-  '@apollo/client-react-streaming@0.14.4':
-    resolution: {integrity: sha512-4f2aZHLfNBWcBGJYWSVQRJVVJ76qW1cLhDcM6YAKey9At86sHt6QfIkAmmHT0yxgwjPCWQiTIQOPwPcwjSswIQ==}
-    peerDependencies:
-      '@apollo/client': ^4.0.0
-      graphql: ^16 || >=17.0.0-alpha.2
-      react: ^19
-      react-dom: ^19
-      rxjs: ^7.3.0
-
   '@apollo/client@4.1.6':
     resolution: {integrity: sha512-ak8uzqmKeX3u9BziGf83RRyODAJKFkPG72hTNvEj4WjMWFmuKW2gGN1i3OfajKT6yuGjvo+n23ES2zqWDKFCZg==}
     peerDependencies:
@@ -227,13 +196,6 @@ packages:
         optional: true
       subscriptions-transport-ws:
         optional: true
-
-  '@apollo/experimental-nextjs-app-support@0.11.11':
-    resolution: {integrity: sha512-q/vtKn2V9NE1YPU7WpPx2PGpLsYSGwRcPy8pa90glrHqlEVVqTWTGraDLe3wG0K/0NnnO1U4IcFoRYKoBfjRag==}
-    peerDependencies:
-      '@apollo/client': ^3.10.4
-      next: ^13.4.1 || ^14.0.0 || ^15.0.0-rc.0
-      react: ^18 || >=19.0.0-rc
 
   '@cfcs/core@0.0.24':
     resolution: {integrity: sha512-feB38qu+eDk0Pggh/yR7gjaNmvUYA2uCxHP3Pz2MLE4LZ/9jPdtu8bzCSI47yTEhWyZCF5Pk698hdz8IN2mTjA==}
@@ -978,11 +940,6 @@ packages:
     peerDependencies:
       '@types/react': ^18.0.0
 
-  '@types/react-dom@19.2.3':
-    resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
-    peerDependencies:
-      '@types/react': ^19.2.0
-
   '@types/react@18.3.27':
     resolution: {integrity: sha512-cisd7gxkzjBKU2GgdYrTdtQx1SORymWyaAFhaxQPK9bYO9ot3Y5OikQRvY0VYQtvwjeQnizCINJAenh/V7MK2w==}
 
@@ -1575,6 +1532,7 @@ packages:
 
   glob@10.5.0:
     resolution: {integrity: sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   graceful-fs@4.2.11:
@@ -2263,10 +2221,12 @@ packages:
   tar@6.2.1:
     resolution: {integrity: sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==}
     engines: {node: '>=10'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   tar@7.5.2:
     resolution: {integrity: sha512-7NyxrTE4Anh8km8iEy7o0QYPs+0JKBTj5ZaqHg6B39erLg0qYXN3BijtShwbsNSvQ+LN75+KV+C4QR/f6Gwnpg==}
     engines: {node: '>=18'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   thenify-all@1.6.0:
     resolution: {integrity: sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA==}
@@ -2307,10 +2267,6 @@ packages:
 
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
-
-  ts-invariant@0.10.3:
-    resolution: {integrity: sha512-uivwYcQaxAucv1CzRp2n/QdYPo4ILf9VXgH19zEIjFx2EJufV16P0JtJVpYHy89DItG6Kwj2oIUjrcK5au+4tQ==}
-    engines: {node: '>=8'}
 
   ts-morph@12.0.0:
     resolution: {integrity: sha512-VHC8XgU2fFW7yO1f/b3mxKDje1vmyzFXHWzOYmKEkCEwcLjDtbdLgBQviqj4ZwP4MJkQtRo6Ha2I29lq/B+VxA==}
@@ -2491,39 +2447,6 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
-  '@apollo/client-integration-nextjs@0.14.4(@apollo/client@4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2))(@types/react@18.3.27)(graphql@16.13.1)(next@14.2.35(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)':
-    dependencies:
-      '@apollo/client': 4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)
-      '@apollo/client-react-streaming': 0.14.4(@apollo/client@4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2))(@types/react@18.3.27)(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)
-      next: 14.2.35(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-      rxjs: 7.8.2
-    transitivePeerDependencies:
-      - '@types/react'
-      - graphql
-      - react-dom
-
-  '@apollo/client-react-streaming@0.11.11(@apollo/client@4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@apollo/client': 4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)
-      '@wry/equality': 0.5.7
-      graphql: 16.13.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      ts-invariant: 0.10.3
-
-  '@apollo/client-react-streaming@0.14.4(@apollo/client@4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2))(@types/react@18.3.27)(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)':
-    dependencies:
-      '@apollo/client': 4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)
-      '@types/react-dom': 19.2.3(@types/react@18.3.27)
-      '@wry/equality': 0.5.7
-      graphql: 16.13.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      rxjs: 7.8.2
-    transitivePeerDependencies:
-      - '@types/react'
-
   '@apollo/client@4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.13.1)
@@ -2539,16 +2462,6 @@ snapshots:
       graphql-ws: 5.16.2(graphql@16.13.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-
-  '@apollo/experimental-nextjs-app-support@0.11.11(@apollo/client@4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2))(graphql@16.13.1)(next@14.2.35(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@apollo/client': 4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)
-      '@apollo/client-react-streaming': 0.11.11(@apollo/client@4.1.6(graphql-ws@5.16.2(graphql@16.13.1))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2))(graphql@16.13.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      next: 14.2.35(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-    transitivePeerDependencies:
-      - graphql
-      - react-dom
 
   '@cfcs/core@0.0.24':
     dependencies:
@@ -3272,10 +3185,6 @@ snapshots:
   '@types/prop-types@15.7.15': {}
 
   '@types/react-dom@18.3.7(@types/react@18.3.27)':
-    dependencies:
-      '@types/react': 18.3.27
-
-  '@types/react-dom@19.2.3(@types/react@18.3.27)':
     dependencies:
       '@types/react': 18.3.27
 
@@ -4520,10 +4429,6 @@ snapshots:
   tree-kill@1.2.2: {}
 
   ts-interface-checker@0.1.13: {}
-
-  ts-invariant@0.10.3:
-    dependencies:
-      tslib: 2.8.1
 
   ts-morph@12.0.0:
     dependencies:
