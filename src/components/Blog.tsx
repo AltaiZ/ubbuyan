@@ -15,7 +15,9 @@ export default function Blog({
   showReadMore?: boolean;
 }) {
   const { data, loading, error } = useQuery(queries.cmsPostList, {
-    variables: {},
+    variables: {
+      searchValue: "мэдээ",
+    },
     fetchPolicy: "no-cache",
   });
 
