@@ -19,6 +19,22 @@ function htmlOrFallback(content?: string | null, fallback?: string) {
   };
 }
 
+function getYoutubeEmbedUrl(url?: string | null) {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    let videoId = null;
+    if (parsed.hostname.includes("youtu.be")) {
+      videoId = parsed.pathname.slice(1);
+    } else {
+      videoId = parsed.searchParams.get("v");
+    }
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function AboutClient({ post }: Props) {
   const [show, setShow] = useState(false);
   const { data } = useQuery(cmsQueries.cmsPostList, {
@@ -31,6 +47,7 @@ export default function AboutClient({ post }: Props) {
   );
   const currentPost = livePost || post;
   const fallback = `<p>Бидний тухай мэдээлэл удахгүй нэмэгдэнэ.</p>`;
+  const embedUrl = getYoutubeEmbedUrl(currentPost?.videoUrl);
 
   return (
     <div id="content" style={{ display: "block" }}>
@@ -41,17 +58,27 @@ export default function AboutClient({ post }: Props) {
         />
       </div>
 
-      <section className="hidden-xs about">
+      <section className="about">
         <div className="np np1">
           <div className="row">
             <div className="col-md-5 col-md-offset-1 aboutvideo">
-              <iframe
-                allowFullScreen
-                frameBorder="0"
-                height="315"
-                src="https://www.youtube.com/embed/ntpEog0lzww"
-                width="100%"
-              ></iframe>
+              {embedUrl ? (
+                <iframe
+                  allowFullScreen
+                  frameBorder="0"
+                  height="315"
+                  src={embedUrl}
+                  width="100%"
+                />
+              ) : (
+                <iframe
+                  allowFullScreen
+                  frameBorder="0"
+                  height="315"
+                  src="https://www.youtube.com/embed/ntpEog0lzww"
+                  width="100%"
+                />
+              )}
             </div>
 
             <div className="col-md-5 col-md-offset-1 abouttext">
@@ -59,105 +86,21 @@ export default function AboutClient({ post }: Props) {
                 {currentPost?.title || "БИДНИЙ ТУХАЙ"}
               </h5>
 
-              {!show && (
-                <div
-                  className="aboutShow"
-                  style={{ height: "136px", overflow: "hidden" }}
-                  dangerouslySetInnerHTML={htmlOrFallback(
-                    currentPost?.content,
-                    fallback
-                  )}
-                />
-              )}
+              <div
+                className="aboutShow"
+                style={!show ? { height: "136px", overflow: "hidden" } : {}}
+                dangerouslySetInnerHTML={htmlOrFallback(
+                  currentPost?.content,
+                  fallback
+                )}
+              />
 
-              {show && (
-                <div
-                  className="aboutShow"
-                  dangerouslySetInnerHTML={htmlOrFallback(
-                    currentPost?.content,
-                    fallback
-                  )}
-                />
-              )}
-
-              {!show && (
-                <button
-                  className="button triggerShow"
-                  onClick={() => setShow(true)}
-                >
-                  Дэлгэрэнгүй
-                </button>
-              )}
-
-              {show && (
-                <button
-                  className="button triggerHide"
-                  onClick={() => setShow(false)}
-                >
-                  Хураах
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="hidden-lg about">
-        <div className="np np1">
-          <div className="row">
-            <div className="col-md-5 col-md-offset-1 aboutvideo">
-              <iframe
-                allowFullScreen
-                frameBorder="0"
-                height="315"
-                src="https://www.youtube.com/embed/ntpEog0lzww"
-                width="100%"
-              ></iframe>
-            </div>
-
-            <div className="col-md-5 col-md-offset-1 abouttext">
-              <h5 className="sub_title">
-                {currentPost?.title || "БИДНИЙ ТУХАЙ"}
-              </h5>
-
-              {!show && (
-                <div
-                  className="aboutShow"
-                  style={{ height: "136px", overflow: "hidden" }}
-                  dangerouslySetInnerHTML={htmlOrFallback(
-                    currentPost?.content,
-                    fallback
-                  )}
-                />
-              )}
-
-              {show && (
-                <div
-                  className="aboutShow"
-                  dangerouslySetInnerHTML={htmlOrFallback(
-                    currentPost?.content,
-                    fallback
-                  )}
-                />
-              )}
-
-              {!show && (
-                <button
-                  className="button triggerShow"
-                  onClick={() => setShow(true)}
-                >
-                  Дэлгэрэнгүй
-                </button>
-              )}
-
-              {show && (
-                <button
-                  className="button triggerHide"
-                  onClick={() => setShow(false)}
-                >
-                  Хураах
-                </button>
-              )}
+              <button
+                className={`button ${show ? "triggerHide" : "triggerShow"}`}
+                onClick={() => setShow(!show)}
+              >
+                {show ? "Хураах" : "Дэлгэрэнгүй"}
+              </button>
             </div>
           </div>
         </div>

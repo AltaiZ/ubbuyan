@@ -33,6 +33,7 @@ export const cmsPostList = gql`
         status
         createdAt
         updatedAt
+        videoUrl
         thumbnail {
           url
         }
@@ -51,7 +52,42 @@ export const cmsPostList = gql`
     }
   }
 `;
+
+export const cmsPostDetail = gql`
+  query PostDetail($id: String!) {
+    cpPostDetail(_id: $id) {
+      _id
+      slug
+      type
+      title
+      content
+      excerpt
+      featured
+      status
+      createdAt
+      updatedAt
+      videoUrl
+      thumbnail {
+        url
+      }
+      categories {
+        _id
+        name
+        slug
+      }
+      images {
+        url
+        type
+        name
+      }
+      customFieldsData
+    }
+  }
+`;
+
 const queries = {
   cmsPostList,
+  cmsPostDetail,
 };
+
 export default queries;

@@ -8,6 +8,7 @@ export type CmsPost = {
   content?: string | null;
   excerpt?: string | null;
   summary?: string | null;
+  videoUrl?: string | null;
   thumbnail?: {
     url?: string | null;
   } | null;

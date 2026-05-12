@@ -4,13 +4,26 @@ import React from "react";
 import Link from "next/link";
 import { useQuery } from "@apollo/client/react";
 import queries from "@/graphql/cms/queries";
+import { gql } from "@apollo/client";
 import { normalizeCmsHtml } from "@/lib/cmsMedia";
 import {
   getCmsPostThumbnailCandidates,
   resolveCmsPostThumbnailUrl,
 } from "@/lib/cms-media";
 
-type SectionKey = "news" | "event" | "knowledge" | null;
+const KB_ARTICLES = gql`
+  query knowledgeBaseArticles {
+    knowledgeBaseArticles {
+      _id
+      title
+      summary
+      content
+      image {
+        url
+      }
+    }
+  }
+`;
 
 type Props = {
   id: string;
@@ -21,92 +34,48 @@ export default function CmsPostDetailPageClient({
   id,
   detailHrefBase = "/medee-medeelel",
 }: Props) {
-  const { data, loading, error } = useQuery(queries.cmsPostList, {
+  const { data: listData, loading: listLoading, error: listError } = useQuery(queries.cmsPostList, {
     variables: {},
     fetchPolicy: "no-cache",
   });
 
-  const allPosts = (data as any)?.cpPostList?.posts || [];
-  const post = allPosts.find((item: any) => item?._id === id);
-  const shouldSearchById = Boolean(id) && !loading && !post;
-
-  const {
-    data: searchedData,
-    loading: searchedLoading,
-    error: searchedError,
-  } = useQuery(queries.cmsPostList, {
+  const { data: searchData, loading: searchLoading } = useQuery(queries.cmsPostList, {
     variables: { searchValue: id },
     fetchPolicy: "no-cache",
-    skip: !shouldSearchById,
+    skip: !id,
   });
 
-  const searchedPosts = (searchedData as any)?.cpPostList?.posts || [];
-  const searchedPost = searchedPosts.find((item: any) => item?._id === id);
-  const activePost = post || searchedPost;
-  const activeThumbnailUrl = resolveCmsPostThumbnailUrl(activePost);
+  const { data: kbData, loading: kbLoading } = useQuery(KB_ARTICLES, {
+    fetchPolicy: "no-cache",
+  });
 
-  const getCategoryNames = (item: any): string[] =>
-    item?.categories?.map((cat: any) => String(cat?.name || "").toLowerCase().trim()) || [];
+  const allPosts = (listData as any)?.cpPostList?.posts || [];
+  const searchedPosts = (searchData as any)?.cpPostList?.posts || [];
+  const kbArticles = (kbData as any)?.knowledgeBaseArticles || [];
+  const kbArticle = kbArticles.find((a: any) => a._id === id);
 
-  const isProductCategory = (names: string[]) =>
-    names.some((name) =>
-      ["product", "products", "бүтээгдэхүүн"].some((word) => name.includes(word))
-    );
+  const cmsPost =
+    allPosts.find((item: any) => item?._id === id) ||
+    searchedPosts.find((item: any) => item?._id === id);
 
-  const detectSection = (names: string[]): SectionKey => {
-    const joined = names.join(" | ");
+  const activePost = cmsPost || (kbArticle ? {
+    _id: kbArticle._id,
+    title: kbArticle.title,
+    excerpt: kbArticle.summary,
+    content: kbArticle.content,
+    thumbnail: kbArticle.image,
+    createdAt: null,
+  } : null);
 
-    if (
-      joined.includes("news") ||
-      joined.includes("мэдээ мэдээлэл") ||
-      joined.includes("мэдээ")
-    ) {
-      return "news";
-    }
-
-    if (
-      joined.includes("арга хэмжээ") ||
-      joined.includes("event") ||
-      joined.includes("events")
-    ) {
-      return "event";
-    }
-
-    if (
-      joined.includes("мэдлэгийн сан") ||
-      joined.includes("knowledge") ||
-      joined.includes("knowledge base")
-    ) {
-      return "knowledge";
-    }
-
-    return null;
-  };
-
-  const getTargetSections = (currentSection: SectionKey): SectionKey[] => {
-    if (currentSection === "news") return ["event", "knowledge"];
-    if (currentSection === "event") return ["news", "knowledge"];
-    if (currentSection === "knowledge") return ["news", "event"];
-    return ["news", "event", "knowledge"];
-  };
-
-  const currentCategoryNames = activePost ? getCategoryNames(activePost) : [];
-  const currentSection = detectSection(currentCategoryNames);
-  const targetSections = getTargetSections(currentSection);
+  const activeThumbnailUrl = cmsPost
+    ? resolveCmsPostThumbnailUrl(cmsPost)
+    : kbArticle?.image?.url || null;
 
   const otherPosts = allPosts
-    .filter((item: any) => {
-      if (item?._id === id) return false;
-
-      const itemCategoryNames = getCategoryNames(item);
-      if (isProductCategory(itemCategoryNames)) return false;
-
-      const itemSection = detectSection(itemCategoryNames);
-      return itemSection !== null && targetSections.includes(itemSection);
-    })
+    .filter((item: any) => item?._id !== id)
     .slice(0, 10);
 
-  if (loading || (shouldSearchById && searchedLoading)) {
+  if (listLoading || searchLoading || kbLoading) {
     return (
       <div className="container wrapper" style={{ padding: "40px 0" }}>
         Уншиж байна...
@@ -114,10 +83,10 @@ export default function CmsPostDetailPageClient({
     );
   }
 
-  if (error || searchedError) {
+  if (listError) {
     return (
       <div className="container wrapper" style={{ padding: "40px 0" }}>
-        Алдаа гарлаа: {(error || searchedError)?.message}
+        Алдаа гарлаа: {listError.message}
       </div>
     );
   }
@@ -146,77 +115,34 @@ export default function CmsPostDetailPageClient({
             {activePost.title}
           </h1>
 
-          <div
-            style={{
-              color: "#666",
-              fontSize: "16px",
-              marginBottom: "20px",
-            }}
-          >
-            Published:{" "}
-            {activePost?.createdAt
-              ? new Date(activePost.createdAt).toLocaleDateString("mn-MN", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })
-              : ""}
-          </div>
-
-          <div style={{ marginBottom: "25px", color: "#999" }}>Share:</div>
+          {activePost.createdAt && (
+            <div style={{ color: "#666", fontSize: "16px", marginBottom: "20px" }}>
+              {new Date(activePost.createdAt).toLocaleDateString("mn-MN", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
+          )}
 
           {activeThumbnailUrl ? (
             <div style={{ marginBottom: "30px" }}>
               <img
                 src={activeThumbnailUrl}
                 alt={activePost.title}
-                data-fallbacks={JSON.stringify(
-                  getCmsPostThumbnailCandidates(activePost).slice(1)
-                )}
-                onError={(event) => {
-                  const target = event.currentTarget;
-                  const raw = target.getAttribute("data-fallbacks") || "[]";
-                  const fallbackList = JSON.parse(raw) as string[];
-                  const next = fallbackList.shift();
-
-                  if (!next) {
-                    return;
-                  }
-
-                  target.setAttribute(
-                    "data-fallbacks",
-                    JSON.stringify(fallbackList)
-                  );
-                  target.src = next;
-                }}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  display: "block",
-                }}
+                style={{ width: "100%", height: "auto", display: "block" }}
               />
             </div>
           ) : null}
 
-          {activePost?.excerpt ? (
-            <p
-              style={{
-                marginBottom: "20px",
-                color: "#666",
-                fontSize: "18px",
-                lineHeight: "1.8",
-              }}
-            >
+          {activePost.excerpt ? (
+            <p style={{ marginBottom: "20px", color: "#666", fontSize: "18px", lineHeight: "1.8" }}>
               {activePost.excerpt}
             </p>
           ) : null}
 
           <div
-            style={{
-              fontSize: "18px",
-              lineHeight: "2",
-              color: "#333",
-            }}
+            style={{ fontSize: "18px", lineHeight: "2", color: "#333" }}
             dangerouslySetInnerHTML={{
               __html: normalizeCmsHtml(activePost.content || ""),
             }}
@@ -224,16 +150,9 @@ export default function CmsPostDetailPageClient({
         </div>
 
         <div className="col-md-4 col-sm-12">
-          <h3
-            style={{
-              fontSize: "28px",
-              marginBottom: "20px",
-              color: "#333",
-            }}
-          >
+          <h3 style={{ fontSize: "28px", marginBottom: "20px", color: "#333" }}>
             Бусад мэдээ
           </h3>
-
           <div>
             {otherPosts.map((item: any) => {
               const thumbnailCandidates = getCmsPostThumbnailCandidates(item);
@@ -252,56 +171,16 @@ export default function CmsPostDetailPageClient({
                     alignItems: "flex-start",
                   }}
                 >
-                  <div
-                    style={{
-                      width: "120px",
-                      minWidth: "120px",
-                      height: "78px",
-                      background: "#eee",
-                      overflow: "hidden",
-                    }}
-                  >
+                  <div style={{ width: "120px", minWidth: "120px", height: "78px", background: "#eee", overflow: "hidden" }}>
                     {thumbnailUrl ? (
                       <img
                         src={thumbnailUrl}
                         alt={item.title}
-                        data-fallbacks={JSON.stringify(
-                          thumbnailCandidates.slice(1)
-                        )}
-                        onError={(event) => {
-                          const target = event.currentTarget;
-                          const raw =
-                            target.getAttribute("data-fallbacks") || "[]";
-                          const fallbackList = JSON.parse(raw) as string[];
-                          const next = fallbackList.shift();
-
-                          if (!next) {
-                            return;
-                          }
-
-                          target.setAttribute(
-                            "data-fallbacks",
-                            JSON.stringify(fallbackList)
-                          );
-                          target.src = next;
-                        }}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          display: "block",
-                        }}
+                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                       />
                     ) : null}
                   </div>
-
-                  <div
-                    style={{
-                      fontSize: "15px",
-                      lineHeight: "1.35",
-                      color: "#333",
-                    }}
-                  >
+                  <div style={{ fontSize: "15px", lineHeight: "1.35", color: "#333" }}>
                     {item.title}
                   </div>
                 </Link>
