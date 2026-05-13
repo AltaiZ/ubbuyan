@@ -15,9 +15,7 @@ export default function Blog({
   showReadMore?: boolean;
 }) {
   const { data, loading, error } = useQuery(queries.cmsPostList, {
-    variables: {
-      searchValue: "мэдээ",
-    },
+    variables: {},
     fetchPolicy: "no-cache",
   });
 
@@ -40,7 +38,10 @@ export default function Blog({
   const posts = [
     ...filteredPosts,
     ...allPosts.filter(
-      (post: any) => !filteredPosts.some((filtered: any) => filtered?._id === post?._id)
+      (post: any) =>
+        !filteredPosts.some(
+          (filtered: any) => filtered?._id === post?._id
+        )
     ),
   ];
 

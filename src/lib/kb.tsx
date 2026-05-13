@@ -32,9 +32,6 @@ const KB_CODE_CANDIDATES: Record<string, string[]> = {
   ontsloh: ["ontsloh", "онцлох", "featured"],
 };
 
-/**
- * 📌 Knowledge Base list
- */
 export const KB_ARTICLES = gql`
   query knowledgeBaseArticles {
     knowledgeBaseArticles {
@@ -47,15 +44,19 @@ export const KB_ARTICLES = gql`
   }
 `;
 
-/**
- * 📌 Get all KB articles
- */
 export async function getKbArticles() {
   const client = getClient();
 
   const { data } = await client.query<any>({
     query: KB_ARTICLES,
     fetchPolicy: "no-cache",
+    context: token
+      ? {
+          headers: {
+            "x-app-token": token,
+          },
+        }
+      : undefined,
   });
 
   return data;
@@ -247,9 +248,6 @@ export const getKbArticlesByCode = cache(async (code: string) => {
   }
 });
 
-/**
- * 📌 (Optional) single article
- */
 export const KB_ARTICLE_DETAIL = gql`
   query knowledgeBaseArticleDetail($id: String!) {
     knowledgeBaseArticleDetail(_id: $id) {

@@ -36,11 +36,30 @@ export default function Page() {
           <div className="container">
             <div className="row">
               <div className="hidden-xs col-md-3 col-md-offset-0 sidebar emgenelsubmenu">
-                <ul className="nav nav-list tetgemj affix emgenelsubmenu">
-                  <li><a className="active" href="#material"><h4>Нас барсны хасалт хийлгэхэд бүрдүүлэх материал</h4></a></li>
-                  <li><a href="#tetgemj"><h4>Оршуулгын тэтгэмж авах</h4></a></li>
-                  <li><a href="#burduuleh_material"><h4>Оршуулгын тэтгэмж авахад бүрдүүлэх материал</h4></a></li>
-                  <li><a href="#erh"><h4>Оршуулгын тэтгэмж авах эрх</h4></a></li>
+                <ul
+                  className="nav nav-list tetgemj emgenelsubmenu"
+                  style={{ position: "sticky", top: "20px" }}
+                >
+                  <li>
+                    <a href="#material">
+                      <h4>Нас барсны хасалт хийлгэхэд бүрдүүлэх материал</h4>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#tetgemj">
+                      <h4>Оршуулгын тэтгэмж авах</h4>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#burduuleh_material">
+                      <h4>Оршуулгын тэтгэмж авахад бүрдүүлэх материал</h4>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#erh">
+                      <h4>Оршуулгын тэтгэмж авах эрх</h4>
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div className="col-md-8 col-md-offset-1 content">

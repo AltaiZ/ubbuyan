@@ -17,6 +17,8 @@ export default function About() {
       });
   }, []);
 
+  const shortContent = content.length > 200 ? content.slice(0, 200) + "..." : content;
+
   return (
     <section className="h_about">
       <div className="container">
@@ -24,7 +26,7 @@ export default function About() {
           <div className="col-md-6">
             <div className="abouttext1">
               <h1>{title}</h1>
-              <p style={{ textAlign: "justify" }}>{content}</p>
+              <p style={{ textAlign: "justify" }}>{shortContent}</p>
               <a className="btn btn-danger go_button" href="/aboutUs">
                 Дэлгэрэнгүй
                 <i className="r_arrow" />

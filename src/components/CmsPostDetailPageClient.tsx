@@ -4,78 +4,40 @@ import React from "react";
 import Link from "next/link";
 import { useQuery } from "@apollo/client/react";
 import queries from "@/graphql/cms/queries";
-import { gql } from "@apollo/client";
 import { normalizeCmsHtml } from "@/lib/cmsMedia";
 import {
   getCmsPostThumbnailCandidates,
   resolveCmsPostThumbnailUrl,
 } from "@/lib/cms-media";
 
-const KB_ARTICLES = gql`
-  query knowledgeBaseArticles {
-    knowledgeBaseArticles {
-      _id
-      title
-      summary
-      content
-      image {
-        url
-      }
-    }
-  }
-`;
-
 type Props = {
   id: string;
   detailHrefBase?: string;
+  initialPost?: any;
 };
 
 export default function CmsPostDetailPageClient({
   id,
   detailHrefBase = "/medee-medeelel",
+  initialPost,
 }: Props) {
   const { data: listData, loading: listLoading, error: listError } = useQuery(queries.cmsPostList, {
     variables: {},
     fetchPolicy: "no-cache",
   });
 
-  const { data: searchData, loading: searchLoading } = useQuery(queries.cmsPostList, {
-    variables: { searchValue: id },
-    fetchPolicy: "no-cache",
-    skip: !id,
-  });
-
-  const { data: kbData, loading: kbLoading } = useQuery(KB_ARTICLES, {
-    fetchPolicy: "no-cache",
-  });
-
   const allPosts = (listData as any)?.cpPostList?.posts || [];
-  const searchedPosts = (searchData as any)?.cpPostList?.posts || [];
-  const kbArticles = (kbData as any)?.knowledgeBaseArticles || [];
-  const kbArticle = kbArticles.find((a: any) => a._id === id);
-
-  const cmsPost =
-    allPosts.find((item: any) => item?._id === id) ||
-    searchedPosts.find((item: any) => item?._id === id);
-
-  const activePost = cmsPost || (kbArticle ? {
-    _id: kbArticle._id,
-    title: kbArticle.title,
-    excerpt: kbArticle.summary,
-    content: kbArticle.content,
-    thumbnail: kbArticle.image,
-    createdAt: null,
-  } : null);
-
+  const cmsPost = allPosts.find((item: any) => item?._id === id);
+  const activePost = cmsPost || initialPost || null;
   const activeThumbnailUrl = cmsPost
     ? resolveCmsPostThumbnailUrl(cmsPost)
-    : kbArticle?.image?.url || null;
+    : initialPost?.thumbnail?.url || null;
 
   const otherPosts = allPosts
     .filter((item: any) => item?._id !== id)
     .slice(0, 10);
 
-  if (listLoading || searchLoading || kbLoading) {
+  if (listLoading && !initialPost) {
     return (
       <div className="container wrapper" style={{ padding: "40px 0" }}>
         Уншиж байна...
@@ -83,7 +45,7 @@ export default function CmsPostDetailPageClient({
     );
   }
 
-  if (listError) {
+  if (listError && !initialPost) {
     return (
       <div className="container wrapper" style={{ padding: "40px 0" }}>
         Алдаа гарлаа: {listError.message}
